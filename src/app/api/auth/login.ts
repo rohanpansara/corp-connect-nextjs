@@ -1,4 +1,3 @@
-// pages/api/auth/login.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 import { apiClient } from '@/utils/apiClient';
@@ -13,23 +12,21 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
 
       const { access_token, refresh_token, logged_user } = response.data.data;
 
-      console.log('Tokens set in cookies:', access_token, refresh_token); // Debugging log
-
       // Set access token and refresh token in HttpOnly cookies
       res.setHeader('Set-Cookie', [
         cookie.serialize('accessToken', access_token, {
           httpOnly: true,
-          secure: false, // Set to false during development
+          secure: process.env.NODE_ENV === 'production', // Set to true in production
           maxAge: 3600, // 1 hour
           path: '/',
-          sameSite: 'lax', // Adjust as necessary
+          sameSite: 'lax', 
         }),
         cookie.serialize('refreshToken', refresh_token, {
           httpOnly: true,
-          secure: false, // Set to false during development
+          secure: process.env.NODE_ENV === 'production', // Set to true in production
           maxAge: 86400, // 1 day
           path: '/',
-          sameSite: 'lax', // Adjust as necessary
+          sameSite: 'lax',
         }),
       ]);
 
