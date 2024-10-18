@@ -11,23 +11,6 @@ export const apiClient = axios.create({
   },
 });
 
-// Add interceptors for token handling
-apiClient.interceptors.request.use(
-  (config) => {
-    // Access cookies using getClientCookies
-    const cookies = getClientCookies(); // Use the new client-side function
-    const accessToken = cookies['accessToken']; // Ensure correct key name
-
-    if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
