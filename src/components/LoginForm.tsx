@@ -1,93 +1,106 @@
-// app/login/LoginForm.tsx
-'use client'; // This line is important for client components
+'use client'; // This is required for client-side components
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Use from 'next/navigation' in the app directory
-import { apiClient } from '@/utils/apiClient';
-import Image from 'next/image';
-import illustration from '@/assets/illustration.png';
-
+import { useRouter } from 'next/navigation'; // 'next/navigation' used in Next.js 13+ for app directory
+import { apiClient } from '@/utils/apiClient'; // Assuming you have an API client utility
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const router = useRouter(); // Initialize the router
+    const [email, setEmail] = useState('');       // State for email
+    const [password, setPassword] = useState(''); // State for password
+    const [error, setError] = useState('');       // State for error messages
+    const router = useRouter();                   // Router to navigate after login
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError(''); // Reset error message before submission
+        setError(''); // Clear previous errors
 
         try {
-            const response = await apiClient.post('/user/login', { email, password }); // Ensure you are calling the correct path
+            // Sending POST request to login endpoint
+            const response = await apiClient.post('/user/login', { email, password });
+
             if (response.status === 200) {
-                // Redirect to dashboard or another page after successful login
+                // Redirect to dashboard or any other page after successful login
                 router.push('/dashboard');
             }
         } catch (err: any) {
+            // Handle error response
             console.error('Login failed:', err);
             setError(err.response?.data?.error || 'An unexpected error occurred.');
         }
     };
 
-
     return (
         <>
-            <main className='flex w-[90%] h-screen min-h-screen bg-[#9BC4CB]'>
-                <section className='flex w-1/2'>
+            <main className="flex w-[90%] h-screen min-h-screen bg-[#9BC4CB]">
+                {/* First Section */}
+                <section className="flex w-1/2 bg-cover bg-center">
+                    {/* You can uncomment the Image below and add an illustration */}
                     {/* <Image src={illustration} alt="Illustration" layout="responsive" /> */}
                 </section>
-                <section className='flex w-1/2'>
-                    <div className='w-full p-8'>
-                        <div className='w-full h-full min-h-full bg-white shadow-lg rounded-[12px]'>
-                            <div className='flex flex-col p-3 w-full h-full'>
-                                <div className='flex h-[20%] w-full justify-center items-center text-pretty text-xl font-medium text-gray-300 bg-black rounded-lg p-5'>
-                                    Log In To&nbsp;<span className='text-[#9BC4CB] font-bold'>CorpConnect</span>
-                                </div>
+
+                {/* Second Section: Login Form */}
+                <section className="flex w-1/2 justify-center items-center">
+                    <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-[12px]">
+                        <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
+                            Log In to <span className="text-[#9BC4CB]">CorpConnect</span>
+                        </h2>
+
+                        {/* Login Form */}
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            {/* Email Input */}
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                    Email address
+                                </label>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    placeholder="Enter your email"
+                                />
                             </div>
+
+                            {/* Password Input */}
+                            <div>
+                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                                    Password
+                                </label>
+                                <input
+                                    id="password"
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    placeholder="Enter your password"
+                                />
+                            </div>
+
+                            {/* Display error message */}
+                            {error && <p className="text-red-500 text-sm">{error}</p>}
+
+                            {/* Submit Button */}
+                            <div>
+                                <button
+                                    type="submit"
+                                    className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-500 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                                >
+                                    Sign In
+                                </button>
+                            </div>
+                        </form>
+
+                        {/* Extra links */}
+                        <div className="mt-4 text-center">
+                            <a href="#" className="text-sm text-indigo-600 hover:text-indigo-500">
+                                Forgot password?
+                            </a>
                         </div>
                     </div>
                 </section>
-                {/* <section className='flex w-1/2'>
-                    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-                        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                            <img className="mx-auto h-10 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-                            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
-                        </div>
-
-                        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                            <form className="space-y-6" action="#" method="POST">
-                                <div>
-                                    <label about="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-                                    <div className="mt-2">
-                                        <input id="email" name="email" type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div className="flex items-center justify-between">
-                                        <label about="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                                        <div className="text-sm">
-                                            <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-                                        </div>
-                                    </div>
-                                    <div className="mt-2">
-                                        <input id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-                                </div>
-                            </form>
-
-                            <p className="mt-10 text-center text-sm text-gray-500">
-                                Not a member?
-                                <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
-                            </p>
-                        </div>
-                    </div>
-                </section> */}
             </main>
         </>
     );

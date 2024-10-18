@@ -53,6 +53,13 @@ export const getCookies = (req: NextApiRequest) => {
   return cookie.parse(req.headers.cookie || '');
 };
 
+// Client-side cookie retrieval
+export const getClientCookies = () => {
+  if (typeof document === 'undefined') return {};
+  const cookieString = document.cookie;
+  return cookie.parse(cookieString || '');
+};
+
 /**
  * Retrieve a specific cookie from the request headers.
  * @param req - Next.js request object
