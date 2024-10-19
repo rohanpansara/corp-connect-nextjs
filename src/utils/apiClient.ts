@@ -1,42 +1,36 @@
-// src/utils/apiClient.ts
 import axios from 'axios';
-import { getClientCookies } from './cookies'; // Use the client-side function
 
 // Create Axios instance
 export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  withCredentials: true,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // Use environment variable for the base URL
+  withCredentials: true, // This will ensure cookies (access and refresh tokens) are sent with requests
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+// Add interceptors for handling token expiration and refresh
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // Handle token refresh
+    // Handle token refresh logic when a 401 Unauthorized response occurs
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        // Access refreshToken from cookies
-        const cookies = getClientCookies(); // Use the new client-side function
-        const refreshToken = cookies['refreshToken']; // Ensure correct key name
+        // Make a request to the token refresh endpoint; cookies will automatically be sent by the browser
+        const refreshResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/refresh-token`, null, {
+          withCredentials: true,
+        });
 
-        const refreshResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/refresh-token`, { refreshToken });
-
-        const newAccessToken = refreshResponse.data.accessToken;
-
-        // Update cookies (this should happen in your component where you call this API)
-        // You will need to set the cookie in the component using `setCookie`
-
-        // Retry the original request with the new token
-        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-        return apiClient(originalRequest);
+        if (refreshResponse.status === 200) {
+          // Retry the original request with the new token (which is now set in cookies)
+          return apiClient(originalRequest);
+        }
       } catch (refreshError) {
-        console.error('Refresh token failed:', refreshError);
+        console.error('Token refresh failed:', refreshError);
         return Promise.reject(refreshError);
       }
     }

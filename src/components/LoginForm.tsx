@@ -1,22 +1,30 @@
 'use client'; // This is required for client-side components
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation'; // 'next/navigation' used in Next.js 13+ for app directory
 import { apiClient } from '@/utils/apiClient'; // Assuming you have an API client utility
+import Image from 'next/image'; // Import Image component from next/image
+import illustration from '@/assets/illustration.png';
+import logo from '@/assets/onlyLogo.png';
+import { Formik, Field, Form, ErrorMessage } from 'formik'; // Import Formik components
+import * as Yup from 'yup'; // For validation
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('');       // State for email
-    const [password, setPassword] = useState(''); // State for password
-    const [error, setError] = useState('');       // State for error messages
-    const router = useRouter();                   // Router to navigate after login
+    const router = useRouter(); // Router to navigate after login
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError(''); // Clear previous errors
+    // Yup validation schema
+    const validationSchema = Yup.object({
+        email: Yup.string()
+            .email('Invalid format')
+            .required('*Email is required'),
+        password: Yup.string()
+            .min(6, 'Password must be at least 6 characters')
+            .required('*Password is required'),
+    });
 
+    const handleSubmit = async (values: { email: string; password: string }) => {
         try {
             // Sending POST request to login endpoint
-            const response = await apiClient.post('/user/login', { email, password });
+            const response = await apiClient.post('/user/login', values);
 
             if (response.status === 200) {
                 // Redirect to dashboard or any other page after successful login
@@ -25,79 +33,98 @@ const LoginForm = () => {
         } catch (err: any) {
             // Handle error response
             console.error('Login failed:', err);
-            setError(err.response?.data?.error || 'An unexpected error occurred.');
+            // Set error message on Formik's setFieldError
+            throw new Error(err.response?.data?.error || 'An unexpected error occurred.');
         }
     };
 
     return (
         <>
-            <main className="flex w-[90%] h-screen min-h-screen bg-[#9BC4CB]">
+            <main className="flex w-[90%] h-screen min-h-screen bg-[#0940AE] gap-x-10">
                 {/* First Section */}
                 <section className="flex w-1/2 bg-cover bg-center">
-                    {/* You can uncomment the Image below and add an illustration */}
-                    {/* <Image src={illustration} alt="Illustration" layout="responsive" /> */}
+                    <Image src={illustration} alt="Illustration" objectFit='cover' />
                 </section>
 
                 {/* Second Section: Login Form */}
                 <section className="flex w-1/2 justify-center items-center">
-                    <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-[12px]">
-                        <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
-                            Log In to <span className="text-[#9BC4CB]">CorpConnect</span>
+                    <div className="w-full max-w-md p-6 bg-[#ECF1FE] shadow-lg rounded-[12px] items-center">
+                        <h2 className="flex justify-center items-center text-2xl font-bold text-center text-gray-700 mb-[1px] bg-cover">
+                            <Image src={logo} alt='CorpConnect' className='flex mr-2 w-[50px] h-[30px]'></Image>Log In To&nbsp;<span className="text-[#407BFD]">CorpConnect</span>
                         </h2>
+                        <span className='flex justify-end items-center text-[10px] text-gray-400 mr-10 mb-6'>Use credentials provided to you by the HR team</span>
 
-                        {/* Login Form */}
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Email Input */}
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Email address
-                                </label>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    placeholder="Enter your email"
-                                />
-                            </div>
+                        {/* Formik Form */}
+                        <Formik
+                            initialValues={{ email: '', password: '' }}
+                            validationSchema={validationSchema}
+                            onSubmit={async (values, { setSubmitting, setFieldError }) => {
+                                try {
+                                    await handleSubmit(values);
+                                } catch (err) {
+                                    setFieldError('email', (err as Error).message);
+                                } finally {
+                                    setSubmitting(false);
+                                }
+                            }}
+                        >
+                            {({ isSubmitting, setFieldTouched, setFieldError, errors, touched }) => (
+                                <Form className="space-y-6">
+                                    {/* Email Input */}
+                                    <div>
+                                        <label htmlFor="email" className="flex flex-row justify-start items-center text-sm font-medium text-[#444e60d2] my-2">
+                                            Email <ErrorMessage name="email" component="p" className="text-[#ff0800] text-xs ml-auto" />
+                                        </label>
+                                        <Field
+                                            id="email"
+                                            name="email"
+                                            type="email"
+                                            className={`mt-1 block w-full p-2 border ${errors.email && touched.email ? 'border-[#ff0800]' : 'border-gray-300'} rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
+                                            placeholder="Enter your email"
+                                            onFocus={() => {
+                                                setFieldTouched('email', false); // Clear "touched" status
+                                                setFieldError('email', ''); // Clear error message on focus
+                                            }}
+                                        />
+                                    </div>
 
-                            {/* Password Input */}
-                            <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                    Password
-                                </label>
-                                <input
-                                    id="password"
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    placeholder="Enter your password"
-                                />
-                            </div>
+                                    {/* Password Input */}
+                                    <div>
+                                        <label htmlFor="password" className="flex flex-row justify-start items-center text-sm font-medium text-[#444e60d2] my-2">
+                                            Password <ErrorMessage name="password" component="p" className="text-[#ff0800] text-xs ml-auto " />
+                                        </label>
+                                        <Field
+                                            id="password"
+                                            name="password"
+                                            type="password"
+                                            className={`mt-1 block w-full p-2 border ${errors.password && touched.password ? 'border-[#ff0800]' : 'border-gray-300'} rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
+                                            placeholder="Enter your password"
+                                            onFocus={() => {
+                                                setFieldTouched('password', false); // Clear "touched" status
+                                                setFieldError('password', ''); // Clear error message on focus
+                                            }}
+                                        />
+                                    </div>
 
-                            {/* Display error message */}
-                            {error && <p className="text-red-500 text-sm">{error}</p>}
-
-                            {/* Submit Button */}
-                            <div>
-                                <button
-                                    type="submit"
-                                    className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-500 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                                >
-                                    Sign In
-                                </button>
-                            </div>
-                        </form>
+                                    {/* Submit Button */}
+                                    <div>
+                                        <button
+                                            type="submit"
+                                            className="w-full bg-[#407BFD] text-white py-2 px-4 rounded-md shadow-sm hover:bg-[#0940AE] focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 transition delay-50"
+                                            disabled={isSubmitting}
+                                        >
+                                            {isSubmitting ? 'Logging In...' : 'Log In'}
+                                        </button>
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
 
                         {/* Extra links */}
                         <div className="mt-4 text-center">
-                            <a href="#" className="text-sm text-indigo-600 hover:text-indigo-500">
+                            <button type='button' className="text-sm text-[#407BFD] hover:text-[#0940AE]">
                                 Forgot password?
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </section>

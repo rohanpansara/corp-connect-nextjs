@@ -1,6 +1,5 @@
 // app/layout.tsx
 import "./globals.css";
-import { CookiesProvider } from 'react-cookie'; // Import CookiesProvider
 
 export default function RootLayout({
   children,
@@ -8,12 +7,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <CookiesProvider> {/* Wrap your application with CookiesProvider */}
-      <html lang="en">
-        <body>
-          {children}
-        </body>
-      </html>
-    </CookiesProvider>
+    <html lang="en">
+      <head>
+        <script src="./node_modules/preline/dist/preline.js"></script>
+      </head>
+      <body>
+        {children}
+      </body>
+    </html>
   );
 }
