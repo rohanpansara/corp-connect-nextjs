@@ -1,4 +1,5 @@
 // app/layout.tsx
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export default function RootLayout({
@@ -8,11 +9,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <script src="./node_modules/preline/dist/preline.js"></script>
-      </head>
       <body>
         {children}
+        <Toaster position="top-center" reverseOrder={true} />
       </body>
     </html>
   );

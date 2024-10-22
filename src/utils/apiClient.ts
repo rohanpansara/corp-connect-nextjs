@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 // Create Axios instance
 export const apiClient = axios.create({
@@ -11,7 +12,13 @@ export const apiClient = axios.create({
 
 // Add interceptors for handling token expiration and refresh
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // If the response has a success message, display it
+    // if (response.data?.message) {
+    //   toast.success(response.data.message);
+    // }
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
 
@@ -20,7 +27,6 @@ apiClient.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        // Make a request to the token refresh endpoint; cookies will automatically be sent by the browser
         const refreshResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/refresh-token`, null, {
           withCredentials: true,
         });
@@ -31,9 +37,23 @@ apiClient.interceptors.response.use(
         }
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
+
+        // Show a toast notification on refresh token failure
+        toast.error('Session expired. Please login again.');
+
+        // Use window.location.href to redirect to login page
+        window.location.href = '/login'; // Redirect user to login on refresh token failure
         return Promise.reject(refreshError);
       }
     }
+
+    // If the response contains a message from the backend, display it as an error toast
+    // if (error.response?.data?.message) {
+    //   toast.error(error.response.data.message);
+    // } else {
+    //   // Show a generic error toast for other issues
+    //   toast.error('An error occurred. Please try again.');
+    // }
 
     return Promise.reject(error);
   }
