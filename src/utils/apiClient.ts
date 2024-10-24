@@ -13,10 +13,6 @@ export const apiClient = axios.create({
 // Add interceptors for handling token expiration and refresh
 apiClient.interceptors.response.use(
   (response) => {
-    // If the response has a success message, display it
-    // if (response.data?.message) {
-    //   toast.success(response.data.message);
-    // }
     return response;
   },
   async (error) => {
@@ -46,14 +42,6 @@ apiClient.interceptors.response.use(
         return Promise.reject(refreshError);
       }
     }
-
-    // If the response contains a message from the backend, display it as an error toast
-    // if (error.response?.data?.message) {
-    //   toast.error(error.response.data.message);
-    // } else {
-    //   // Show a generic error toast for other issues
-    //   toast.error('An error occurred. Please try again.');
-    // }
 
     return Promise.reject(error);
   }
