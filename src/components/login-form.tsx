@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'; // 'next/navigation' used in Next.js 13+ for app directory
 import { apiClient } from '@/utils/apiClient'; // Assuming you have an API client utility
-import Image from 'next/image'; // Import Image component from next/image
+import Image from "next/legacy/image"; // Import Image component from next/image
 import illustration from '@/assets/illustration.png';
 import logo from '@/assets/onlyLogo.png';
 import { Formik, Field, Form, ErrorMessage } from 'formik'; // Import Formik components
@@ -54,9 +54,10 @@ const LoginForm = () => {
             <section className="flex w-1/2 justify-center items-center">
                 <div className="w-full max-w-md p-6 bg-[#ECF1FE] shadow-lg rounded-[12px] items-center">
                     <h2 className="flex justify-center items-center text-2xl font-bold text-center text-gray-700 mb-[1px] bg-cover">
-                        <Image src={logo} alt='CorpConnect' className='flex mr-2 w-[50px] h-[30px]'></Image>Log In To&nbsp;<span className="text-[#407BFD]">CorpConnect</span>
+                        {/* <Image src={logo} alt='CorpConnect' className='flex mr-2 w-[10px] h-[5px]' objectFit='contain'></Image> */}
+                        Log In To&nbsp;<span className="text-[#407BFD]">CorpConnect</span>
                     </h2>
-                    <span className='flex justify-end items-center text-[10px] text-gray-400 mr-10 mb-6'>Use credentials provided to you by the HR team</span>
+                    <span className='flex justify-center items-center text-[10px] text-center text-gray-400 mb-6'>Use credentials provided to you by the HR team</span>
 
                     {/* Formik Form */}
                     <Formik

@@ -1,12 +1,12 @@
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import axios from "axios";
+import toast from "react-hot-toast";
 
 // Create Axios instance
 export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // Use environment variable for the base URL
   withCredentials: true, // This will ensure cookies (access and refresh tokens) are sent with requests
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -23,22 +23,25 @@ apiClient.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/refresh-token`, null, {
-          withCredentials: true,
-        });
+        const refreshResponse = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/refresh-token`,
+          null,
+          {
+            withCredentials: true,
+          }
+        );
 
         if (refreshResponse.status === 200) {
-          // Retry the original request with the new token (which is now set in cookies)
           return apiClient(originalRequest);
         }
       } catch (refreshError) {
-        console.error('Token refresh failed:', refreshError);
+        console.error("Token refresh failed:", refreshError);
 
         // Show a toast notification on refresh token failure
-        toast.error('Session expired. Please login again.');
+        toast.error("Session expired. Please login again.");
 
         // Use window.location.href to redirect to login page
-        window.location.href = '/login'; // Redirect user to login on refresh token failure
+        window.location.href = "/auth/login"; // Redirect user to login on refresh token failure
         return Promise.reject(refreshError);
       }
     }
