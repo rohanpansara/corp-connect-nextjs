@@ -3,9 +3,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { apiClient } from '@/utils/apiClient';
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'; // Ensure you import your card components
+import { Card, CardContent, CardDescription } from '@/components/ui/card'; // Ensure you import your card components
 import toast from 'react-hot-toast';
-import { Poppins } from 'next/font/google';
+import { PiTornadoThin } from "react-icons/pi";
+import { FcClock, FcConferenceCall, FcLeave } from "react-icons/fc";
 
 const Cards = () => {
 
@@ -14,6 +15,16 @@ const Cards = () => {
     const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+
+    const iconClassName = "h-[50px] w-[50px]";
+
+    type CardTitle = 'Leaves Available' | 'Today’s Hours' | 'Next Meeting';
+
+    const iconMap: Record<CardTitle, JSX.Element> = {
+        'Leaves Available': <FcLeave className={iconClassName} />,
+        'Today’s Hours': <FcClock className={iconClassName} />,
+        'Next Meeting': <FcConferenceCall className={iconClassName} />,
+    };
 
     const fetchCardsData = async () => {
         try {
@@ -46,13 +57,20 @@ const Cards = () => {
     }
 
     return (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-4xl w-full">
+        <div className="flex justify-items-center items-center gap-[10px] max-w-[90%] w-full">
             {cardsData && Object.values(cardsData).map((card: any, index: number) => (
-                <Card key={index} className="bg-white shadow-lg rounded-lg">
-                    <CardContent>
-                        <CardTitle className="text-xl font-bold text-blue-800">{card.title}</CardTitle>
-                        <p className="text-gray-500 text-2xl font-semibold">{card.value}</p>
-                        <CardDescription className="text-gray-400">{card.description}</CardDescription>
+                <Card key={index} className="w-[200px] h-[100px] overflow-hidden p-4 border-none bg-[#e5e5e5] text-[#0A0A0A] shadow-lg rounded-md text-left mx-auto">
+                    <CardContent className='p-0 h-full flex flex-row justify-between items-center my-auto'>
+                        <CardDescription className='p-0 pr-2 flex'>
+                            <span>
+                                {/* Render icon based on card.title */}
+                                {iconMap[card.title as CardTitle] || <PiTornadoThin className="h-[50px] w-[50px]" />} {/* Default icon */}
+                            </span>
+                        </CardDescription>
+                        <CardDescription className='p-0 pl-2 flex jus flex-col justify-center items-left text-black'>
+                            <span className='text-[14px] font-bold'>{card.value}</span>
+                            <span className='text-[12px]'>{card.title}</span>
+                        </CardDescription>
                     </CardContent>
                 </Card>
             ))}
