@@ -8,9 +8,25 @@ import logo from '@/assets/onlyLogo.png';
 import { Formik, Field, Form, ErrorMessage } from 'formik'; // Import Formik components
 import * as Yup from 'yup'; // For validation
 import toast from 'react-hot-toast'; // Import toast
+import { useEffect } from 'react';
+import useAuth from '@/hooks/useAuth';
 
 const LoginForm = () => {
-    const router = useRouter(); // Router to navigate after login
+
+    const isAuthenticated = useAuth(); // Use the custom hook
+    const router = useRouter();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            // If user is authenticated, redirect to dashboard
+            router.push('/dashboard');
+        }
+    }, [isAuthenticated, router]);
+
+    if (isAuthenticated === null) {
+        // While checking authentication status, you can show a loading state
+        return <div className="min-h-screen bg-[#0940AE] flex items-center justify-center"><p className="text-white">Loading...</p></div>;
+    }
 
     // Yup validation schema
     const validationSchema = Yup.object({
