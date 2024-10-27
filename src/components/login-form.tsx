@@ -45,7 +45,7 @@ const LoginForm = () => {
 
     return (
         <main className="flex w-[90%] h-screen min-h-screen bg-[#0940AE] gap-x-10">
-            {/* First Section */}
+            {/* First Section: Office Illustration Image */}
             <section className="flex w-1/2 bg-cover bg-center">
                 <Image src={illustration} alt="Illustration" objectFit='cover' />
             </section>
@@ -84,7 +84,7 @@ const LoginForm = () => {
                                         id="email"
                                         name="email"
                                         type="email"
-                                        className={`mt-1 block w-full p-2 border ${errors.email && touched.email ? 'border-[#ff0800]' : 'border-gray-300'} rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
+                                        className={`mt-1 block w-full p-2 border ${errors.email && touched.email ? 'border-[#ff0800] placeholder:text-[#caadad]' : 'border-gray-300'} rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
                                         placeholder="Enter your email"
                                         onFocus={() => {
                                             setFieldTouched('email', false); // Clear "touched" status
@@ -102,7 +102,7 @@ const LoginForm = () => {
                                         id="password"
                                         name="password"
                                         type="password"
-                                        className={`mt-1 block w-full p-2 border ${errors.password && touched.password ? 'border-[#ff0800]' : 'border-gray-300'} rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
+                                        className={`mt-1 block w-full p-2 border ${errors.password && touched.password ? 'border-[#ff0800] placeholder:text-[#caadad]' : 'border-gray-300'} rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
                                         placeholder="Enter your password"
                                         onFocus={() => {
                                             setFieldTouched('password', false); // Clear "touched" status
@@ -115,7 +115,7 @@ const LoginForm = () => {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="w-full bg-[#407BFD] text-white py-2 px-4 rounded-md shadow-sm hover:bg-[#0940AE] focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 transition delay-50"
+                                        className="w-full bg-[#407BFD] text-white py-2 px-4 rounded-md shadow-sm hover:bg-[#4a76d4] focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 transition delay-50"
                                         disabled={isSubmitting}
                                     >
                                         {isSubmitting ? 'Logging In...' : 'Log In'}
@@ -125,9 +125,8 @@ const LoginForm = () => {
                         )}
                     </Formik>
 
-                    {/* Extra links */}
-                    <div className="mt-4 text-center">
-                        <button type='button' className="text-sm text-[#407BFD] hover:text-[#0940AE]">
+                    <div className="mt-2 text-center">
+                        <button type='button' className="text-xs text-[#407BFD] hover:text-[#4a76d4]">
                             Forgot password?
                         </button>
                     </div>

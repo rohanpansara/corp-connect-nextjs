@@ -1,10 +1,9 @@
+import LoginForm from '@/components/login-form';
+
 export const metadata = {
     title: 'Login | CorpConnect',
     description: 'Login to your CorpConnect account',
 };
-
-import LoginForm from '@/components/LoginForm';
-
 
 const LoginPage = () => {
     return (
