@@ -1,16 +1,19 @@
-// components/ui/card.tsx
-"use client";
+"use client"
 
 import { useEffect, useRef, useState } from 'react';
 import { apiClient } from '@/utils/apiClient';
-import { Card, CardContent, CardDescription } from '@/components/ui/card'; // Ensure you import your card components
+import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import toast from 'react-hot-toast';
 import { PiTornadoThin } from "react-icons/pi";
 import { FcClock, FcConferenceCall, FcLeave } from "react-icons/fc";
+import { useRouter } from 'next/navigation';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { truncateText } from '@/utils/truncateText';
+
 
 const Cards = () => {
-
     const fetchRef = useRef(false);
+    const router = useRouter();
 
     const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(null);
     const [loading, setLoading] = useState(true);
@@ -32,7 +35,12 @@ const Cards = () => {
             setCardsData(response.data.data);
         } catch (err: any) {
             if (err.response) {
-                setError(`Error: ${err.response.status} - ${err.response.data.message || 'Failed to fetch cards'}`);
+                if (err.response.status === 401 || err.response.status === 403) {
+                    router.push('/auth/login');
+                    toast.error("You need to login first");
+                } else {
+                    setError(`Error: ${err.response.status} - ${err.response.data.message || 'Failed to fetch cards'}`);
+                }
             } else if (err.request) {
                 setError('Network error: Failed to receive a response');
             } else {
@@ -53,23 +61,35 @@ const Cards = () => {
     if (loading) return <p className="text-white text-center">Loading...</p>;
     if (error) {
         toast.error(error);
-        return <p className="text-red-500 text-center">{error}</p>;
     }
 
     return (
         <div className="flex justify-items-center items-center gap-[10px] max-w-[90%] w-full">
             {cardsData && Object.values(cardsData).map((card: any, index: number) => (
-                <Card key={index} className="w-[200px] h-[100px] overflow-hidden p-4 border-none bg-[#ADBDFF] shadow-lg rounded-md text-left mx-auto">
-                    <CardContent className='p-0 h-full flex flex-row justify-between items-center my-auto'>
+                <Card key={index} className="w-[220px] h-[100px] overflow-hidden p-4 border-none bg-[#C4DFDF] shadow-lg rounded-md text-left mx-auto">
+                    <CardContent className='p-0 h-full flex flex-row justify-around items-center my-auto'>
                         <CardDescription className='p-0 pr-2 flex'>
                             <span>
                                 {/* Render icon based on card.title */}
                                 {iconMap[card.title as CardTitle] || <PiTornadoThin className="h-[50px] w-[50px]" />} {/* Default icon */}
                             </span>
                         </CardDescription>
-                        <CardDescription className='p-0 pl-2 flex jus flex-col justify-center items-left text-[#180821]'>
-                            <span className='text-[14px] font-bold'>{card.value}</span>
-                            <span className='text-[12px]'>{card.title}</span>
+                        <CardDescription className='p-0 pl-2 flex flex-col justify-center items-left text-[#074F57]'>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <span className='text-[16px] font-bold'>
+                                            {truncateText(card.value, 12)}
+                                        </span>
+                                    </TooltipTrigger>
+                                    {card.value.length > 12 && (
+                                        <TooltipContent>
+                                            <p>{card.value}</p>
+                                        </TooltipContent>
+                                    )}
+                                </Tooltip>
+                            </TooltipProvider>
+                            <span className='text-[10px]'>{card.title}</span>
                         </CardDescription>
                     </CardContent>
                 </Card>
