@@ -62,7 +62,7 @@ const LoginForm = () => {
     return (
         <main className="flex w-[90%] h-screen min-h-screen bg-[#0940AE] gap-x-10">
             {/* First Section: Office Illustration Image */}
-            <section className="flex w-1/2 bg-cover bg-center">
+            <section className="flex w-1/2 bg-cover bg-center xl:display-none">
                 <Image src={illustration} alt="Illustration" objectFit='cover' />
             </section>
 

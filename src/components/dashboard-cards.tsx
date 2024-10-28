@@ -59,7 +59,7 @@ const Cards = () => {
     return (
         <div className="flex justify-items-center items-center gap-[10px] max-w-[90%] w-full">
             {cardsData && Object.values(cardsData).map((card: any, index: number) => (
-                <Card key={index} className="w-[200px] h-[100px] overflow-hidden p-4 border-none bg-[#e5e5e5] text-[#0A0A0A] shadow-lg rounded-md text-left mx-auto">
+                <Card key={index} className="w-[200px] h-[100px] overflow-hidden p-4 border-none bg-[#ADBDFF] shadow-lg rounded-md text-left mx-auto">
                     <CardContent className='p-0 h-full flex flex-row justify-between items-center my-auto'>
                         <CardDescription className='p-0 pr-2 flex'>
                             <span>
@@ -67,7 +67,7 @@ const Cards = () => {
                                 {iconMap[card.title as CardTitle] || <PiTornadoThin className="h-[50px] w-[50px]" />} {/* Default icon */}
                             </span>
                         </CardDescription>
-                        <CardDescription className='p-0 pl-2 flex jus flex-col justify-center items-left text-black'>
+                        <CardDescription className='p-0 pl-2 flex jus flex-col justify-center items-left text-[#180821]'>
                             <span className='text-[14px] font-bold'>{card.value}</span>
                             <span className='text-[12px]'>{card.title}</span>
                         </CardDescription>

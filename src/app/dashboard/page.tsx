@@ -14,7 +14,7 @@ export const metadata = {
 
 const DashboardPage = () => {
     return (
-        <div className={`min-h-screen bg-[#EAEAEA] flex items-center justify-center flex-col space-y-6 p-6 ${inter.className}`}>
+        <div className={`min-h-screen bg-[#F8F8FF] flex items-center justify-center flex-col space-y-6 p-6 ${inter.className}`}>
             <h1 className="text-black text-3xl font-semibold mb-8">Dashboard</h1>
             <Cards />
         </div>
