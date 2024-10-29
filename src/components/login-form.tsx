@@ -10,22 +10,21 @@ import * as Yup from 'yup'; // For validation
 import toast from 'react-hot-toast'; // Import toast
 import { useEffect } from 'react';
 import useAuth from '@/hooks/useAuth';
+import { Skeleton } from './ui/skeleton';
 
 const LoginForm = () => {
 
-    const isAuthenticated = useAuth(); // Use the custom hook
+    const { isAuthenticated, isLoading } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
-        if (isAuthenticated) {
-            // If user is authenticated, redirect to dashboard
+        if (isAuthenticated && !isLoading) {
             router.push('/dashboard');
         }
-    }, [isAuthenticated, router]);
+    }, []);
 
-    if (isAuthenticated === null) {
-        // While checking authentication status, you can show a loading state
-        return <div className="min-h-screen bg-[#0940AE] flex items-center justify-center"><p className="text-white">Loading...</p></div>;
+    if (isLoading) {
+        return <Skeleton className="w-[90%] h-screen rounded-md" />;
     }
 
     // Yup validation schema
@@ -40,21 +39,15 @@ const LoginForm = () => {
 
     const handleSubmit = async (values: { email: string; password: string }) => {
         try {
-            // Sending POST request to login endpoint
             const response = await apiClient.post('/user/login', values);
-
             if (response.status === 200) {
-                // Redirect to dashboard or any other page after successful login
-                toast.success(response.data.message || 'Login successful'); // Show success message
+                toast.success(response.data.message || 'Login successful');
                 router.push('/dashboard');
             }
         } catch (err: any) {
-            // Handle error response
             console.error('Login failed:', err);
-            // Extract and show the error message from the response
             const errorMessage = "*" + err.response?.data?.message || 'An unexpected error occurred.';
-            toast.error(errorMessage); // Show the backend error message as a toast
-            // Optionally set error message on Formik's setFieldError
+            toast.error(errorMessage);
             throw new Error(errorMessage);
         }
     };
