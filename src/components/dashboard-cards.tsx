@@ -5,7 +5,7 @@ import { apiClient } from "@/utils/apiClient";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import toast from "react-hot-toast";
 import { PiTornadoThin } from "react-icons/pi";
-import { FcClock, FcConferenceCall, FcLeave } from "react-icons/fc";
+import { FcClock, FcConferenceCall, FcLeave, FcOvertime } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 import {
   Tooltip,
@@ -27,12 +27,13 @@ const Cards = () => {
 
   const iconClassName = "h-[50px] w-[50px]";
 
-  type CardTitle = "Leaves Available" | "Today’s Hours" | "Next Meeting";
+  type CardTitle = "Leaves Available" | "Today’s Hours" | "Next Meeting" | "Shift Timings";
 
   const iconMap: Record<CardTitle, JSX.Element> = {
     "Leaves Available": <FcLeave className={iconClassName} />,
     "Today’s Hours": <FcClock className={iconClassName} />,
     "Next Meeting": <FcConferenceCall className={iconClassName} />,
+    "Shift Timings": <FcOvertime className={iconClassName} />
   };
 
   const fetchCardsData = async () => {
@@ -78,7 +79,7 @@ const Cards = () => {
         Object.values(cardsData).map((card: any, index: number) => (
           <Card
             key={index}
-            className="w-[220px] h-[100px] overflow-hidden p-4 border-none bg-[#C4DFDF] shadow-lg rounded-md text-left mx-auto"
+            className="w-[220px] h-[100px] overflow-hidden p-4 border-none bg-[#cfe2e2] shadow-lg rounded-md text-left mx-auto"
           >
             <CardContent className="p-0 h-full flex flex-row justify-around items-center my-auto">
               <CardDescription className="p-0 pr-2 flex">
@@ -94,7 +95,7 @@ const Cards = () => {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <span className="text-[16px] font-bold">
+                      <span className="text-[16px] font-bold cursor-default">
                         {truncateText(card.value, 12)}
                       </span>
                     </TooltipTrigger>

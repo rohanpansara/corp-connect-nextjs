@@ -19,6 +19,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
+import { BsLayoutSidebarInset, BsLayoutSidebarInsetReverse } from "react-icons/bs";
+
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
 const SIDEBAR_WIDTH = "16rem"
@@ -35,6 +37,8 @@ type SidebarContext = {
   isMobile: boolean
   toggleSidebar: () => void
 }
+
+var isExpanded = false;
 
 const SidebarContext = React.createContext<SidebarContext | null>(null)
 
@@ -116,6 +120,7 @@ const SidebarProvider = React.forwardRef<
     // We add a state so that we can do data-state="expanded" or "collapsed".
     // This makes it easier to style the sidebar with Tailwind classes.
     const state = open ? "expanded" : "collapsed"
+    isExpanded = open ? true : false;
 
     const contextValue = React.useMemo<SidebarContext>(
       () => ({
@@ -272,14 +277,14 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn("h-7 w-7", className)}
+      className={cn("h-8 w-8", isExpanded ? "absolute left-[240px] z-30" : "left-[20px] z-30")}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
       }}
       {...props}
     >
-      <PanelLeft />
+      {isExpanded ? <BsLayoutSidebarInset /> : <BsLayoutSidebarInsetReverse />}
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
@@ -615,7 +620,7 @@ const SidebarMenuAction = React.forwardRef<
         "peer-data-[size=lg]/menu-button:top-2.5",
         "group-data-[collapsible=icon]:hidden",
         showOnHover &&
-          "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 peer-data-[active=true]/menu-button:text-sidebar-accent-foreground md:opacity-0",
+        "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 peer-data-[active=true]/menu-button:text-sidebar-accent-foreground md:opacity-0",
         className
       )}
       {...props}
