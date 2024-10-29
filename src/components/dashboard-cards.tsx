@@ -46,8 +46,7 @@ const Cards = () => {
           toast.error("You need to login first");
         } else {
           setError(
-            `Error: ${err.response.status} - ${
-              err.response.data.message || "Failed to fetch cards"
+            `Error: ${err.response.status} - ${err.response.data.message || "Failed to fetch cards"
             }`
           );
         }
@@ -74,7 +73,7 @@ const Cards = () => {
   }
 
   return (
-    <div className="flex justify-items-center items-center gap-[10px] max-w-[90%] w-full">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] lg:grid-flow-row-dense w-full max-w-full">
       {cardsData &&
         Object.values(cardsData).map((card: any, index: number) => (
           <Card

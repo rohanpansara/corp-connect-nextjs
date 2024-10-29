@@ -14,13 +14,13 @@ export const metadata = {
 const DashboardPage = () => {
   return (
     <div
-      className={`min-h-screen w-full bg-[#F8F6F4] flex items-center justify-center flex-col space-y-6 p-6 ${inter.className}`}
+      className={`min-h-screen w-full bg-[#F8F6F4] flex items-center flex-col space-y-4 p-4 ${inter.className}`}
     >
-      <div className="w-[90%] flex justify-center items-center rounded-tr-md rounded-tl-md h-[50px] bg-slate-800 mb-8">
-        <span className="text-center font-semibold text-blue-200">
+      {/* <div className="w-full flex justify-center items-center rounded-tr-md rounded-tl-md h-[50px] bg-[#074F57]">
+        <span className="text-center font-semibold text-[#C4DFDF]">
           Dashboard
         </span>
-      </div>
+      </div> */}
       <Cards />
     </div>
   );
