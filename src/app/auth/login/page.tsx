@@ -1,11 +1,7 @@
 import LoginForm from '@/components/login-form';
 
-export const metadata = {
-    title: "Login | CorpConnect",
-    description: "Login to your CorpConnect account",
-    keywords: ["dashboard", "office", "corpconnect", "employee management"],
-    author: "CorpConnect Team",
-};
+import { loginMetadata } from '@/app/metadata/loginMetadata';
+export const metadata = loginMetadata;
 
 const LoginPage = () => {
     return (

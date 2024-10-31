@@ -5,7 +5,7 @@ import { apiClient } from "@/utils/apiClient";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import toast from "react-hot-toast";
 import { PiTornadoThin } from "react-icons/pi";
-import { FcClock, FcConferenceCall, FcLeave, FcOvertime } from "react-icons/fc";
+import { LuCalendar, LuClock3, LuCalendarClock, LuTv2 } from "react-icons/lu";
 import { useRouter } from "next/navigation";
 import {
   Tooltip,
@@ -19,21 +19,19 @@ const Cards = () => {
   const fetchRef = useRef(false);
   const router = useRouter();
 
-  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(
-    null
-  );
+  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const iconClassName = "h-[50px] w-[50px]";
+  const iconClassName = "h-[50px] w-[50px] text-[#074F57]";
 
   type CardTitle = "Leaves Available" | "Today’s Hours" | "Next Meeting" | "Shift Timings";
 
   const iconMap: Record<CardTitle, JSX.Element> = {
-    "Leaves Available": <FcLeave className={iconClassName} />,
-    "Today’s Hours": <FcClock className={iconClassName} />,
-    "Next Meeting": <FcConferenceCall className={iconClassName} />,
-    "Shift Timings": <FcOvertime className={iconClassName} />
+    "Leaves Available": <LuCalendar className={iconClassName} />,
+    "Today’s Hours": <LuClock3 className={iconClassName} />,
+    "Next Meeting": <LuTv2 className={iconClassName} />,
+    "Shift Timings": <LuCalendarClock className={iconClassName} />
   };
 
   const fetchCardsData = async () => {
@@ -46,10 +44,7 @@ const Cards = () => {
           router.push("/auth/login");
           toast.error("You need to login first");
         } else {
-          setError(
-            `Error: ${err.response.status} - ${err.response.data.message || "Failed to fetch cards"
-            }`
-          );
+          setError(`Error: ${err.response.status} - ${err.response.data.message || "Failed to fetch cards"}`);
         }
       } else if (err.request) {
         setError("Network error: Failed to receive a response");
@@ -95,7 +90,7 @@ const Cards = () => {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <span className="text-[16px] font-bold cursor-default">
+                      <span className="text-[16px] font-extrabold cursor-default">
                         {truncateText(card.value, 12)}
                       </span>
                     </TooltipTrigger>

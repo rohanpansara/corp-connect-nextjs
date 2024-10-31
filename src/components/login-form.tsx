@@ -4,13 +4,11 @@ import { useRouter } from 'next/navigation'; // 'next/navigation' used in Next.j
 import { apiClient } from '@/utils/apiClient'; // Assuming you have an API client utility
 import Image from "next/legacy/image"; // Import Image component from next/image
 import illustration from '@/assets/illustration.png';
-import logo from '@/assets/onlyLogo.png';
 import { Formik, Field, Form, ErrorMessage } from 'formik'; // Import Formik components
 import * as Yup from 'yup'; // For validation
 import toast from 'react-hot-toast'; // Import toast
 import { useEffect } from 'react';
 import useAuth from '@/hooks/useAuth';
-import { Skeleton } from './ui/skeleton';
 
 const LoginForm = () => {
 
@@ -21,11 +19,7 @@ const LoginForm = () => {
         if (isAuthenticated && !isLoading) {
             router.push('/dashboard');
         }
-    }, []);
-
-    if (isLoading) {
-        return <Skeleton className="w-[90%] h-screen rounded-md" />;
-    }
+    }, [router]);
 
     // Yup validation schema
     const validationSchema = Yup.object({
@@ -41,8 +35,8 @@ const LoginForm = () => {
         try {
             const response = await apiClient.post('/user/login', values);
             if (response.status === 200) {
-                toast.success(response.data.message || 'Login successful');
                 router.push('/dashboard');
+                toast.success(response.data.message || 'Login successful');
             }
         } catch (err: any) {
             console.error('Login failed:', err);
@@ -64,7 +58,7 @@ const LoginForm = () => {
                 <div className="w-full max-w-md p-6 bg-[#ECF1FE] shadow-lg rounded-[12px] items-center">
                     <h2 className="flex justify-center items-center text-2xl font-bold text-center text-gray-700 mb-[1px] bg-cover">
                         {/* <Image src={logo} alt='CorpConnect' className='flex mr-2 w-[10px] h-[5px]' objectFit='contain'></Image> */}
-                        Log In To&nbsp;<span className="text-[#407BFD]">CorpConnect</span>
+                        Welcome To&nbsp;<span className="text-[#407BFD]">CorpConnect</span>
                     </h2>
                     <span className='flex justify-center items-center text-[10px] text-center text-gray-400 mb-6'>Use credentials provided to you by the HR team</span>
 

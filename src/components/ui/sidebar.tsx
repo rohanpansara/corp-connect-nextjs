@@ -5,7 +5,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
 import { PanelLeft } from "lucide-react"
 
-import { useIsMobile } from "@/hooks/use-mobile"
+import { useIsMobile } from "@/hooks/uiHooks/use-mobile"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -19,12 +19,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-import { BsLayoutSidebarInset, BsLayoutSidebarInsetReverse } from "react-icons/bs";
+import { TiMinus, TiPlus } from "react-icons/ti";
 
-const SIDEBAR_COOKIE_NAME = "sidebar:state"
+const SIDEBAR_COOKIE_NAME = "sidebar-state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
-const SIDEBAR_WIDTH_MOBILE = "18rem"
+const SIDEBAR_WIDTH = "13rem"
+const SIDEBAR_WIDTH_MOBILE = "16rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
@@ -275,16 +275,16 @@ const SidebarTrigger = React.forwardRef<
     <Button
       ref={ref}
       data-sidebar="trigger"
-      variant="ghost"
-      size="icon"
-      className={cn("h-8 w-8", isExpanded ? "absolute left-[240px] z-30" : "left-[20px] z-30")}
+      variant="plain"
+      size="default"
+      className={cn(isExpanded ? "absolute left-[183px] z-30" : "absolute left-[-10px] top-[-6px] z-30")}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
       }}
       {...props}
     >
-      {isExpanded ? <BsLayoutSidebarInset /> : <BsLayoutSidebarInsetReverse />}
+      {isExpanded ? <TiPlus className="text-slate-50 bg-[#074F57] rounded-[40%] flex justify-center items-center" /> : <TiMinus className="text-slate-50 bg-[#074F57] rounded-[40%] flex justify-center items-center" />}
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
@@ -466,7 +466,7 @@ const SidebarGroupAction = React.forwardRef<
       ref={ref}
       data-sidebar="group-action"
       className={cn(
-        "absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "absolute right-3 top-3.5 flex aspect-square w-3 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         // Increases the hit area of the button on mobile.
         "after:absolute after:-inset-2 after:md:hidden",
         "group-data-[collapsible=icon]:hidden",
