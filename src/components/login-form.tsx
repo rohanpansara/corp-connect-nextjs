@@ -19,7 +19,7 @@ const LoginForm = () => {
         if (isAuthenticated && !isLoading) {
             router.push('/dashboard');
         }
-    }, [router]);
+    }, []);
 
     // Yup validation schema
     const validationSchema = Yup.object({

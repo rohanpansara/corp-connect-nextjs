@@ -5,11 +5,10 @@ import { useRouter } from "next/navigation";
 import {
     Table,
     TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
     TableHeader,
     TableRow,
+    TableHead,
+    TableCell,
 } from "@/components/ui/table";
 import {
     Tooltip,
@@ -22,20 +21,21 @@ import toast from "react-hot-toast";
 import { FaUserSlash, FaUser } from "react-icons/fa";
 import { truncateText } from "@/utils/truncateText";
 
-// Define the UserDTO type
 type UserDTO = {
+    id: string; // Assuming there's an id field for unique identification
     name: string;
     email: string;
     roles: string;
-    permissions: string[]; // Assuming this is an array of strings
-    isAccountEnabled: boolean;
+    permissions: string[];
+    isAccountEnabled: string;
+    isAccountNonLocked: string;
     createdDate: string;
 };
 
 const UserTable = () => {
     const fetchRef = useRef(false);
     const router = useRouter();
-    const [usersData, setUsersData] = useState<UserDTO[]>([]); // State to hold user data with UserDTO type
+    const [usersData, setUsersData] = useState<UserDTO[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -50,7 +50,11 @@ const UserTable = () => {
         setLoading(true);
         try {
             const response = await apiClient.get("/employee");
-            setUsersData(response.data.data); // response.data.data should match UserDTO type
+            if (response.data?.data) {
+                setUsersData(response.data.data);
+            } else {
+                setError("No data found");
+            }
         } catch (err: any) {
             if (err.response) {
                 if (err.response.status === 401 || err.response.status === 403) {
@@ -70,9 +74,7 @@ const UserTable = () => {
     };
 
     if (loading) return <p className="text-white text-center">Loading...</p>;
-    if (error) {
-        return <p className="text-red-500 text-center">{error}</p>;
-    }
+    if (error) return <p className="text-red-500 text-center">{error}</p>;
 
     return (
         <div className="flex w-full max-w-full">
@@ -84,22 +86,23 @@ const UserTable = () => {
                         <TableHead>Roles</TableHead>
                         <TableHead>Created Date</TableHead>
                         <TableHead className="text-center">Account Enabled</TableHead>
+                        <TableHead className="text-center">Account Locked</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {usersData.map((user) => (
-                        <TableRow key={user.email} className="h-10">
+                        <TableRow key={user?.id} className="h-10">
                             <TableCell className="font-medium overflow-hidden">
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger asChild>
                                             <span className="text-[12px] text-center font-semibold cursor-default">
-                                                {truncateText(user.name, 20)}
+                                                {truncateText(user?.name, 20)}
                                             </span>
                                         </TooltipTrigger>
-                                        {user.name.length > 20 && (
+                                        {user?.name?.length > 20 && (
                                             <TooltipContent className="max-w-[500px]">
-                                                <p>{user.name}</p>
+                                                <p>{user?.name}</p>
                                             </TooltipContent>
                                         )}
                                     </Tooltip>
@@ -110,12 +113,12 @@ const UserTable = () => {
                                     <Tooltip>
                                         <TooltipTrigger asChild>
                                             <span className="text-[12px] text-center cursor-default">
-                                                {truncateText(user.email, 30)}
+                                                {truncateText(user?.email, 30)}
                                             </span>
                                         </TooltipTrigger>
-                                        {user.email.length > 30 && (
+                                        {user?.email?.length > 30 && (
                                             <TooltipContent className="max-w-[500px]">
-                                                <p>{user.email}</p>
+                                                <p>{user?.email}</p>
                                             </TooltipContent>
                                         )}
                                     </Tooltip>
@@ -126,12 +129,12 @@ const UserTable = () => {
                                     <Tooltip>
                                         <TooltipTrigger asChild>
                                             <span className="text-[12px] text-center cursor-default">
-                                                {truncateText(user.roles, 20)}
+                                                {truncateText(user?.roles, 20)}
                                             </span>
                                         </TooltipTrigger>
-                                        {user.roles.length > 20 && (
+                                        {user?.roles?.length > 20 && (
                                             <TooltipContent className="max-w-[500px]">
-                                                <p>{user.roles}</p>
+                                                <p>{user?.roles}</p>
                                             </TooltipContent>
                                         )}
                                     </Tooltip>
@@ -142,19 +145,38 @@ const UserTable = () => {
                                     <Tooltip>
                                         <TooltipTrigger asChild>
                                             <span className="text-[12px] text-center cursor-default">
-                                                {truncateText(user.createdDate, 30)}
+                                                {truncateText(user?.createdDate, 30)}
                                             </span>
                                         </TooltipTrigger>
-                                        {user.roles.length > 20 && (
+                                        {user?.createdDate?.length > 30 && (
                                             <TooltipContent className="max-w-[500px]">
-                                                <p>{user.createdDate}</p>
+                                                <p>{user?.createdDate}</p>
                                             </TooltipContent>
                                         )}
                                     </Tooltip>
                                 </TooltipProvider>
                             </TableCell>
                             <TableCell className="text-center mx-auto">
-                                {!user.isAccountEnabled ? <span className="flex items-center justify-center"><FaUser className="text-green-500 text-center" /></span> : <span className="flex items-center justify-center"><FaUserSlash className="text-red-500 text-center" /></span>}
+                                {user?.isAccountEnabled === "true" ? (
+                                    <span className="flex items-center justify-center">
+                                        <FaUser className="text-green-500 text-center" />
+                                    </span>
+                                ) : (
+                                    <span className="flex items-center justify-center">
+                                        <FaUserSlash className="text-red-500 text-center" />
+                                    </span>
+                                )}
+                            </TableCell>
+                            <TableCell className="text-center mx-auto">
+                                {user?.isAccountNonLocked === "true" ? (
+                                    <span className="flex items-center justify-center">
+                                        <FaUser className="text-green-500 text-center" />
+                                    </span>
+                                ) : (
+                                    <span className="flex items-center justify-center">
+                                        <FaUserSlash className="text-red-500 text-center" />
+                                    </span>
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}
