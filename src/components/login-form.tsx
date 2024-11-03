@@ -35,9 +35,18 @@ const LoginForm = () => {
         try {
             const response = await apiClient.post('/user/login', values);
             if (response.status === 200) {
-                router.push('/dashboard');
-                toast.success(response.data.message || 'Login successful');
-            }
+                const navigatePromise = new Promise<void>((resolve) => {
+                    router.push('/dashboard');
+                    resolve(); // Resolve without a value
+                });
+            
+                toast.promise(navigatePromise, {
+                    loading: 'Navigating to dashboard...',
+                    success: response.data.message || 'Login successful',
+                    error: 'Failed to navigate to dashboard'
+                });
+            }            
+            
         } catch (err: any) {
             console.error('Login failed:', err);
             const errorMessage = "*" + err.response?.data?.message || 'An unexpected error occurred.';

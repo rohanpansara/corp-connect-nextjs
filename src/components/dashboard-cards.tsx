@@ -14,6 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { truncateText } from "@/utils/truncateText";
+import { getInitials } from "@/utils/getInitials";
 
 const Cards = () => {
   const fetchRef = useRef(false);
@@ -34,8 +35,13 @@ const Cards = () => {
     "Shift Timings": <LuCalendarClock className={iconClassName} />
   };
 
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1000)
+  }, []);
+
   const fetchCardsData = async () => {
     try {
+      setLoading(true);
       const response = await apiClient.get("/dashboard/cards");
       setCardsData(response.data.data);
     } catch (err: any) {
@@ -69,14 +75,14 @@ const Cards = () => {
   }
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] lg:grid-flow-row-dense w-full max-w-full">
+    <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-[20px] lg:grid-flow-row-dense w-full max-w-full">
       {cardsData &&
         Object.values(cardsData).map((card: any, index: number) => (
           <Card
             key={index}
-            className="w-[220px] h-[100px] overflow-hidden p-4 border-none bg-[#cfe2e2] shadow-lg rounded-md text-left mx-auto"
+            className="xl:w-[240px] h-[100px] lg:w-[380px] md:w-[450px] overflow-hidden p-4 border-none bg-[#cfe2e2] shadow-lg rounded-md text-left mx-auto"
           >
-            <CardContent className="p-0 h-full flex flex-row justify-around items-center my-auto">
+            <CardContent className="p-0 h-full flex flex-row items-center justify-around">
               <CardDescription className="p-0 pr-2 flex">
                 <span>
                   {/* Render icon based on card.title */}
@@ -91,7 +97,7 @@ const Cards = () => {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <span className="text-[16px] font-extrabold cursor-default">
-                        {truncateText(card.value, 12)}
+                        {getInitials(card.value)}
                       </span>
                     </TooltipTrigger>
                     {card.value.length > 12 && (
