@@ -23,7 +23,7 @@ import { TiMinus, TiPlus } from "react-icons/ti";
 
 const SIDEBAR_COOKIE_NAME = "sidebar-state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "13rem"
+const SIDEBAR_WIDTH = "12rem"
 const SIDEBAR_WIDTH_MOBILE = "16rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
@@ -277,7 +277,7 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="plain"
       size="default"
-      className={cn(isExpanded ? "absolute left-[183px] z-30" : "absolute left-[-10px] top-[-6px] z-30")}
+      className={cn(isExpanded ? "absolute left-[12em] z-30" : "absolute left-[-10px] top-[-6px] z-30")}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()

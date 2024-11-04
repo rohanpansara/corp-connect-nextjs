@@ -20,23 +20,29 @@ const Cards = () => {
   const fetchRef = useRef(false);
   const router = useRouter();
 
-  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(null);
+  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   const iconClassName = "h-[50px] w-[50px] text-[#074F57]";
 
-  type CardTitle = "Leaves Available" | "Today’s Hours" | "Next Meeting" | "Shift Timings";
+  type CardTitle =
+    | "Leaves Available"
+    | "Today’s Hours"
+    | "Next Meeting"
+    | "Shift Timings";
 
   const iconMap: Record<CardTitle, JSX.Element> = {
     "Leaves Available": <LuCalendar className={iconClassName} />,
     "Today’s Hours": <LuClock3 className={iconClassName} />,
     "Next Meeting": <LuTv2 className={iconClassName} />,
-    "Shift Timings": <LuCalendarClock className={iconClassName} />
+    "Shift Timings": <LuCalendarClock className={iconClassName} />,
   };
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000)
+    setTimeout(() => setLoading(false), 1000);
   }, []);
 
   const fetchCardsData = async () => {
@@ -50,7 +56,11 @@ const Cards = () => {
           router.push("/auth/login");
           toast.error("You need to login first");
         } else {
-          setError(`Error: ${err.response.status} - ${err.response.data.message || "Failed to fetch cards"}`);
+          setError(
+            `Error: ${err.response.status} - ${
+              err.response.data.message || "Failed to fetch cards"
+            }`
+          );
         }
       } else if (err.request) {
         setError("Network error: Failed to receive a response");
@@ -96,10 +106,17 @@ const Cards = () => {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <span className="text-[16px] font-extrabold cursor-default">
-                        {getInitials(card.value)}
-                      </span>
+                      {card.title === "Next Meeting" ? (
+                        <span className="text-[16px] font-extrabold cursor-default">
+                          {getInitials(card.value)}
+                        </span>
+                      ) : (
+                        <span className="text-[16px] font-extrabold cursor-default">
+                          {card.value}
+                        </span>
+                      )}
                     </TooltipTrigger>
+
                     {card.value.length > 12 && (
                       <TooltipContent>
                         <p>{card.value}</p>
