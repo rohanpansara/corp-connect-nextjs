@@ -1,11 +1,11 @@
-import Cards from "@/components/dashboard-cards";
+import Cards from "@/components/dashboard/dashboard-cards";
 import { Inter } from "next/font/google";
 
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ["latin"] });
 
 import { dashboardMetadata } from '@/app/metadata/dashboardMetadata';
-import UserTable from "@/components/dashboard-table";
+import UserTable from "@/components/dashboard/dashboard-table";
 export const metadata = dashboardMetadata;
 
 const DashboardPage = () => {
