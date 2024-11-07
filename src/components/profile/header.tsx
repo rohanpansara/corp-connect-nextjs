@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 import { UserDTO } from "@/types/user";
 import { getInitials } from "@/utils/getInitials";
-import profileBackground from '../../assets/profile-background.jpg'
+import profileBackground from "../../assets/profile-background.jpg";
 
 const ProfileHeader = ({ id }: { id: string }) => {
   const fetchRef = useRef(false);
@@ -54,7 +54,7 @@ const ProfileHeader = ({ id }: { id: string }) => {
   return (
     <>
       <div className="flex w-full h-[150px] p-2">
-        <Avatar className="h-full w-full">
+        <Avatar className="h-full w-full rounded-t-[10px]">
           <AvatarImage
             className="object-cover"
             src={profileBackground.src}
@@ -65,10 +65,11 @@ const ProfileHeader = ({ id }: { id: string }) => {
           </AvatarFallback>
         </Avatar>
       </div>
-
-      <div className="flex flex-col mr-auto">
-        <span className="text-lg font-semibold">Rohan Pansara - {id}</span>
-        <span className="text-sm text-gray-600">{userHeaderData?.email}</span>
+      <div className="absolute top-[80px] mx-auto">
+        <Avatar className="h-[120px] w-[120px] rounded-full border-[5px] border-[#F8F6F4]">
+          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
       </div>
     </>
   );
