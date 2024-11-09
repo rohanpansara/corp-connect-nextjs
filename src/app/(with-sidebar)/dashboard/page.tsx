@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 import { dashboardMetadata } from '@/app/metadata/dashboardMetadata';
-import UserTable from "@/components/dashboard/dashboard-table";
+import UserTable from "@/components/user-table";
 export const metadata = dashboardMetadata;
 
 const DashboardPage = () => {

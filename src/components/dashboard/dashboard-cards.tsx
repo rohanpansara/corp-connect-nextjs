@@ -79,12 +79,12 @@ const Cards = () => {
   }
 
   return (
-    <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-[20px] lg:grid-flow-row-dense w-full max-w-full">
+    <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-[20px] lg:grid-flow-row-dense mx-auto w-full max-w-full">
       {cardsData &&
         Object.values(cardsData).map((card: any, index: number) => (
           <Card
             key={index}
-            className="xl:w-[240px] h-[100px] lg:w-[380px] md:w-[450px] overflow-hidden p-4 border-none bg-[#cfe2e2] shadow-lg rounded-md text-left mx-auto"
+            className="h-[100px] xl:w-[240px] lg:w-[380px] md:w-[450px] overflow-hidden p-4 border-none bg-[#cfe2e2] shadow-lg rounded-md text-left mx-auto"
           >
             <CardContent className="p-0 h-full flex flex-row items-center justify-around">
               <CardDescription className="p-0 pr-2 flex">

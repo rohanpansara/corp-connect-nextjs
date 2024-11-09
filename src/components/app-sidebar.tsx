@@ -6,7 +6,8 @@ import {
   FaTools,
   FaMoneyCheckAlt,
 } from "react-icons/fa";
-import { RiDashboardHorizontalFill, RiProfileFill } from "react-icons/ri";
+import { RiDashboardHorizontalFill } from "react-icons/ri";
+import { BiSolidLogOut } from "react-icons/bi";
 import {
   Sidebar,
   SidebarContent,
@@ -56,10 +57,15 @@ const lowerMenuItems = [
     url: "/settings",
     icon: FaTools,
   },
+  {
+    title: "Logout",
+    url: "/auth/login",
+    icon: BiSolidLogOut,
+  }
 ];
 
 export function AppSidebar() {
-  const pathname = usePathname(); // Get the current path
+  const pathname = usePathname();
   const currentSegment = getLastPathSegment(pathname);
 
   return (

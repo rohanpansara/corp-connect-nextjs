@@ -9,7 +9,7 @@ import { UserDTO } from "@/types/user";
 import { getInitials } from "@/utils/getInitials";
 import profileBackground from "../../assets/profile-background.jpg";
 
-const ProfileHeader = ({ id }: { id: string }) => {
+const UserInfo = ({ id }: { id: string }) => {
   const fetchRef = useRef(false);
   const router = useRouter();
 
@@ -54,25 +54,10 @@ const ProfileHeader = ({ id }: { id: string }) => {
   return (
     <>
       <div className="flex w-full h-[150px] p-2 pt-0">
-        <Avatar className="h-full w-full rounded-t-[10px]">
-          <AvatarImage
-            className="object-cover"
-            src={profileBackground.src}
-            alt="Profile Background"
-          />
-          <AvatarFallback>
-            {getInitials(userHeaderData?.name || "") || "Profile Picture"}
-          </AvatarFallback>
-        </Avatar>
-      </div>
-      <div className="absolute top-[80px]">
-        <Avatar className="h-[120px] w-[120px] rounded-full border-[5px] border-[#F8F6F4]">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <div className="font-s"></div>
       </div>
     </>
   );
 };
 
-export default ProfileHeader;
+export default UserInfo;
