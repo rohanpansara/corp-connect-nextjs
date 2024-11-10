@@ -1,31 +1,25 @@
 import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { FaTrashAlt } from "react-icons/fa";
 
 interface DeleteDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  entity: string; // name of the entity (e.g., "User", "Task")
-  entityName: string | number; // entity's name or count of entities (for multiple deletion)
-  onDelete: () => void; // function to call when confirming the deletion
+  entity: string;
+  entityName: string | number; 
+  onDelete: () => void;
 }
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({ isOpen, onClose, entity, entityName, onDelete }) => {
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogTrigger asChild>
-        <Button variant="destructive">
-          <FaTrashAlt />
-          Delete
-        </Button>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      {/* Remove DialogTrigger, since you already control the dialog state with `isOpen` */}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Confirm Deletion</DialogTitle>
         </DialogHeader>
         <p>
-          Are you sure you want to delete {entity === "User" ? `${entityName}` : `${entityName} ${entity}s`}?
+          Are you sure you want to delete the {entity === "User" ? `${entityName}` : `${entityName} ${entity}s`}?
         </p>
         <DialogFooter>
           <Button variant="secondary" onClick={onClose}>

@@ -12,9 +12,13 @@ import { Formik, FormikHelpers, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { apiClient } from "@/utils/apiClient";
 import toast from "react-hot-toast";
-import { TbUserPlus } from "react-icons/tb";
 
-const AddUserDialog = () => {
+interface AddUserDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
   interface UserFormValues {
     name: string;
     email: string;
@@ -40,8 +44,10 @@ const AddUserDialog = () => {
     password: Yup.string()
       .min(6, "*Password must be at least 8 characters")
       .required("*Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), ""], "*Passwords must match"),
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref("password"), ""],
+      "*Passwords must match"
+    ),
     userStatus: Yup.string().required("*User status is required"),
     roles: Yup.string().required("*Role is required"),
   });
@@ -62,13 +68,7 @@ const AddUserDialog = () => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="flex items-center gap-2 text-xs">
-          <TbUserPlus className="h-4 w-4" />
-          Add User
-        </Button>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[550px] md:max-w-[650px]">
         <DialogHeader>
           <DialogTitle>Fill User Details</DialogTitle>
@@ -88,7 +88,10 @@ const AddUserDialog = () => {
                 {/* Name */}
                 <div className="col-span-4 sm:col-span-2 lg:col-span-4">
                   <div className="flex items-center justify-between w-full">
-                    <label htmlFor="name" className="text-right text-sm text-muted-foreground">
+                    <label
+                      htmlFor="name"
+                      className="text-right text-sm text-muted-foreground"
+                    >
                       Name
                     </label>
                     <ErrorMessage
@@ -100,13 +103,17 @@ const AddUserDialog = () => {
                   <Field
                     id="name"
                     name="name"
-                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? 'border-red-600' : ''} "/>
+                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? 'border-red-600' : ''} "
+                  />
                 </div>
 
                 {/* Email */}
                 <div className="col-span-4 sm:col-span-2 lg:row-start-2 lg:col-span-4 sm:row-start-1 row-start-2">
                   <div className="flex items-center justify-between">
-                    <label htmlFor="email" className="text-right text-sm text-muted-foreground">
+                    <label
+                      htmlFor="email"
+                      className="text-right text-sm text-muted-foreground"
+                    >
                       Email
                     </label>
                     <ErrorMessage
@@ -128,7 +135,10 @@ const AddUserDialog = () => {
                 {/* Password */}
                 <div className="col-span-2 lg:row-start-3 md:row-start-2">
                   <div className="flex items-center justify-between">
-                    <label htmlFor="password" className="text-right text-sm text-muted-foreground">
+                    <label
+                      htmlFor="password"
+                      className="text-right text-sm text-muted-foreground"
+                    >
                       Password
                     </label>
                     <ErrorMessage
@@ -150,7 +160,10 @@ const AddUserDialog = () => {
                 {/* Confirm Password */}
                 <div className="col-span-2 col-start-3 lg:row-start-3 md:row-start-2">
                   <div className="flex items-center justify-between">
-                    <label htmlFor="confirmPassword" className="text-right text-sm text-muted-foreground">
+                    <label
+                      htmlFor="confirmPassword"
+                      className="text-right text-sm text-muted-foreground"
+                    >
                       Confirm Password
                     </label>
                     <ErrorMessage
@@ -171,7 +184,10 @@ const AddUserDialog = () => {
                 {/* Status (Dropdown) */}
                 <div className="col-span-2 lg:row-start-4 md:row-start-3">
                   <div className="flex items-center justify-between">
-                    <label htmlFor="userStatus" className="text-right text-sm text-muted-foreground">
+                    <label
+                      htmlFor="userStatus"
+                      className="text-right text-sm text-muted-foreground"
+                    >
                       User Status
                     </label>
                     <ErrorMessage
@@ -195,7 +211,10 @@ const AddUserDialog = () => {
                 {/* Roles (Dropdown) */}
                 <div className="col-span-2 col-start-3 lg:row-start-4 md:row-start-3">
                   <div className="flex items-center justify-between">
-                    <label htmlFor="roles" className="text-right text-sm text-muted-foreground">
+                    <label
+                      htmlFor="roles"
+                      className="text-right text-sm text-muted-foreground"
+                    >
                       Role
                     </label>
                     <ErrorMessage
