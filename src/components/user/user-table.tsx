@@ -19,7 +19,9 @@ import {
 import { apiClient } from "@/utils/apiClient";
 import toast from "react-hot-toast";
 import { FaUserSlash, FaUser } from "react-icons/fa";
-import { TbUserEdit, TbUserMinus, TbUserPlus } from "react-icons/tb";
+import { FaUserPen } from "react-icons/fa6";
+import { TbUserMinus } from "react-icons/tb";
+import { BiSolidUserDetail } from "react-icons/bi";
 import { truncateText } from "@/utils/truncateText";
 import { Checkbox } from "@/components/ui/checkbox"; // Import ShadCN Checkbox
 
@@ -117,7 +119,7 @@ const UserTable = () => {
           )}
         </div>
         <div className="ml-auto">
-          <AddUserDialog/>
+          <AddUserDialog />
         </div>
       </div>
       <div className="flex w-full max-w-full">
@@ -131,8 +133,9 @@ const UserTable = () => {
               <TableHead>Email</TableHead>
               <TableHead>Roles</TableHead>
               <TableHead>Created Date</TableHead>
-              <TableHead>Account Enabled</TableHead>
-              <TableHead>Account Locked</TableHead>
+              <TableHead>Acct. Enabled</TableHead>
+              <TableHead>Acct. Locked</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -221,6 +224,37 @@ const UserTable = () => {
                   ) : (
                     <FaUserSlash className="ml-10 text-red-500" />
                   )}
+                </TableCell>
+                <TableCell className="flex">
+                  <TooltipProvider>
+                    <Tooltip >
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="plain"
+                          className="border-[2px] p-2 border-primary text-primary mr-4 hover:text-gray-200 hover:bg-primary"
+                        >
+                          <FaUserPen />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom">
+                        <p>Edit User</p>
+                      </TooltipContent>
+                    </Tooltip>
+
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="plain"
+                          className="border-[2px] p-2 border-primary text-primary hover:text-gray-200 hover:bg-primary"
+                        >
+                          <BiSolidUserDetail />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom">
+                        <p>View User Details</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </TableCell>
               </TableRow>
             ))}

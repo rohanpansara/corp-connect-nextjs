@@ -70,7 +70,7 @@ const AddUserDialog = () => {
           Add User
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[550px] h-[350px] md:max-w-[650px]">
+      <DialogContent className="sm:max-w-[550px] md:max-w-[650px]">
         <DialogHeader>
           <DialogTitle>Fill User Details</DialogTitle>
           <DialogDescription className="text-[12px]">
@@ -87,7 +87,7 @@ const AddUserDialog = () => {
             <Form className="space-y-4 sm:space-y-2">
               <div className="grid grid-cols-4 grid-rows-3 gap-4 sm:gap-2">
                 {/* Name */}
-                <div className="col-span-4 sm:col-span-2">
+                <div className="col-span-4 sm:col-span-2 lg:col-span-4">
                   <div className="flex items-center justify-between w-full">
                     <label htmlFor="name" className="text-right text-sm text-muted-foreground">
                       Name
@@ -105,7 +105,7 @@ const AddUserDialog = () => {
                 </div>
 
                 {/* Email */}
-                <div className="col-span-4 sm:col-span-2 sm:row-start-1 row-start-2">
+                <div className="col-span-4 sm:col-span-2 lg:row-start-2 lg:col-span-4 sm:row-start-1 row-start-2">
                   <div className="flex items-center justify-between">
                     <label htmlFor="email" className="text-right text-sm text-muted-foreground">
                       Email
@@ -127,7 +127,7 @@ const AddUserDialog = () => {
                 </div>
 
                 {/* Password */}
-                <div className="col-span-2 sm:row-start-3 md:row-start-2">
+                <div className="col-span-2 lg:row-start-3 md:row-start-2">
                   <div className="flex items-center justify-between">
                     <label htmlFor="password" className="text-right text-sm text-muted-foreground">
                       Password
@@ -149,7 +149,7 @@ const AddUserDialog = () => {
                 </div>
 
                 {/* Confirm Password */}
-                <div className="col-span-2 col-start-3 row-start-3 ">
+                <div className="col-span-2 col-start-3 lg:row-start-3 md:row-start-2">
                   <div className="flex items-center justify-between">
                     <label htmlFor="confirmPassword" className="text-right text-sm text-muted-foreground">
                       Confirm Password
@@ -170,7 +170,7 @@ const AddUserDialog = () => {
                 </div>
 
                 {/* Status (Dropdown) */}
-                <div className="col-span-2 row-start-4">
+                <div className="col-span-2 lg:row-start-4 md:row-start-3">
                   <div className="flex items-center justify-between">
                     <label htmlFor="userStatus" className="text-right text-sm text-muted-foreground">
                       User Status
@@ -194,7 +194,7 @@ const AddUserDialog = () => {
                 </div>
 
                 {/* Roles (Dropdown) */}
-                <div className="col-span-2 col-start-3 row-start-4">
+                <div className="col-span-2 col-start-3 lg:row-start-4 md:row-start-3">
                   <div className="flex items-center justify-between">
                     <label htmlFor="roles" className="text-right text-sm text-muted-foreground">
                       Role
