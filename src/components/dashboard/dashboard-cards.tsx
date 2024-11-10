@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { apiClient } from "@/utils/apiClient";
+import { apiClient } from "@/app/api/apiClient";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import toast from "react-hot-toast";
 import { PiTornadoThin } from "react-icons/pi";
@@ -24,7 +24,7 @@ const Cards = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const iconClassName = "h-[50px] w-[50px] text-[#074F57]";
+  const iconClassName = "h-[50px] w-[50px] text-[#2CA58D]";
 
   type CardTitle =
     | "Leaves Available"
@@ -96,7 +96,7 @@ const Cards = () => {
                   {/* Default icon */}
                 </span>
               </CardDescription>
-              <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-[#074F57]">
+              <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-[#2CA58D]">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>

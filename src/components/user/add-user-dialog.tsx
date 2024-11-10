@@ -5,28 +5,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Formik, FormikHelpers, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { apiClient } from "@/utils/apiClient";
-import toast from "react-hot-toast";
-
-interface AddUserDialogProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { handleAddUserSubmit } from "@/app/api/handlers/addUserSubmit";
+import { validationSchema } from "@/validators/addUserFormValidator";
+import { AddUserDialogProps } from "@/app/api/interfaces/props/AddUserDialogProps";
 
 const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
-  interface UserFormValues {
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    userStatus: string;
-    roles: string;
-  }
   const initialValues = {
     name: "",
     email: "",
@@ -34,37 +20,6 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
     confirmPassword: "",
     userStatus: "",
     roles: "",
-  };
-
-  const validationSchema = Yup.object({
-    name: Yup.string().required("*Name is required"),
-    email: Yup.string()
-      .email("*Invalid email format")
-      .required("*Email is required"),
-    password: Yup.string()
-      .min(6, "*Password must be at least 8 characters")
-      .required("*Password is required"),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password"), ""],
-      "*Passwords must match"
-    ),
-    userStatus: Yup.string().required("*User status is required"),
-    roles: Yup.string().required("*Role is required"),
-  });
-
-  const handleSubmit = async (
-    values: UserFormValues,
-    { resetForm, setSubmitting }: FormikHelpers<UserFormValues>
-  ) => {
-    try {
-      await apiClient.post("/user", values);
-      toast.success("User added successfully");
-      resetForm();
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "Failed to add user");
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   return (
@@ -79,7 +34,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+          onSubmit={handleAddUserSubmit}
           enableReinitialize
         >
           {({ isSubmitting }) => (

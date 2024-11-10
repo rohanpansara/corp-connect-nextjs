@@ -16,8 +16,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { apiClient } from "@/utils/apiClient";
-import toast from "react-hot-toast";
 import { FaUserSlash, FaUser, FaTrashAlt } from "react-icons/fa";
 import { FaUserPen } from "react-icons/fa6";
 import { BiSolidUserDetail } from "react-icons/bi";
@@ -29,6 +27,7 @@ import { UserDTO } from "@/types/user";
 import { Button } from "../ui/button";
 import AddUserDialog from "./add-user-dialog";
 import DeleteDialog from "../delete-dialog";
+import { fetchUsersData } from "@/app/api/fetchers/fetchAllUsers";
 
 const UserTable = () => {
   const fetchRef = useRef(false);
@@ -41,43 +40,19 @@ const UserTable = () => {
   const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false); // State for Add User Dialog
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false); // State for Delete Dialog
 
+  const handleNavigation = (path: string) => router.push(path);
+
   useEffect(() => {
     if (!fetchRef.current) {
       fetchRef.current = true;
-      fetchUsersData();
+      fetchUsersData({
+        setUsersData,
+        setError,
+        setLoading,
+        onNavigate: handleNavigation,
+      });
     }
   }, []);
-
-  const fetchUsersData = async () => {
-    setLoading(true);
-    try {
-      const response = await apiClient.get("/employee");
-      if (response.data?.data) {
-        setUsersData(response.data.data);
-      } else {
-        setError("No data found");
-      }
-    } catch (err: any) {
-      if (err.response) {
-        if (err.response.status === 401 || err.response.status === 403) {
-          router.push("/auth/login");
-          toast.error("You need to login first");
-        } else {
-          setError(
-            `Error: ${err.response.status} - ${
-              err.response.data.message || "Failed to fetch cards"
-            }`
-          );
-        }
-      } else if (err.request) {
-        setError("Network error: Failed to receive a response");
-      } else {
-        setError(`Error: ${err.message}`);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSelectAll = () => {
     if (selectAll) {
@@ -106,12 +81,7 @@ const UserTable = () => {
   };
 
   const handleDeleteUsers = async () => {
-    // Log to see if the delete function is firing
-    console.log("Delete Users function triggered");
-    console.log("Selected users for deletion:", Array.from(selectedUsers));
-
-    // Add your delete logic here (API call, etc.)
-    setIsDeleteDialogOpen(false); // Close the dialog after deletion
+    setIsDeleteDialogOpen(false);
   };
 
   if (loading) return <p className="text-white text-center">Loading...</p>;
@@ -139,7 +109,9 @@ const UserTable = () => {
                 disabled={selectedUsers.size === 0} // Disable the button if no users are selected
               >
                 <FaTrashAlt />
-                Delete Selected
+                {selectedUsers.size === usersData.length
+                  ? `Delete All (${selectedUsers.size})`
+                  : `Delete Selected (${selectedUsers.size})`}
               </Button>
             </>
           )}

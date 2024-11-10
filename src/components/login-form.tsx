@@ -1,7 +1,7 @@
 'use client'; // This is required for client-side components
 
 import { useRouter } from 'next/navigation'; // 'next/navigation' used in Next.js 13+ for app directory
-import { apiClient } from '@/utils/apiClient'; // Assuming you have an API client utility
+import { apiClient } from '@/app/api/apiClient'; // Assuming you have an API client utility
 import Image from "next/legacy/image"; // Import Image component from next/image
 import illustration from '@/assets/illustration.png';
 import { Formik, Field, Form, ErrorMessage } from 'formik'; // Import Formik components

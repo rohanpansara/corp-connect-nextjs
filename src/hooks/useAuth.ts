@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { apiClient } from "@/utils/apiClient";
+import { apiClient } from "@/app/api/apiClient";
 
 let authCache: boolean | null = null; // Global cache
 let authPromise: Promise<void> | null = null; // Prevents duplicate requests
