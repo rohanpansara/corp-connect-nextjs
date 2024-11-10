@@ -13,7 +13,7 @@ import { TbUserPlus } from "react-icons/tb";
 const inter = Inter({ subsets: ["latin"] });
 
 import { userMetadata } from "@/app/metadata/userMetadata";
-import UserTable from "@/components/user-table";
+import UserTable from "@/components/user/user-table";
 import { Button } from "@/components/ui/button";
 export const metadata = userMetadata;
 
@@ -36,11 +36,7 @@ const UserPage = () => {
           </BreadcrumbList>
         </Breadcrumb>
         </div>
-        <div className="ml-auto">
-          <Button><TbUserPlus/>Add User</Button>
-        </div>
       </div>
-
       <UserTable />
     </div>
   );

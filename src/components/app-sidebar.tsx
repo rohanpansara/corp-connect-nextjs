@@ -5,6 +5,8 @@ import {
   FaCalendarTimes,
   FaTools,
   FaMoneyCheckAlt,
+  FaUserAlt,
+  FaUserFriends,
 } from "react-icons/fa";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { BiSolidLogOut } from "react-icons/bi";
@@ -21,6 +23,8 @@ import {
 import { usePathname } from "next/navigation";
 import clsx from "clsx"; // Import clsx for conditional classnames
 import { getLastPathSegment } from "@/utils/getLastURLSegment";
+import { title } from "process";
+import { url } from "inspector";
 
 // Menu items.
 const upperMenuItems = [
@@ -38,6 +42,11 @@ const upperMenuItems = [
     title: "Attendance",
     url: "/attendance",
     icon: FaCalendarAlt,
+  },
+  {
+    title: "Users",
+    url: "/user",
+    icon: FaUserFriends
   },
   {
     title: "Finance",
