@@ -45,7 +45,7 @@ const upperMenuItems = [
   },
   {
     title: "Users",
-    url: "/user",
+    url: "/users",
     icon: FaUserFriends
   },
   {

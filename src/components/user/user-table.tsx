@@ -20,7 +20,6 @@ import { apiClient } from "@/utils/apiClient";
 import toast from "react-hot-toast";
 import { FaUserSlash, FaUser } from "react-icons/fa";
 import { FaUserPen } from "react-icons/fa6";
-import { TbUserMinus } from "react-icons/tb";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { truncateText } from "@/utils/truncateText";
 import { Checkbox } from "@/components/ui/checkbox"; // Import ShadCN Checkbox
@@ -28,6 +27,7 @@ import { Checkbox } from "@/components/ui/checkbox"; // Import ShadCN Checkbox
 import { UserDTO } from "@/types/user";
 import { Button } from "../ui/button";
 import AddUserDialog from "./add-user-dialog";
+import DeleteDialog from "../delete-dialog";
 
 const UserTable = () => {
   const fetchRef = useRef(false);
@@ -37,6 +37,7 @@ const UserTable = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   useEffect(() => {
     if (!fetchRef.current) {
@@ -102,6 +103,12 @@ const UserTable = () => {
     setSelectedUsers(updatedSelection);
   };
 
+  const handleDeleteUsers = async () => {
+    // Add your delete logic here (API call, etc.)
+    console.log("Deleting users:", Array.from(selectedUsers));
+    setIsDeleteDialogOpen(false); // Close the dialog after deletion
+  };
+
   if (loading) return <p className="text-white text-center">Loading...</p>;
   if (error) return <p className="text-red-500 text-center">{error}</p>;
 
@@ -109,13 +116,17 @@ const UserTable = () => {
     <>
       <div className="flex w-full max-w-full">
         <div className="mr-auto">
+          {/* Only show delete dialog if there are selected users */}
           {selectedUsers.size > 0 && (
-            <Button variant="destructive" className="text-xs">
-              <TbUserMinus />
-              {selectedUsers.size === usersData.length
-                ? "Remove All"
-                : "Remove User"}
-            </Button>
+            <DeleteDialog
+              isOpen={isDeleteDialogOpen}
+              onClose={() => setIsDeleteDialogOpen(false)} // Close without deleting
+              entity="User"
+              entityName={
+                selectedUsers.size === 1 ? "User" : selectedUsers.size
+              } // Dynamic name or count
+              onDelete={handleDeleteUsers} // Call delete function when confirmed
+            />
           )}
         </div>
         <div className="ml-auto">
@@ -227,7 +238,7 @@ const UserTable = () => {
                 </TableCell>
                 <TableCell className="flex">
                   <TooltipProvider>
-                    <Tooltip >
+                    <Tooltip>
                       <TooltipTrigger asChild>
                         <Button
                           variant="plain"
@@ -245,7 +256,7 @@ const UserTable = () => {
                       <TooltipTrigger asChild>
                         <Button
                           variant="plain"
-                          className="border-[2px] p-2 border-primary text-primary hover:text-gray-200 hover:bg-primary"
+                          className="border-[2px] p-2 border-[#074F57] text-[#074F57] hover:text-gray-200 hover:bg-[#074F57]"
                         >
                           <BiSolidUserDetail />
                         </Button>

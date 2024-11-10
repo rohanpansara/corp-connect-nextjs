@@ -33,18 +33,17 @@ const AddUserDialog = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
+    name: Yup.string().required("*Name is required"),
     email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
+      .email("*Invalid email format")
+      .required("*Email is required"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+      .min(6, "*Password must be at least 8 characters")
+      .required("*Password is required"),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), ""], "Passwords must match")
-      .required("Password doesn't match"),
-    userStatus: Yup.string().required("User status is required"),
-    roles: Yup.string().required("Role is required"),
+      .oneOf([Yup.ref("password"), ""], "*Passwords must match"),
+    userStatus: Yup.string().required("*User status is required"),
+    roles: Yup.string().required("*Role is required"),
   });
 
   const handleSubmit = async (
@@ -206,10 +205,18 @@ const AddUserDialog = () => {
                     />
                   </div>
                   <Field
+                    as="select"
                     id="roles"
                     name="roles"
-                    className="input border-[1px] rounded-md border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.roles ? 'border-red-600' : ''}"
-                  />
+                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.userStatus ? 'border-red-600' : ''}"
+                  >
+                    <option value="">Select Role</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="HR_ADMIN">HR Admin</option>
+                    <option value="PMS_MANAGER">PMS Manager</option>
+                    <option value="HR_MANAGER">HR Manager</option>
+                    <option value="USER">User</option>
+                  </Field>
                 </div>
               </div>
               <DialogFooter>
