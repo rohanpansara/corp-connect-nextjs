@@ -23,6 +23,14 @@ import {
   FaUserAlt,
   FaUserAltSlash,
 } from "react-icons/fa";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { FaUserLargeSlash, FaUserPen } from "react-icons/fa6";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { TbUserPlus } from "react-icons/tb";
@@ -34,6 +42,8 @@ import { Button } from "../ui/button";
 import AddUserDialog from "./AddUserDialog";
 import DeleteDialog from "../DeleteDialog";
 import { fetchUsersData } from "@/app/api/fetchers/fetchAllUsers";
+import { deleteUsers } from "@/app/api/handlers/DeleteUsersSubmit";
+import { Switch } from "@radix-ui/react-switch";
 
 const UserTable = () => {
   const fetchRef = useRef(false);
@@ -75,20 +85,69 @@ const UserTable = () => {
 
     if (updatedSelection.has(userId)) {
       updatedSelection.delete(userId);
-      setSelectAll(false); // Unselect "Select All" if a user is deselected
+      setSelectAll(false);
     } else {
       updatedSelection.add(userId);
       if (updatedSelection.size === usersData.length) {
-        setSelectAll(true); // Select "Select All" if all users are selected
+        setSelectAll(true);
       }
     }
 
     setSelectedUsers(updatedSelection);
   };
 
+  // Step 3: Update handleDeleteUsers to use deleteUsers function
   const handleDeleteUsers = async () => {
-    
-    setIsDeleteDialogOpen(false);
+    try {
+      await deleteUsers(Array.from(selectedUsers)); // Convert Set to Array
+      setUsersData(usersData.filter((user) => !selectedUsers.has(user.id))); // Update table
+      setSelectedUsers(new Set()); // Clear selection after delete
+    } catch (error) {
+      setError("Failed to delete selected users.");
+    }
+    setIsDeleteDialogOpen(false); // Close dialog after deletion
+  };
+
+  // Toggle account enabled status
+  const handleToggleAccountStatus = async (userId: string, status: boolean) => {
+    // API call to update user status (enabled/disabled)
+    // Replace with your actual API call logic
+    try {
+      // Example: Updating the user status
+      // await updateUserStatus(userId, status);
+      // Update the UI after changing status
+      setUsersData((prevData) =>
+        prevData.map((user) =>
+          user.id === userId
+            ? { ...user, isAccountEnabled: status ? "true" : "false" }
+            : user
+        )
+      );
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
+  // Toggle account lock status
+  const handleToggleAccountLockStatus = async (
+    userId: string,
+    status: boolean
+  ) => {
+    // API call to update account lock status (locked/unlocked)
+    try {
+      // Example: Updating the lock status
+      // await updateAccountLockStatus(userId, status);
+      // Update the UI after changing lock status
+      setUsersData((prevData) =>
+        prevData.map((user) =>
+          user.id === userId
+            ? { ...user, isAccountNonLocked: status ? "true" : "false" }
+            : user
+        )
+      );
+    } catch (error) {
+      console.error("Error updating lock status:", error);
+    }
   };
 
   if (loading) return <p className="text-white text-center">Loading...</p>;
@@ -226,19 +285,84 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell>
-                <TableCell>
-                  {user?.isAccountEnabled === "true" ? (
-                    <FaUserAlt className="h-[18px] w-[18px] ml-10 text-green-500" />
-                  ) : (
-                    <FaUserLargeSlash className="h-[18px] w-[18px] ml-10 text-red-500" />
-                  )}
+                <TableCell className="text-center">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger>
+                            {user.isAccountEnabled === "true" ? (
+                              <FaUserAlt className="h-[16px] w-[16px] text-green-500" />
+                            ) : (
+                              <FaUserLargeSlash className="h-[16px] w-[16px] text-red-500" />
+                            )}
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuItem>
+                              <Switch
+                                checked={user.isAccountEnabled === "true"}
+                                onCheckedChange={(checked) =>
+                                  handleToggleAccountStatus(user.id, checked)
+                                }
+                              >
+                                {user.isAccountEnabled === "true"
+                                  ? "Disable Account"
+                                  : "Enable Account"}
+                              </Switch>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>
+                          {user.isAccountEnabled === "true"
+                            ? "Disable Account"
+                            : "Enable Account"}
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </TableCell>
-                <TableCell>
-                  {user?.isAccountNonLocked === "true" ? (
-                    <FaUserAlt className="h-[18px] w-[18px] ml-10 text-green-500" />
-                  ) : (
-                    <FaUserLargeSlash className="h-[18px] w-[18px] ml-10 text-red-500" />
-                  )}
+                <TableCell className="text-center">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger>
+                            {user.isAccountNonLocked === "true" ? (
+                              <FaUserAlt className="h-[16px] w-[16px] text-green-500" />
+                            ) : (
+                              <FaUserLargeSlash className="h-[16px] w-[16px] text-red-500" />
+                            )}
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuItem>
+                              <Switch
+                                checked={user.isAccountNonLocked === "true"}
+                                onCheckedChange={(checked) =>
+                                  handleToggleAccountLockStatus(
+                                    user.id,
+                                    checked
+                                  )
+                                }
+                              >
+                                {user.isAccountNonLocked === "true"
+                                  ? "Unlock Account"
+                                  : "Lock Account"}
+                              </Switch>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>
+                          {user.isAccountNonLocked === "true"
+                            ? "Lock Account"
+                            : "Unlock Account"}
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </TableCell>
                 <TableCell className="flex">
                   <TooltipProvider>

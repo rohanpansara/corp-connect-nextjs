@@ -27,7 +27,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
       <DialogContent className="sm:max-w-[550px] md:max-w-[650px]">
         <DialogHeader>
           <DialogTitle>Fill User Details</DialogTitle>
-          <DialogDescription className="text-[12px]">
+          <DialogDescription className="text-[12px] mt-0">
             Ensure all fields are completed correctly.
           </DialogDescription>
         </DialogHeader>
@@ -52,13 +52,13 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     <ErrorMessage
                       name="name"
                       component="span"
-                      className="text-sm text-red-600"
+                      className="text-xs text-red-600"
                     />
                   </div>
                   <Field
                     id="name"
                     name="name"
-                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? 'border-red-600' : ''} "
+                    className="border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.name ? 'border-red-600' : ''} "
                   />
                 </div>
 
@@ -74,7 +74,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     <ErrorMessage
                       name="email"
                       component="span"
-                      className="text-sm text-red-600"
+                      className="text-xs text-red-600"
                     />
                   </div>
                   <Field
@@ -82,8 +82,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     name="email"
                     type="email"
                     autoComplete="off"
-                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500
-        ${errors.email ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.email ? 'border-red-600' : ''}"
                   />
                 </div>
 
@@ -99,7 +98,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     <ErrorMessage
                       name="password"
                       component="span"
-                      className="text-sm text-red-600"
+                      className="text-xs text-red-600"
                     />
                   </div>
                   <Field
@@ -107,8 +106,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     name="password"
                     type="password"
                     autoComplete="off"
-                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500
-        ${errors.password ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.password ? 'border-red-600' : ''}"
                   />
                 </div>
 
@@ -124,15 +122,14 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     <ErrorMessage
                       name="confirmPassword"
                       component="span"
-                      className="text-sm text-red-600"
+                      className="text-xs text-red-600"
                     />
                   </div>
                   <Field
                     id="confirmPassword"
                     name="confirmPassword"
                     type="password"
-                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500
-        ${errors.confirmPassword ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.confirmPassword ? 'border-red-600' : ''}"
                   />
                 </div>
 
@@ -148,14 +145,14 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     <ErrorMessage
                       name="userStatus"
                       component="span"
-                      className="text-sm text-red-600"
+                      className="text-xs text-red-600"
                     />
                   </div>
                   <Field
                     as="select"
                     id="userStatus"
                     name="userStatus"
-                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.userStatus ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.userStatus ? 'border-red-600' : ''}"
                   >
                     <option value="">Select Status</option>
                     <option value="FULL_TIME">Full Time</option>
@@ -175,14 +172,14 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     <ErrorMessage
                       name="roles"
                       component="span"
-                      className="text-sm text-red-600"
+                      className="text-xs text-red-600"
                     />
                   </div>
                   <Field
                     as="select"
                     id="roles"
                     name="roles"
-                    className="input border-[1px] rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.userStatus ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none ${errors.userStatus ? 'border-red-600' : ''}"
                   >
                     <option value="">Select Role</option>
                     <option value="ADMIN">Admin</option>

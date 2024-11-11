@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 import { dashboardMetadata } from '@/app/metadata/dashboardMetadata';
-import UserTable from "@/components/user/UserTable";
 export const metadata = dashboardMetadata;
 
 const DashboardPage = () => {
@@ -14,7 +13,6 @@ const DashboardPage = () => {
       className={`min-h-screen w-full bg-[#F8F6F4] flex items-center flex-col space-y-4 p-4 ${inter.className}`}
     >
       <Cards />
-      <UserTable />
     </div>
   );
 };
