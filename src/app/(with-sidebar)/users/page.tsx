@@ -2,8 +2,8 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 import { userMetadata } from "@/app/metadata/userMetadata";
-import UserTable from "@/components/user/user-table";
-import { BreadcrumbCreator } from "@/components/breadcrumb";
+import UserTable from "@/components/user/UserTable";
+import { BreadcrumbCreator } from "@/components/Breadcrumb";
 import { generateBreadcrumbsFromPathname } from "@/utils/generateBreadcrumbRoutes";
 export const metadata = userMetadata;
 

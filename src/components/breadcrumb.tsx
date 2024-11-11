@@ -3,7 +3,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
@@ -19,7 +18,12 @@ export const BreadcrumbCreator = ({ routes }: { routes: Route[] }) => {
         {routes.map((route, index) => (
           <BreadcrumbItem key={route.path}>
             <BreadcrumbLink href={route.path}>{route.label}</BreadcrumbLink>
-            {index < routes.length - 1 && <BreadcrumbSeparator />}
+            {/* Wrap BreadcrumbSeparator in a <span> if it does not support changing the element type */}
+            {index < routes.length - 1 && (
+              <span>
+                <BreadcrumbSeparator />
+              </span>
+            )}
           </BreadcrumbItem>
         ))}
       </BreadcrumbList>

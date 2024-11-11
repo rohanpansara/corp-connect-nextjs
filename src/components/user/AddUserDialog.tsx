@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { handleAddUserSubmit } from "@/app/api/handlers/addUserSubmit";
+import { handleAddUserSubmit } from "@/app/api/handlers/AddUserSubmit";
 import { validationSchema } from "@/validators/addUserFormValidator";
 import { AddUserDialogProps } from "@/app/api/interfaces/props/AddUserDialogProps";
 

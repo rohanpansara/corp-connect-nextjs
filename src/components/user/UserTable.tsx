@@ -16,8 +16,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { FaUserSlash, FaUser, FaTrashAlt } from "react-icons/fa";
-import { FaUserPen } from "react-icons/fa6";
+import {
+  FaUserSlash,
+  FaUser,
+  FaTrashAlt,
+  FaUserAlt,
+  FaUserAltSlash,
+} from "react-icons/fa";
+import { FaUserLargeSlash, FaUserPen } from "react-icons/fa6";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { TbUserPlus } from "react-icons/tb";
 import { truncateText } from "@/utils/truncateText";
@@ -25,8 +31,8 @@ import { Checkbox } from "@/components/ui/checkbox"; // Import ShadCN Checkbox
 
 import { UserDTO } from "@/types/user";
 import { Button } from "../ui/button";
-import AddUserDialog from "./add-user-dialog";
-import DeleteDialog from "../delete-dialog";
+import AddUserDialog from "./AddUserDialog";
+import DeleteDialog from "../DeleteDialog";
 import { fetchUsersData } from "@/app/api/fetchers/fetchAllUsers";
 
 const UserTable = () => {
@@ -81,6 +87,7 @@ const UserTable = () => {
   };
 
   const handleDeleteUsers = async () => {
+    
     setIsDeleteDialogOpen(false);
   };
 
@@ -221,16 +228,16 @@ const UserTable = () => {
                 </TableCell>
                 <TableCell>
                   {user?.isAccountEnabled === "true" ? (
-                    <FaUser className="ml-10 text-green-500" />
+                    <FaUserAlt className="h-[18px] w-[18px] ml-10 text-green-500" />
                   ) : (
-                    <FaUserSlash className="ml-5 text-red-500" />
+                    <FaUserLargeSlash className="h-[18px] w-[18px] ml-10 text-red-500" />
                   )}
                 </TableCell>
                 <TableCell>
                   {user?.isAccountNonLocked === "true" ? (
-                    <FaUser className="ml-10 text-green-500" />
+                    <FaUserAlt className="h-[18px] w-[18px] ml-10 text-green-500" />
                   ) : (
-                    <FaUserSlash className="ml-10 text-red-500" />
+                    <FaUserLargeSlash className="h-[18px] w-[18px] ml-10 text-red-500" />
                   )}
                 </TableCell>
                 <TableCell className="flex">

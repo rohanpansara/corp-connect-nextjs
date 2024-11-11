@@ -3,7 +3,7 @@ import { FormikHelpers } from "formik";
 import { apiClient } from "@/app/api/apiClient"; // Ensure this is correctly imported
 import { toast } from "react-hot-toast";
 
-export const handleSubmit = async (
+export const handleAddUserSubmit = async (
   values: UserFormValues,
   { resetForm, setSubmitting }: FormikHelpers<UserFormValues>
 ) => {
