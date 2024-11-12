@@ -12,7 +12,7 @@ function ProfileBackground({ userHeaderData }: any) {
           alt="Profile Background"
         />
         <AvatarFallback>
-          {getInitials(userHeaderData?.name || "") || "Profile Picture"}
+          {getInitials(userHeaderData?.name || "") || ""}
         </AvatarFallback>
       </Avatar>
     </>
