@@ -17,18 +17,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
-  FaUserSlash,
-  FaUser,
   FaTrashAlt,
-  FaUserAlt,
-  FaUserAltSlash,
+  FaUserAlt
 } from "react-icons/fa";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FaUserLargeSlash, FaUserPen } from "react-icons/fa6";

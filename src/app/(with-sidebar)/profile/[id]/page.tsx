@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import { profileMetadata } from "@/app/metadata/profileMetadata";
-import ProfileHeader from "@/components/profile/header";
+import ProfileHeader from "@/components/profile/ProfileHeader";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = profileMetadata;
