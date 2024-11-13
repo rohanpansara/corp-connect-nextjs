@@ -54,7 +54,7 @@ const UserInfo = ({ id }: { id: string }) => {
   return (
     <>
       <div className="flex w-full h-[150px] p-2 pt-0">
-        <div className="font-s"></div>
+        <div className="font-sans text-md">{userHeaderData?.name}</div>
       </div>
     </>
   );

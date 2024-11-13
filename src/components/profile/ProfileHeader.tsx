@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 import { UserDTO } from "@/types/user";
-import UserAvatar from "./UserAvatar";
 import ProfileBackground from "./ProfileBackground";
+import UserAvatar from "./UserAvatar";
 
 const ProfileHeader = ({ id }: { id: string }) => {
   const fetchRef = useRef(false);
