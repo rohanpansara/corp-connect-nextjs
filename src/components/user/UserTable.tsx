@@ -36,6 +36,8 @@ import DeleteDialog from "../DeleteDialog";
 import { fetchUsersData } from "@/app/api/fetchers/fetchAllUsers";
 import { deleteUsers } from "@/app/api/handlers/DeleteUsersSubmit";
 import { Switch } from "@radix-ui/react-switch";
+import Image from "next/image";
+import UserProfileImage from "./UserProfileImage";
 
 const UserTable = () => {
   const fetchRef = useRef(false);
@@ -197,8 +199,8 @@ const UserTable = () => {
               <TableHead className="text-center">
                 <Checkbox checked={selectAll} onClick={handleSelectAll} />
               </TableHead>
+              <TableHead>Profile</TableHead>
               <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
               <TableHead>Roles</TableHead>
               <TableHead>Created Date</TableHead>
               <TableHead>Acct. Enabled</TableHead>
@@ -217,6 +219,16 @@ const UserTable = () => {
                     />
                   )}
                 </TableCell>
+                <TableCell>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <UserProfileImage user={user} />
+                      </TooltipTrigger>
+                      <TooltipContent>{user?.name}</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </TableCell>
                 <TableCell className="font-medium overflow-hidden">
                   <TooltipProvider>
                     <Tooltip>
@@ -233,7 +245,7 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell>
-                <TableCell className="overflow-hidden">
+                {/* <TableCell className="overflow-hidden">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -248,7 +260,7 @@ const UserTable = () => {
                       )}
                     </Tooltip>
                   </TooltipProvider>
-                </TableCell>
+                </TableCell> */}
                 <TableCell className="overflow-hidden">
                   <TooltipProvider>
                     <Tooltip>
