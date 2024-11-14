@@ -25,7 +25,7 @@ const UserProfileImage: React.FC<UserImageProps> = ({ user }) => {
 
   return (
     <Image
-    className="rounded-full"
+    className="rounded-full mx-auto"
       src={hasError ? fallback.src : imgSrc}
       alt={`${user?.name}`}
       width={30}

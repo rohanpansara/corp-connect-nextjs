@@ -16,7 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { FaTrashAlt, FaUserAlt } from "react-icons/fa";
+import { FcCancel, FcOk } from "react-icons/fc";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,8 +36,8 @@ import DeleteDialog from "../DeleteDialog";
 import { fetchUsersData } from "@/app/api/fetchers/fetchAllUsers";
 import { deleteUsers } from "@/app/api/handlers/DeleteUsersSubmit";
 import { Switch } from "@radix-ui/react-switch";
-import Image from "next/image";
 import UserProfileImage from "./UserProfileImage";
+import { FaTrashAlt } from "react-icons/fa";
 
 const UserTable = () => {
   const fetchRef = useRef(false);
@@ -47,8 +47,8 @@ const UserTable = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false); // State for Add User Dialog
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false); // State for Delete Dialog
+  const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const handleNavigation = (path: string) => router.push(path);
 
@@ -90,26 +90,19 @@ const UserTable = () => {
     setSelectedUsers(updatedSelection);
   };
 
-  // Step 3: Update handleDeleteUsers to use deleteUsers function
   const handleDeleteUsers = async () => {
     try {
-      await deleteUsers(Array.from(selectedUsers)); // Convert Set to Array
-      setUsersData(usersData.filter((user) => !selectedUsers.has(user.id))); // Update table
-      setSelectedUsers(new Set()); // Clear selection after delete
+      await deleteUsers(Array.from(selectedUsers));
+      setUsersData(usersData.filter((user) => !selectedUsers.has(user.id)));
+      setSelectedUsers(new Set());
     } catch (error) {
       setError("Failed to delete selected users.");
     }
-    setIsDeleteDialogOpen(false); // Close dialog after deletion
+    setIsDeleteDialogOpen(false);
   };
 
-  // Toggle account enabled status
   const handleToggleAccountStatus = async (userId: string, status: boolean) => {
-    // API call to update user status (enabled/disabled)
-    // Replace with your actual API call logic
     try {
-      // Example: Updating the user status
-      // await updateUserStatus(userId, status);
-      // Update the UI after changing status
       setUsersData((prevData) =>
         prevData.map((user) =>
           user.id === userId
@@ -122,16 +115,11 @@ const UserTable = () => {
     }
   };
 
-  // Toggle account lock status
   const handleToggleAccountLockStatus = async (
     userId: string,
     status: boolean
   ) => {
-    // API call to update account lock status (locked/unlocked)
     try {
-      // Example: Updating the lock status
-      // await updateAccountLockStatus(userId, status);
-      // Update the UI after changing lock status
       setUsersData((prevData) =>
         prevData.map((user) =>
           user.id === userId
@@ -181,7 +169,7 @@ const UserTable = () => {
         <div className="ml-auto">
           <AddUserDialog
             isOpen={isAddUserDialogOpen}
-            onClose={() => setIsAddUserDialogOpen(false)} // Close without deleting
+            onClose={() => setIsAddUserDialogOpen(false)}
           />
           <Button
             variant="default"
@@ -199,18 +187,33 @@ const UserTable = () => {
               <TableHead className="text-center">
                 <Checkbox checked={selectAll} onClick={handleSelectAll} />
               </TableHead>
-              <TableHead>Profile</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Roles</TableHead>
-              <TableHead>Created Date</TableHead>
-              <TableHead>Acct. Enabled</TableHead>
-              <TableHead>Acct. Locked</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead className="text-center max-w-[60px] w-[60px]">
+                Profile
+              </TableHead>
+              <TableHead className="text-center">Name</TableHead>
+              <TableHead className="text-center w-[100px] max-w-[100px]">
+                Roles
+              </TableHead>
+              <TableHead className="text-center">Created Date</TableHead>
+              <TableHead className="text-center w-[140px] max-w-[140px]">
+                Acct. Enabled
+              </TableHead>
+              <TableHead className="text-center w-[140px] max-w-[140px]">
+                Acct. Locked
+              </TableHead>
+              <TableHead className="text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {usersData.map((user) => (
-              <TableRow key={user?.id} className="h-10">
+              <TableRow
+                key={user?.id}
+                className={`h-10 ${
+                  selectedUsers.has(user.id)
+                    ? "bg-blue-100 hover:bg-blue-100 dark:bg-blue-900" // Custom background color for selected rows
+                    : ""
+                }`}
+              >
                 <TableCell className="text-center">
                   {usersData != undefined && usersData?.length > 0 && (
                     <Checkbox
@@ -219,7 +222,7 @@ const UserTable = () => {
                     />
                   )}
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-center max-w-[60px] w-[60px]">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -229,7 +232,7 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell>
-                <TableCell className="font-medium overflow-hidden">
+                <TableCell className="text-center font-medium overflow-hidden">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -261,7 +264,7 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell> */}
-                <TableCell className="overflow-hidden">
+                <TableCell className="text-center overflow-hidden w-[100px] max-w-[100px]">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -277,7 +280,7 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell>
-                <TableCell className="overflow-hidden">
+                <TableCell className="text-center overflow-hidden">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -293,16 +296,16 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-center w-[140px] max-w-[140px]">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <DropdownMenu>
                           <DropdownMenuTrigger>
                             {user.isAccountEnabled === "true" ? (
-                              <FaUserAlt className="h-[16px] w-[16px] text-green-500" />
+                              <FcOk className="h-[16px] w-[16px]" />
                             ) : (
-                              <FaUserLargeSlash className="h-[16px] w-[16px] text-red-500" />
+                              <FcCancel className="h-[16px] w-[16px] text-red-500" />
                             )}
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
@@ -331,16 +334,16 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-center w-[140px] max-w-[140px]">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <DropdownMenu>
                           <DropdownMenuTrigger>
                             {user.isAccountNonLocked === "true" ? (
-                              <FaUserAlt className="h-[16px] w-[16px] text-green-500" />
+                              <FcOk className="h-[16px] w-[16px]" />
                             ) : (
-                              <FaUserLargeSlash className="h-[16px] w-[16px] text-red-500" />
+                              <FcCancel className="h-[16px] w-[16px] text-red-500" />
                             )}
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
@@ -372,7 +375,7 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell>
-                <TableCell className="flex">
+                <TableCell className="text-center">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
