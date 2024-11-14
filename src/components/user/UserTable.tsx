@@ -16,10 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  FaTrashAlt,
-  FaUserAlt
-} from "react-icons/fa";
+import { FaTrashAlt, FaUserAlt } from "react-icons/fa";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -164,16 +161,18 @@ const UserTable = () => {
                 } // Dynamic name or count
                 onDelete={handleDeleteUsers} // Call delete function when confirmed
               />
-              <Button
-                variant="destructive"
-                onClick={() => setIsDeleteDialogOpen(true)} // Open delete dialog
-                disabled={selectedUsers.size === 0} // Disable the button if no users are selected
-              >
-                <FaTrashAlt />
-                {selectedUsers.size === usersData.length
-                  ? `Delete All (${selectedUsers.size})`
-                  : `Delete Selected (${selectedUsers.size})`}
-              </Button>
+              {usersData?.length > 1 && (
+                <Button
+                  variant="destructive"
+                  onClick={() => setIsDeleteDialogOpen(true)} // Open delete dialog
+                  disabled={selectedUsers.size === 0} // Disable the button if no users are selected
+                >
+                  <FaTrashAlt />
+                  {selectedUsers.size === usersData.length
+                    ? `Delete All (${selectedUsers.size})`
+                    : `Delete Selected (${selectedUsers.size})`}
+                </Button>
+              )}
             </>
           )}
         </div>
@@ -211,10 +210,12 @@ const UserTable = () => {
             {usersData.map((user) => (
               <TableRow key={user?.id} className="h-10">
                 <TableCell className="text-center">
-                  <Checkbox
-                    checked={selectedUsers.has(user.id)}
-                    onClick={() => handleSelectUser(user.id)}
-                  />
+                  {usersData != undefined && usersData?.length > 0 && (
+                    <Checkbox
+                      checked={selectedUsers.has(user.id)}
+                      onClick={() => handleSelectUser(user.id)}
+                    />
+                  )}
                 </TableCell>
                 <TableCell className="font-medium overflow-hidden">
                   <TooltipProvider>
