@@ -128,7 +128,7 @@ const UserTable = () => {
         )
       );
     } catch (error) {
-      console.error("Error updating lock status:", error);
+      console.error("Error updating status:", error);
     }
   };
 
@@ -147,7 +147,7 @@ const UserTable = () => {
                 onClose={() => setIsDeleteDialogOpen(false)} // Close without deleting
                 entity="User"
                 entityName={
-                  selectedUsers.size === 1 ? "User" : selectedUsers.size
+                  selectedUsers?.size === 1 ? "User" : selectedUsers?.size
                 } // Dynamic name or count
                 onDelete={handleDeleteUsers} // Call delete function when confirmed
               />
@@ -158,9 +158,9 @@ const UserTable = () => {
                   disabled={selectedUsers.size === 0} // Disable the button if no users are selected
                 >
                   <FaTrashAlt />
-                  {selectedUsers.size === usersData.length
-                    ? `Delete All (${selectedUsers.size})`
-                    : `Delete Selected (${selectedUsers.size})`}
+                  {selectedUsers?.size === usersData?.length
+                    ? `Delete All (${selectedUsers?.size})`
+                    : `Delete Selected (${selectedUsers?.size})`}
                 </Button>
               )}
             </>
@@ -209,7 +209,7 @@ const UserTable = () => {
               <TableRow
                 key={user?.id}
                 className={`h-10 ${
-                  selectedUsers.has(user.id)
+                  selectedUsers.has(user?.id)
                     ? "bg-blue-100 hover:bg-blue-100 dark:bg-blue-900" // Custom background color for selected rows
                     : ""
                 }`}
@@ -217,8 +217,8 @@ const UserTable = () => {
                 <TableCell className="text-center">
                   {usersData != undefined && usersData?.length > 0 && (
                     <Checkbox
-                      checked={selectedUsers.has(user.id)}
-                      onClick={() => handleSelectUser(user.id)}
+                      checked={selectedUsers.has(user?.id)}
+                      onClick={() => handleSelectUser(user?.id)}
                     />
                   )}
                 </TableCell>
@@ -302,7 +302,7 @@ const UserTable = () => {
                       <TooltipTrigger asChild>
                         <DropdownMenu>
                           <DropdownMenuTrigger>
-                            {user.isAccountEnabled === "true" ? (
+                            {user?.isAccountEnabled === "true" ? (
                               <FcOk className="h-[16px] w-[16px]" />
                             ) : (
                               <FcCancel className="h-[16px] w-[16px] text-red-500" />
@@ -311,12 +311,12 @@ const UserTable = () => {
                           <DropdownMenuContent>
                             <DropdownMenuItem>
                               <Switch
-                                checked={user.isAccountEnabled === "true"}
+                                checked={user?.isAccountEnabled === "true"}
                                 onCheckedChange={(checked) =>
-                                  handleToggleAccountStatus(user.id, checked)
+                                  handleToggleAccountStatus(user?.id, checked)
                                 }
                               >
-                                {user.isAccountEnabled === "true"
+                                {user?.isAccountEnabled === "true"
                                   ? "Disable Account"
                                   : "Enable Account"}
                               </Switch>
@@ -326,7 +326,7 @@ const UserTable = () => {
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>
-                          {user.isAccountEnabled === "true"
+                          {user?.isAccountEnabled === "true"
                             ? "Disable Account"
                             : "Enable Account"}
                         </p>
@@ -340,7 +340,7 @@ const UserTable = () => {
                       <TooltipTrigger asChild>
                         <DropdownMenu>
                           <DropdownMenuTrigger>
-                            {user.isAccountNonLocked === "true" ? (
+                            {user?.isAccountNonLocked === "true" ? (
                               <FcOk className="h-[16px] w-[16px]" />
                             ) : (
                               <FcCancel className="h-[16px] w-[16px] text-red-500" />
@@ -349,15 +349,15 @@ const UserTable = () => {
                           <DropdownMenuContent>
                             <DropdownMenuItem>
                               <Switch
-                                checked={user.isAccountNonLocked === "true"}
+                                checked={user?.isAccountNonLocked === "true"}
                                 onCheckedChange={(checked) =>
                                   handleToggleAccountLockStatus(
-                                    user.id,
+                                    user?.id,
                                     checked
                                   )
                                 }
                               >
-                                {user.isAccountNonLocked === "true"
+                                {user?.isAccountNonLocked === "true"
                                   ? "Unlock Account"
                                   : "Lock Account"}
                               </Switch>
@@ -367,7 +367,7 @@ const UserTable = () => {
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>
-                          {user.isAccountNonLocked === "true"
+                          {user?.isAccountNonLocked === "true"
                             ? "Lock Account"
                             : "Unlock Account"}
                         </p>
