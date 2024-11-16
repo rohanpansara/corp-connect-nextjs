@@ -12,13 +12,12 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { truncateText } from "@/utils/truncateText";
+} from "../ui/tooltip";
 import { getInitials } from "@/utils/getInitials";
 
 const Cards = () => {
-  const fetchRef = useRef(false);
   const router = useRouter();
+  const fetchRef = useRef(false);
 
   const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(null);
   const [loading, setLoading] = useState(true);
@@ -118,7 +117,7 @@ const Cards = () => {
                     )}
                   </Tooltip>
                 </TooltipProvider>
-                <span className="text-[10px]">{card.title}</span>
+                <span className="text-[10px]">{card?.title}</span>
               </CardDescription>
             </CardContent>
           </Card>

@@ -199,7 +199,7 @@ const UserTable = () => {
                 Acct. Enabled
               </TableHead>
               <TableHead className="text-center w-[140px] max-w-[140px]">
-                Acct. Locked
+                Acct. Unlocked
               </TableHead>
               <TableHead className="text-center">Actions</TableHead>
             </TableRow>
@@ -396,6 +396,7 @@ const UserTable = () => {
                         <Button
                           variant="plain"
                           className="border-[2px] p-2 border-[#074F57] text-[#074F57] hover:text-gray-200 hover:bg-[#074F57]"
+                          onClick={() => router.push(`/profile/${user?.id}`)}
                         >
                           <BiSolidUserDetail />
                         </Button>

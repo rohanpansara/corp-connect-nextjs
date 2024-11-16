@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import fallback from "@/assets/github-default.jpg"; // Ensure this path is correct
+import { getInitials } from "@/utils/getInitials";
 
 // Define an interface for the user prop
 interface User {
@@ -18,7 +19,7 @@ const UserProfileImage: React.FC<UserImageProps> = ({ user }) => {
 
   const handleImageError = () => {
     if (!hasError) {
-      setImgSrc(fallback.src); // Use fallback image here
+      setImgSrc(fallback.src);
       setHasError(true);
     }
   };
@@ -27,7 +28,7 @@ const UserProfileImage: React.FC<UserImageProps> = ({ user }) => {
     <Image
     className="rounded-full mx-auto"
       src={hasError ? fallback.src : imgSrc}
-      alt={`${user?.name}`}
+      alt={`${getInitials(user?.name)}`}
       width={30}
       height={30}
       objectFit="cover"
