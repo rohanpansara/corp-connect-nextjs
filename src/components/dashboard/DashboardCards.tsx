@@ -72,11 +72,6 @@ const Cards = () => {
     }
   }, []);
 
-  if (loading) return <p className="text-white text-center">Loading...</p>;
-  if (error) {
-    toast.error(error);
-  }
-
   return (
     <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-[20px] lg:grid-flow-row-dense mx-auto w-full max-w-full">
       {cardsData &&

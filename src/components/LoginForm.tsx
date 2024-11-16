@@ -12,14 +12,7 @@ import useAuth from '@/hooks/useAuth';
 
 const LoginForm = () => {
 
-    const { isAuthenticated, isLoading } = useAuth();
     const router = useRouter();
-
-    useEffect(() => {
-        if (isAuthenticated && !isLoading) {
-            router.push('/dashboard');
-        }
-    }, []);
 
     // Yup validation schema
     const validationSchema = Yup.object({

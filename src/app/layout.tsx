@@ -1,6 +1,5 @@
 // app/layout.tsx
 import { Toaster } from "react-hot-toast";
-import NextTopLoader from 'nextjs-toploader';
 import "./globals.css";
 
 export default function RootLayout({
@@ -11,7 +10,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NextTopLoader />
         {children}
         <Toaster position="top-center" reverseOrder={true} />
       </body>
