@@ -1,34 +1,30 @@
 import { useState } from "react";
 import Image from "next/image";
-import fallback from "@/assets/github-default.jpg"; // Ensure this path is correct
-import { getInitials } from "@/utils/getInitials";
-
-// Define an interface for the user prop
-interface User {
-  id: string;
-  name: string;
-}
-
+import maleFallback from "./../../../public/images/users/default-male.png"; // Path to default male image
+import femaleFallback from "./../../../public/images/users/default-female.png"; // Path to default female image
+import { UserDTO } from "@/types/user";
 interface UserImageProps {
-  user: User;
+  user: UserDTO;
 }
 
 const UserProfileImage: React.FC<UserImageProps> = ({ user }) => {
-  const [imgSrc, setImgSrc] = useState(`/images/users/${user?.id}.png`);
-  const [hasError, setHasError] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
-    if (!hasError) {
-      setImgSrc(fallback.src);
-      setHasError(true);
-    }
+    setImageError(true);
   };
 
   return (
     <Image
-    className="rounded-full mx-auto"
-      src={hasError ? fallback.src : imgSrc}
-      alt={`${getInitials(user?.name)}`}
+      className="rounded-full mx-auto"
+      src={
+        imageError
+          ? user.gender === "female"
+            ? femaleFallback
+            : maleFallback
+          : `/images/users/${user.id}.png`
+      } // Use fallback image only if error occurs
+      alt={`${user.name}'s profile`}
       width={30}
       height={30}
       objectFit="cover"

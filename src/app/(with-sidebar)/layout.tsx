@@ -3,6 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import "./../globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
+import { AppNavbar } from "@/components/AppNavbar";
 
 export default function SidebarLayout({
   children,
@@ -13,7 +14,7 @@ export default function SidebarLayout({
     <SidebarProvider>
       <AppSidebar />
       <main className="w-full">
-        <SidebarTrigger />
+        <AppNavbar/>
         <AuthProvider>{children}</AuthProvider>
       </main>
     </SidebarProvider>

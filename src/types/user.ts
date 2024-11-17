@@ -7,4 +7,5 @@ export type UserDTO = {
     isAccountEnabled: string;
     isAccountNonLocked: string;
     createdDate: string;
+    gender: string;
 };
