@@ -276,7 +276,7 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="plain"
       size="default"
-      className={cn(isExpanded ? "fixed left-[10em] z-[99]" : "fixed left-[-10px] z-[99]")}
+      className={cn(isExpanded ? "fixed left-[10em] z-30" : "fixed left-[-10px] z-30")}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()

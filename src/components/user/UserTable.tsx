@@ -132,9 +132,6 @@ const UserTable = () => {
     }
   };
 
-  if (loading) return <p className="text-white text-center">Loading...</p>;
-  if (error) return <p className="text-red-500 text-center">{error}</p>;
-
   return (
     <>
       <div className="flex w-full max-w-full">
@@ -248,22 +245,6 @@ const UserTable = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </TableCell>
-                {/* <TableCell className="overflow-hidden">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <span className="text-[12px] text-center cursor-default">
-                          {truncateText(user?.email, 30)}
-                        </span>
-                      </TooltipTrigger>
-                      {user?.email?.length > 30 && (
-                        <TooltipContent className="max-w-[500px]">
-                          <p>{user?.email}</p>
-                        </TooltipContent>
-                      )}
-                    </Tooltip>
-                  </TooltipProvider>
-                </TableCell> */}
                 <TableCell className="text-center overflow-hidden w-[100px] max-w-[100px]">
                   <TooltipProvider>
                     <Tooltip>

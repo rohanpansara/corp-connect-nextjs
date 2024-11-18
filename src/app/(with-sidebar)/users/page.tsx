@@ -3,8 +3,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 import { userMetadata } from "@/app/metadata/userMetadata";
 import UserTable from "@/components/user/UserTable";
-import { BreadcrumbCreator } from "@/components/Breadcrumb";
 import { generateBreadcrumbsFromPathname } from "@/utils/generateBreadcrumbRoutes";
+import { BreadcrumbCreator } from "@/components/breadcrumb";
 export const metadata = userMetadata;
 
 const UserPage = () => {

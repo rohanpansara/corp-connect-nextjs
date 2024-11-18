@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { handleAddUserSubmit } from "@/app/api/handlers/AddUserSubmit";
-import { validationSchema } from "@/validators/addUserFormValidator";
 import { AddUserDialogProps } from "@/app/api/interfaces/props/AddUserDialogProps";
+import { handleAddUserSubmit } from "@/app/api/handlers/AddUserSubmit";
+import { addUserValidationSchema } from "@/validators/AddUserFormValidator";
 
 const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
   const initialValues = {
@@ -33,7 +33,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
         </DialogHeader>
         <Formik
           initialValues={initialValues}
-          validationSchema={validationSchema}
+          validationSchema={addUserValidationSchema}
           onSubmit={handleAddUserSubmit}
           enableReinitialize
         >

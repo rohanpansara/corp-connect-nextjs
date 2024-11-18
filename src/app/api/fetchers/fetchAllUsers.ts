@@ -19,16 +19,17 @@ export const fetchUsersData = async ({
   
   try {
     const response = await apiClient.get("/employee");
-    toast.dismiss(loadingToastId); // Dismiss loading toast on successful response
-
+    
     if (response.data?.data) {
       setUsersData(response.data.data);
+      toast.dismiss(loadingToastId);
+      toast.success("Users found successfully");
     } else {
       setError("No data found");
     }
   } catch (err: any) {
-    toast.dismiss(loadingToastId); // Dismiss loading toast on error response
-
+    toast.dismiss(loadingToastId);
+    
     if (err.response) {
       if (err.response.status == 401 || err.response.status == 403) {
         onNavigate("/auth/login");
