@@ -23,7 +23,7 @@ const Cards = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const iconClassName = "h-[50px] w-[50px] text-[#2CA58D]";
+  const iconClassName = "h-[50px] w-[50px] text-[#2CA58D] dark:text-[#cfe2e2]";
 
   type CardTitle =
     | "Leaves Available"
@@ -78,7 +78,7 @@ const Cards = () => {
         Object.values(cardsData).map((card: any, index: number) => (
           <Card
             key={index}
-            className="h-[100px] xl:w-[240px] lg:w-[380px] md:w-[450px] overflow-hidden p-4 border-none bg-[#cfe2e2] shadow-lg rounded-md text-left mx-auto"
+            className="h-[100px] xl:w-[240px] lg:w-[380px] md:w-[450px] overflow-hidden p-4 border-none bg-[#cfe2e2] dark:bg-[#2CA58D] shadow-lg rounded-md text-left mx-auto"
           >
             <CardContent className="p-0 h-full flex flex-row items-center justify-around">
               <CardDescription className="p-0 pr-2 flex">
@@ -90,7 +90,7 @@ const Cards = () => {
                   {/* Default icon */}
                 </span>
               </CardDescription>
-              <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-[#2CA58D]">
+              <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-[#2CA58D] dark:text-[#cfe2e2]">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
