@@ -16,7 +16,7 @@ export default function SidebarLayout({
       <SidebarTrigger />
       <main className="w-full">
         <AppNavbar />
-        <div className="pt-6">
+        <div>
           <AuthProvider>{children}</AuthProvider>
         </div>
       </main>

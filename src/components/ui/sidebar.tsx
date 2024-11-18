@@ -247,6 +247,7 @@ const Sidebar = React.forwardRef<
             variant === "floating" || variant === "inset"
               ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
               : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
+              collapsible === "icon" && state === "collapsed" ? "pt-5" : "",
             className
           )}
           {...props}
@@ -276,7 +277,7 @@ const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="plain"
       size="default"
-      className={cn(isExpanded ? "fixed left-[10em] z-30" : "fixed left-[-10px] z-30")}
+      className={cn(isExpanded ? "fixed left-[10em] z-[1001]" : "fixed z-[1001]")}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()

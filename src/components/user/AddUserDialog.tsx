@@ -182,9 +182,9 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none ${errors.userStatus ? 'border-red-600' : ''}"
                   >
                     <option value="">Select Role</option>
-                    <option value="ADMIN">Admin</option>
+                    <option value="ADMIN">Project Admin</option>
                     <option value="HR_ADMIN">HR Admin</option>
-                    <option value="PMS_MANAGER">PMS Manager</option>
+                    <option value="PMS_MANAGER">Project Manager</option>
                     <option value="HR_MANAGER">HR Manager</option>
                     <option value="USER">User</option>
                   </Field>
