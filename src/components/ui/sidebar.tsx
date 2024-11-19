@@ -280,7 +280,7 @@ const SidebarTrigger = React.forwardRef<
       size="default"
       className={cn(
         isExpanded
-          ? "fixed left-[10em] z-[1001] transition-all duration-300 ease-in-out transform"
+          ? "fixed left-[10em] z-[501] transition-all duration-300 ease-in-out transform"
           : "fixed z-[1001] transition-all duration-300 ease-in-out transform"
       )}
       onClick={(event) => {

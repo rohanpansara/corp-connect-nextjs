@@ -38,15 +38,12 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
           enableReinitialize
         >
           {({ isSubmitting }) => (
-            <Form className="space-y-4 sm:space-y-2">
+            <Form className="space-y-4 sm:space-y-2 ">
               <div className="grid grid-cols-4 grid-rows-3 gap-4 sm:gap-2">
                 {/* Name */}
                 <div className="col-span-4 sm:col-span-2 lg:col-span-4">
                   <div className="flex items-center justify-between w-full">
-                    <label
-                      htmlFor="name"
-                      className="text-right text-sm text-muted-foreground"
-                    >
+                    <label htmlFor="name" className="text-right text-sm text-muted-foreground">
                       Name
                     </label>
                     <ErrorMessage

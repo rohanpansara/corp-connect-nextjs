@@ -17,13 +17,7 @@ const UserProfileImage: React.FC<UserImageProps> = ({ user }) => {
   return (
     <Image
       className="rounded-full mx-auto"
-      src={
-        imageError
-          ? user.gender === "female"
-            ? femaleFallback
-            : maleFallback
-          : `/images/users/${user.id}.png`
-      } // Use fallback image only if error occurs
+      src={ imageError ? user.gender === "female" ? femaleFallback : maleFallback : `/images/users/${user.id}.png` }
       alt={`${user.name}'s profile`}
       width={30}
       height={30}
