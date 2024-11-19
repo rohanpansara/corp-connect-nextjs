@@ -1,9 +1,9 @@
 import ThemeToggle from "@/hooks/uiHooks/ThemeToggle";
-import { BiNotification, BiSun, BiUser } from "react-icons/bi";
+import { BiNotification, BiUser } from "react-icons/bi";
 
 export function AppNavbar() {
   return (
-    <div className="sticky top-0 flex justify-center items-center w-full max-w-auto h-[30px] p-2 pt-0 pb-0 bg-gray-800 dark:bg-gray-500 space-y-4 z-[1000]">
+    <div className="sticky top-0 flex justify-center items-center w-full max-w-auto h-[30px] p-2 pt-0 pb-0 bg-mainBackground space-y-4 z-[1000]">
       <div className="flex justify-between items-center w-full">
         <div className="text-sm font-sans font-semibold mr-auto">Navbar</div>
         <div className="flex justify-center items-center">

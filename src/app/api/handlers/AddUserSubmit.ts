@@ -8,7 +8,7 @@ export const handleAddUserSubmit = async (
   { resetForm, setSubmitting }: FormikHelpers<UserFormValues>
 ) => {
   try {
-    const response = await apiClient.post("/user/new-user", values);
+    const response = await apiClient.post("/hr/access-control/new-user", values);
     // Show success message from the response (if available)
     toast.success(response?.data?.message || "User added successfully");
     resetForm();
