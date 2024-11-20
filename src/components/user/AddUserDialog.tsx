@@ -24,7 +24,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[550px] md:max-w-[650px]">
+      <DialogContent className="sm:max-w-[550px] md:max-w-[650px] bg-zinc-50">
         <DialogHeader>
           <DialogTitle>Fill User Details</DialogTitle>
           <DialogDescription className="text-[12px] mt-0">

@@ -1,16 +1,22 @@
 import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { DeleteDialogProps } from "@/contracts/interfaces/DeleteDialogProps";
 
-interface DeleteDialogProps {
-  isOpen: boolean;
-  onClose: () => void;
-  entity: string;
-  entityName: string | number; 
-  onDelete: () => void;
-}
-
-const DeleteDialog: React.FC<DeleteDialogProps> = ({ isOpen, onClose, entity, entityName, onDelete }) => {
+const DeleteDialog: React.FC<DeleteDialogProps> = ({
+  isOpen,
+  onClose,
+  entity,
+  entitySize,
+  onDelete,
+  all,
+}) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       {/* Remove DialogTrigger, since you already control the dialog state with `isOpen` */}
@@ -18,12 +24,21 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ isOpen, onClose, entity, en
         <DialogHeader>
           <DialogTitle>Confirm Deletion</DialogTitle>
         </DialogHeader>
-        <p>
-          Are you sure you want to delete the {entity === "User" ? `${entityName}` : `${entityName} ${entity}s`}?
-        </p>
+        {all === false ? (
+          <p>
+            Are you sure you want to delete the{" "}
+            <span className="font-semibold">
+              {entitySize > 1 ? `${entitySize} ${entity}s` : `${entity}`}?
+            </span>
+          </p>
+        ) : (
+          <p>
+            Are you sure you want to <span className="font-semibold">all the {entity}s?</span>
+          </p>
+        )}
         <DialogFooter>
           <Button variant="secondary" onClick={onClose}>
-            Cancel
+            No
           </Button>
           <Button
             variant="destructive"
@@ -32,7 +47,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ isOpen, onClose, entity, en
               onClose();
             }}
           >
-            Confirm
+            Yes
           </Button>
         </DialogFooter>
       </DialogContent>

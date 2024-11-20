@@ -2,10 +2,10 @@
 "use client";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/AppSidebar";
+import { AppSidebar } from "@/components/common/AppSidebar";
 import "./../globals.css";
-import { AuthProvider } from "@/components/AuthProvider";
-import { AppNavbar } from "@/components/AppNavbar";
+import { AuthProvider } from "@/components/common/AuthProvider";
+import { AppNavbar } from "@/components/common/AppNavbar";
 import { useEffect } from "react";
 
 export default function SidebarLayout({

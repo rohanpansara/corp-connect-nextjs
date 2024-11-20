@@ -6,7 +6,7 @@ import { TailSpin } from "react-loader-spinner";
 
 const Loading = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-[#F8F6F4]">
+    <div className="flex justify-center items-center h-screen bg-mainBackground">
       <TailSpin 
         height="80" 
         width="80" 

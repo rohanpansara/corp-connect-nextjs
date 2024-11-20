@@ -5,9 +5,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { FaTrashAlt } from "react-icons/fa";
 import { BiSolidUserDetail } from "react-icons/bi";
-import { FcOk, FcCancel } from "react-icons/fc";
+import { FcOk } from "react-icons/fc";
 import { TbUserPlus } from "react-icons/tb";
-import { UserDTO } from "@/types/user";
 import { fetchUsersData } from "@/app/api/fetchers/fetchAllUsers";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "../ui/checkbox";
@@ -21,6 +20,8 @@ import { FaUserPen } from "react-icons/fa6";
 import { DataTable } from "@/app/(with-sidebar)/users/data-table";
 import AddUserDialog from "./AddUserDialog";
 import UserProfileImage from "./UserProfileImage";
+import DeleteDialog from "../common/DeleteDialog";
+import { UserDTO } from "@/contracts/types/user";
 
 const UserTable = () => {
   const fetchRef = useRef(false);
@@ -81,6 +82,7 @@ const UserTable = () => {
       ),
       cell: ({ row }) => (
         <Checkbox
+          className="mr-auto"
           checked={selectedUsers.has(row.original.id)}
           onClick={() => handleSelectUser(row.original.id)}
         />
@@ -133,16 +135,19 @@ const UserTable = () => {
       id: "actions",
       header: "Actions",
       cell: ({ row }) => (
-        <div className="flex space-x-2">
+        <div className="flex">
           <Button
             variant="plain"
+            size="plain"
+            className="mr-6"
             onClick={() => console.log("Edit", row.original.id)}
           >
             <FaUserPen />
           </Button>
           <Button
             variant="plain"
-            onClick={() => console.log("View", row.original.id)}
+            size="plain"
+            onClick={() => router.push(`/profile/${row.original.id}`)}
           >
             <BiSolidUserDetail />
           </Button>
@@ -155,6 +160,14 @@ const UserTable = () => {
     <div className="w-full">
       <div className="flex justify-between items-center">
         <div className="mr-auto">
+          <DeleteDialog
+            isOpen={isDeleteDialogOpen}
+            onClose={() => setIsDeleteDialogOpen(false)}
+            entity="User"
+            entitySize={selectedUsers.size}
+            all={selectedUsers.size === usersData.length}
+            onDelete={() => console.log("Deleted")}
+          />
           {selectedUsers.size > 0 && (
             <Button
               variant="destructive"
@@ -167,7 +180,7 @@ const UserTable = () => {
             </Button>
           )}
         </div>
-        <div className="ml-auto">
+        <div className="ml-auto ">
           <AddUserDialog
             isOpen={isAddUserDialogOpen}
             onClose={() => setIsAddUserDialogOpen(false)}
