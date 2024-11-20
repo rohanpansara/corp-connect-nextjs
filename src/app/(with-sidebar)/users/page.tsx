@@ -13,7 +13,7 @@ const UserPage = () => {
 
   return (
     <div
-      className={`min-h-screen w-full bg-[#F8F6F4] flex items-center flex-col space-y-4 p-4 ${inter.className}`}
+      className={`min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${inter.className}`}
     >
       <div className="flex w-full">
         <div className="flex justify-center items-center mr-auto">

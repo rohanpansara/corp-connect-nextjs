@@ -19,7 +19,6 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      {/* Remove DialogTrigger, since you already control the dialog state with `isOpen` */}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Confirm Deletion</DialogTitle>
@@ -27,7 +26,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
         {all === false ? (
           <p>
             Are you sure you want to delete the{" "}
-            <span className="font-semibold">
+            <span className="font-bold">
               {entitySize > 1 ? `${entitySize} ${entity}s` : `${entity}`}?
             </span>
           </p>

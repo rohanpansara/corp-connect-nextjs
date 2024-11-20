@@ -18,7 +18,6 @@ export const BreadcrumbCreator = ({ routes }: { routes: Route[] }) => {
         {routes.map((route, index) => (
           <BreadcrumbItem key={route.path}>
             <BreadcrumbLink href={route.path}>{route.label}</BreadcrumbLink>
-            {/* Wrap BreadcrumbSeparator in a <span> if it does not support changing the element type */}
             {index < routes.length - 1 && (
               <span>
                 <BreadcrumbSeparator />
