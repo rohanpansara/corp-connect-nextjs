@@ -4,7 +4,7 @@ const inter = Inter({ subsets: ["latin"] });
 import { userMetadata } from "@/app/metadata/userMetadata";
 import UserTable from "@/components/user/UserTable";
 import { generateBreadcrumbsFromPathname } from "@/utils/generateBreadcrumbRoutes";
-import { BreadcrumbCreator } from "@/components/common/breadcrumb";
+import { BreadcrumbCreator } from "@/components/common/Breadcrumb";
 export const metadata = userMetadata;
 
 const UserPage = () => {

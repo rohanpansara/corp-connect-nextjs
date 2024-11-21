@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { FaTrashAlt } from "react-icons/fa";
@@ -16,15 +16,30 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { FaUserPen } from "react-icons/fa6";
 import { DataTable } from "@/app/(with-sidebar)/users/data-table";
 import AddUserDialog from "./AddUserDialog";
 import UserProfileImage from "./UserProfileImage";
 import DeleteDialog from "../common/DeleteDialog";
 import { UserDTO } from "@/contracts/types/user";
+import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
 
 const UserTable = () => {
-  const fetchRef = useRef(false);
   const router = useRouter();
   const [usersData, setUsersData] = useState<UserDTO[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<Set<string>>(new Set());
@@ -37,15 +52,12 @@ const UserTable = () => {
   const handleNavigation = (path: string) => router.push(path);
 
   useEffect(() => {
-    if (!fetchRef.current) {
-      fetchRef.current = true;
-      fetchUsersData({
-        setUsersData,
-        setError,
-        setLoading,
-        onNavigate: handleNavigation,
-      });
-    }
+    fetchUsersData({
+      setUsersData,
+      setError,
+      setLoading,
+      onNavigate: handleNavigation,
+    });
   }, []);
 
   const handleSelectAll = () => {
@@ -133,24 +145,79 @@ const UserTable = () => {
     },
     {
       id: "actions",
-      header: "Actions",
       cell: ({ row }) => (
         <div className="flex">
-          <Button
-            variant="plain"
-            size="plain"
-            className="mr-6"
-            onClick={() => console.log("Edit", row.original.id)}
-          >
-            <FaUserPen />
-          </Button>
-          <Button
-            variant="plain"
-            size="plain"
-            onClick={() => router.push(`/profile/${row.original.id}`)}
-          >
-            <BiSolidUserDetail />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="plain" size="plain"><PiDotsThreeOutlineVerticalLight/></Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-44">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <span>Profile</span>
+                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <span>Billing</span>
+                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <span>Settings</span>
+                  <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <span>Keyboard shortcuts</span>
+                  <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <span>Team</span>
+                </DropdownMenuItem>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    <span>Invite users</span>
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuItem>
+                        <span>Email</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <span>Message</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <span>More...</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+                <DropdownMenuItem>
+                  <span>New Team</span>
+                  <DropdownMenuShortcut>CTRL+T</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <span>GitHub</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <span>Support</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem disabled>
+                <span>API</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <span>Log out</span>
+                <DropdownMenuShortcut>CTRL+UP</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       ),
     },

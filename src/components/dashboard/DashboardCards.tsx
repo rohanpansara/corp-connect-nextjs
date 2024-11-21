@@ -17,9 +17,10 @@ import { getInitials } from "@/utils/getInitials";
 
 const Cards = () => {
   const router = useRouter();
-  const fetchRef = useRef(false);
 
-  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(null);
+  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -66,10 +67,7 @@ const Cards = () => {
   };
 
   useEffect(() => {
-    if (!fetchRef.current) {
-      fetchCardsData();
-      fetchRef.current = true;
-    }
+    fetchCardsData();
   }, []);
 
   return (

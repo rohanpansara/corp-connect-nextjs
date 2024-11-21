@@ -24,7 +24,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[550px] md:max-w-[650px] bg-zinc-50">
+      <DialogContent className="sm:max-w-[550px] md:max-w-[650px] bg-mainBackground">
         <DialogHeader>
           <DialogTitle>Fill User Details</DialogTitle>
           <DialogDescription className="text-[12px] mt-0">
@@ -149,7 +149,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     as="select"
                     id="userStatus"
                     name="userStatus"
-                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.userStatus ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-1 bg-mainBackground rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.userStatus ? 'border-red-600' : ''}"
                   >
                     <option value="">Select Status</option>
                     <option value="FULL_TIME">Full Time</option>
@@ -176,7 +176,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     as="select"
                     id="roles"
                     name="roles"
-                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full focus:outline-none ${errors.userStatus ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-1 rounded-sm bg-mainBackground border-gray-300 w-full h-8 max-w-full focus:outline-none ${errors.userStatus ? 'border-red-600' : ''}"
                   >
                     <option value="">Select Role</option>
                     <option value="ADMIN">Project Admin</option>

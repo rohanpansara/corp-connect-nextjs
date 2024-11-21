@@ -40,6 +40,7 @@ body {
   :root {
     --mainBackground: #F8F6F4;
     --sidebarBackground: #FFFFFF;
+    --deleteRed: #ff0800;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -78,6 +79,7 @@ body {
   .dark {
     --mainBackground: #1E2022;
     --sidebarBackground: #35383A;
+    --deleteRed: #c80802;
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -118,6 +120,6 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-mainBackground text-foreground;
   }
 }
