@@ -26,6 +26,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={robotoMono.className}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 'light';
+                document.documentElement.classList.add(theme);
+              })();
+            `,
+          }}
+        />
+      </head>
       <body>
         {children}
         <Toaster position="top-center" reverseOrder={true} />

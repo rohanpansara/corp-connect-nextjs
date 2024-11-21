@@ -13,7 +13,6 @@ export default function ThemeToggle() {
       theme === "dark" ||
       (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
     setIsDarkMode(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
   }, []);
 
   const toggleTheme = () => {
@@ -24,12 +23,13 @@ export default function ThemeToggle() {
   };
 
   return (
-    <Button variant="plain" size="plain" onClick={toggleTheme} className="p-2 rounded">
-      {isDarkMode ? (
-        <BiSun/>
-      ) : (
-        <BiMoon/>
-      )}
+    <Button
+      variant="plain"
+      size="plain"
+      onClick={toggleTheme}
+      className="p-2 rounded"
+    >
+      {isDarkMode ? <BiSun /> : <BiMoon />}
     </Button>
   );
 }

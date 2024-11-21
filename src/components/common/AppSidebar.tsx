@@ -1,4 +1,5 @@
 "use client";
+
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react"; // For handling loading state during API call
 import clsx from "clsx"; // Import clsx for conditional classnames
@@ -10,7 +11,7 @@ import {
   PiBankLight,
   PiUserSquareLight,
   PiGearLight,
-  PiSignOutLight
+  PiSignOutLight,
 } from "react-icons/pi";
 import {
   Sidebar,
@@ -24,6 +25,7 @@ import {
 } from "@/components/ui/sidebar";
 import { getLastPathSegment } from "@/utils/getLastURLSegment";
 import { apiClient } from "@/app/api/apiClient";
+import toast from "react-hot-toast";
 
 // Menu items.
 const upperMenuItems = [
@@ -44,25 +46,23 @@ export function AppSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const currentSegment = getLastPathSegment(pathname);
-  const [loading, setLoading] = useState(false); // Handle loading state for the API request
+  const [loading, setLoading] = useState(false);
 
   // Handle logout
   const handleLogout = async () => {
-    setLoading(true); // Set loading state to true while API is being called
+    setLoading(true);
     try {
-      const response = await apiClient.post("/auth/logout"); // Assuming the logout endpoint is "/auth/logout"
-      if (response.status === 200) {
-        // Redirect to login page on successful logout
+      const response = await apiClient.post("/user/logout");
+      if (response?.status === 200) {
         router.push("/auth/login");
+        toast.success(response?.data?.message || "Logged Out")
       } else {
-        // Handle unsuccessful logout (show error message or log)
         console.error("Logout failed", response);
       }
     } catch (error) {
-      // Handle error (network failure, etc.)
       console.error("Error during logout", error);
     } finally {
-      setLoading(false); // Reset loading state after the API call
+      setLoading(false);
     }
   };
 
@@ -78,26 +78,26 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <a
                       href={item.url}
-                      className={clsx({
-                        "text-gray-900 dark:text-gray-400 font-medium text-xs":
-                          currentSegment === getLastPathSegment(item.url),
-                        "text-gray-500 dark:text-gray-600 text-xs":
-                          currentSegment !== getLastPathSegment(item.url),
-                      })}
+                      className={clsx(
+                        "anchor-common",
+                        currentSegment === getLastPathSegment(item.url)
+                          ? "anchor-active"
+                          : "anchor-inactive"
+                      )}
                     >
                       <div
-                        className={clsx("text-xl", {
-                          "bg-primary h-full w-[2px] rounded-full":
+                        className={clsx({
+                          "text-xl bg-primary h-full w-[2px] rounded-full":
                             currentSegment === getLastPathSegment(item.url),
                         })}
                       ></div>
                       <item.icon
-                        className={clsx("text-xl", {
-                          "text-gray-900 dark:text-gray-400 fill-current":
-                            currentSegment === getLastPathSegment(item.url),
-                          "text-gray-500 dark:text-gray-600":
-                            currentSegment !== getLastPathSegment(item.url),
-                        })}
+                        className={clsx(
+                          "icon-common",
+                          currentSegment === getLastPathSegment(item.url)
+                            ? "icon-active"
+                            : "icon-inactive"
+                        )}
                       />
                       <span>{item.title}</span>
                     </a>
@@ -117,53 +117,53 @@ export function AppSidebar() {
                     {item.title === "Logout" ? (
                       <button
                         onClick={handleLogout}
-                        className={clsx({
-                          "text-gray-900 dark:text-gray-400 font-medium text-xs":
-                            currentSegment === getLastPathSegment(item.url),
-                          "text-gray-500 dark:text-gray-600 text-xs":
-                            currentSegment !== getLastPathSegment(item.url),
-                        })}
-                        disabled={loading} // Disable the button while loading
+                        className={clsx(
+                          "anchor-common",
+                          currentSegment === getLastPathSegment(item.url)
+                            ? "anchor-active"
+                            : "anchor-inactive"
+                        )}
+                        disabled={loading}
                       >
                         <div
-                          className={clsx("text-xl", {
-                            "bg-bg-primary h-full w-[2px] rounded-full":
+                          className={clsx({
+                            "text-xl bg-primary h-full w-[2px] rounded-full":
                               currentSegment === getLastPathSegment(item.url),
                           })}
                         ></div>
                         <item.icon
-                          className={clsx("text-xl", {
-                            "text-gray-900 dark:text-gray-400 fill-current":
-                              currentSegment === getLastPathSegment(item.url),
-                            "text-gray-500 dark:text-gray-600":
-                              currentSegment !== getLastPathSegment(item.url),
-                          })}
+                          className={clsx(
+                            "icon-common",
+                            currentSegment === getLastPathSegment(item.url)
+                              ? "icon-active"
+                              : "icon-inactive"
+                          )}
                         />
                         <span>{loading ? "Logging out..." : item.title}</span>
                       </button>
                     ) : (
                       <a
                         href={item.url}
-                        className={clsx({
-                          "text-gray-900 dark:text-gray-400 font-medium text-xs":
-                            currentSegment === getLastPathSegment(item.url),
-                          "text-gray-500 dark:text-gray-600 text-xs":
-                            currentSegment !== getLastPathSegment(item.url),
-                        })}
+                        className={clsx(
+                          "anchor-common",
+                          currentSegment === getLastPathSegment(item.url)
+                            ? "anchor-active"
+                            : "anchor-inactive"
+                        )}
                       >
                         <div
-                          className={clsx("text-xl", {
-                            "bg-primary h-full w-[2px] rounded-full":
+                          className={clsx({
+                            "text-xl bg-primary h-full w-[2px] rounded-full":
                               currentSegment === getLastPathSegment(item.url),
                           })}
                         ></div>
                         <item.icon
-                          className={clsx("text-xl", {
-                            "text-gray-900 dark:text-gray-400 fill-current":
-                              currentSegment === getLastPathSegment(item.url),
-                            "text-gray-500 dark:text-gray-600":
-                              currentSegment !== getLastPathSegment(item.url),
-                          })}
+                          className={clsx(
+                            "icon-common",
+                            currentSegment === getLastPathSegment(item.url)
+                              ? "icon-active"
+                              : "icon-inactive"
+                          )}
                         />
                         <span>{item.title}</span>
                       </a>

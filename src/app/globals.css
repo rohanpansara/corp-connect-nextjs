@@ -11,8 +11,28 @@ body {
     text-wrap: balance;
   }
 
-  .mainBackground {
-    background-color: #F8F6F4;
+  .anchor-common {
+    @apply text-xs font-medium;
+  }
+
+  .anchor-active {
+    @apply text-gray-900 dark:text-gray-200;
+  }
+
+  .anchor-inactive {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+
+  .icon-common {
+    @apply text-xl;
+  }
+
+  .icon-active {
+    @apply text-gray-900 dark:text-gray-200 fill-gray-900 dark:fill-gray-200;
+  }
+
+  .icon-inactive {
+    @apply text-gray-600 dark:text-gray-400;
   }
 }
 

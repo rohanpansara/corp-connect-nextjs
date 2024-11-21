@@ -7,11 +7,26 @@ import illustration from "@/assets/illustration.png";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const LoginForm = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const response = await apiClient.get("/user/validate-token");
+        if (response.status === 200) {
+          router.push("/dashboard");
+        }
+      } catch (err) {} finally {
+        setLoading(false);
+      }
+    };
+
+    checkSession();
+  }, [router]);
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid format").required("*Email is required"),
