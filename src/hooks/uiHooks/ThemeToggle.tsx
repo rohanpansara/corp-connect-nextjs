@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { BiMoon, BiSun } from "react-icons/bi";
+import { PiMoonLight, PiSunLight } from "react-icons/pi";
 
 export default function ThemeToggle() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -25,11 +25,11 @@ export default function ThemeToggle() {
   return (
     <Button
       variant="plain"
-      size="plain"
+      size="nothing"
       onClick={toggleTheme}
-      className="p-2 rounded"
+      className="flex justify-center items-center rounded"
     >
-      {isDarkMode ? <BiSun /> : <BiMoon />}
+      {isDarkMode ? <PiSunLight /> : <PiMoonLight />}
     </Button>
   );
 }

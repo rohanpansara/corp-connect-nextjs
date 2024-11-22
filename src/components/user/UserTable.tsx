@@ -37,7 +37,12 @@ import AddUserDialog from "./AddUserDialog";
 import UserProfileImage from "./UserProfileImage";
 import DeleteDialog from "../common/DeleteDialog";
 import { UserDTO } from "@/contracts/types/user";
-import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
+import {
+  PiDotsThreeOutlineVerticalLight,
+  PiIdentificationBadgeLight,
+  PiPencilSimpleLineLight,
+  PiTrashLight,
+} from "react-icons/pi";
 
 const UserTable = () => {
   const router = useRouter();
@@ -149,73 +154,33 @@ const UserTable = () => {
         <div className="flex">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="plain" size="plain"><PiDotsThreeOutlineVerticalLight/></Button>
+              <Button variant="plain" size="nothing">
+                <PiDotsThreeOutlineVerticalLight />
+              </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-44">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>User Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <span>Profile</span>
-                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                <DropdownMenuItem className="group">
+                  <Button variant="plain" size="nothing" className="flex justify-start items-center w-full">
+                    <PiIdentificationBadgeLight className="group-hover:text-green-500" />
+                    <span>View Profile</span>
+                  </Button>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Billing</span>
-                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                <DropdownMenuItem className="group">
+                  <Button variant="plain" size="nothing" className="flex justify-start items-center w-full">
+                    <PiPencilSimpleLineLight className="group-hover:text-blue-500" />
+                    <span>Edit</span>
+                  </Button>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Settings</span>
-                  <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Keyboard shortcuts</span>
-                  <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <span>Team</span>
-                </DropdownMenuItem>
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>
-                    <span>Invite users</span>
-                  </DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuItem>
-                        <span>Email</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <span>Message</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>
-                        <span>More...</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-                <DropdownMenuItem>
-                  <span>New Team</span>
-                  <DropdownMenuShortcut>CTRL+T</DropdownMenuShortcut>
+                <DropdownMenuItem className="group">
+                  <Button variant="plain" size="nothing" className="flex justify-start items-center w-full">
+                    <PiTrashLight className="group-hover:text-red-500" />
+                    <span>Remove</span>
+                  </Button>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <span>GitHub</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <span>Support</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem disabled>
-                <span>API</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <span>Log out</span>
-                <DropdownMenuShortcut>CTRL+UP</DropdownMenuShortcut>
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

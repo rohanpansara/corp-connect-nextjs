@@ -1,5 +1,6 @@
 import ThemeToggle from "@/hooks/uiHooks/ThemeToggle";
-import { BiNotification, BiUser } from "react-icons/bi";
+import { BiNotification } from "react-icons/bi";
+import { PiBellSimpleLight, PiUserCircleLight } from "react-icons/pi";
 
 export function AppNavbar() {
   return (
@@ -7,10 +8,10 @@ export function AppNavbar() {
       <div className="flex items-center w-full">
         <div className="flex justify-center items-center ml-auto">
           <div className="mr-2 text-lg">
-            <BiNotification />
+            <PiBellSimpleLight />
           </div>
           <div className="ml-2 mr-2 text-lg">
-            <BiUser />
+            <PiUserCircleLight />
           </div>
           <div className="ml-2 text-lg">
             <ThemeToggle />
