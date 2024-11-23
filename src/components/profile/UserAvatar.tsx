@@ -14,7 +14,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import github from "@/assets/github-default.jpg";
-import { UserDTO } from "@/types/user";
+import { UserDTO } from "@/contracts/types/user";
 
 interface UserAvatarProps {
   userHeaderData: UserDTO | undefined; // Ensure it's the correct type

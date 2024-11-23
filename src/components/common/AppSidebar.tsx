@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react"; // For handling loading state during API call
-import clsx from "clsx"; // Import clsx for conditional classnames
+import { useState } from "react";
+import clsx from "clsx";
 import {
   PiSquaresFourLight,
   PiCalendarXLight,
@@ -72,7 +72,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {upperMenuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.title} className="group">
                   <SidebarMenuButton asChild>
                     <a
                       href={item.url}

@@ -24,7 +24,9 @@ const UserPage = () => {
           <BreadcrumbCreator routes={routes} />
         </div>
       </div>
+      <div className="flex w-full">
       <UserTable />
+      </div>
     </div>
   );
 };

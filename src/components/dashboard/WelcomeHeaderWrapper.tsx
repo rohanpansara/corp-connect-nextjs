@@ -6,11 +6,11 @@ const WelcomeHeaderWrapper = () => {
   const cookieStore = cookies();
 
   // Retrieve the cookie value
-  const cookieValue = cookieStore.get("User_Name")?.value || null;
+  const usernameCookie = cookieStore.get("User_Name")?.value || null;
 
   // If cookie value exists, replace '+' with space and decodeURIComponent
-  const userName = cookieValue
-    ? decodeURIComponent(cookieValue.replace(/\+/g, " "))
+  const userName = usernameCookie
+    ? decodeURIComponent(usernameCookie.replace(/\+/g, " "))
     : null;
 
   return <WelcomeHeader userName={userName} />;
