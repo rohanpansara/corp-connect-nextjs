@@ -8,7 +8,6 @@ import {
   PiCalendarXLight,
   PiCalendarDotsLight,
   PiUsersLight,
-  PiBankLight,
   PiUserSquareLight,
   PiGearLight,
   PiSignOutLight,
@@ -33,7 +32,6 @@ const upperMenuItems = [
   { title: "Leaves", url: "/leaves", icon: PiCalendarXLight },
   { title: "Attendance", url: "/attendance", icon: PiCalendarDotsLight },
   { title: "Users", url: "/users", icon: PiUsersLight },
-  { title: "Finance", url: "/finance", icon: PiBankLight },
 ];
 
 const lowerMenuItems = [

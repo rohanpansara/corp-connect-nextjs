@@ -1,23 +1,27 @@
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
-
 import { userMetadata } from "@/app/metadata/userMetadata";
 import UserTable from "@/components/user/UserTable";
 import { generateBreadcrumbsFromPathname } from "@/utils/generateBreadcrumbRoutes";
 import { BreadcrumbCreator } from "@/components/common/Breadcrumb";
+import { Poppins } from "next/font/google";
 export const metadata = userMetadata;
 
-const UserPage = () => {
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
-   const routes = generateBreadcrumbsFromPathname("/dashboard/users");
+const UserPage = () => {
+  const routes = generateBreadcrumbsFromPathname("/dashboard/users");
 
   return (
     <div
-      className={`min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${inter.className}`}
+      className={`min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
     >
       <div className="flex w-full">
         <div className="flex justify-center items-center mr-auto">
-        <BreadcrumbCreator routes={routes}/>
+          <BreadcrumbCreator routes={routes} />
         </div>
       </div>
       <UserTable />
