@@ -1,12 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { apiClient } from "@/app/api/apiClient";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
-import toast from "react-hot-toast";
 import { PiTornadoThin } from "react-icons/pi";
 import { LuCalendar, LuClock3, LuCalendarClock, LuTv2 } from "react-icons/lu";
-import { useRouter } from "next/navigation";
 import {
   Tooltip,
   TooltipContent,
@@ -15,15 +11,11 @@ import {
 } from "../ui/tooltip";
 import { getInitials } from "@/utils/getInitials";
 
-const Cards = () => {
-  const router = useRouter();
+type CardsProps = {
+  cardsData: { [key: string]: any };
+};
 
-  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(
-    null
-  );
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
+const DashboardCards = ({ cardsData }: CardsProps) => {
   const iconClassName = "h-[50px] w-[50px] text-[#2CA58D] dark:text-[#cfe2e2]";
 
   type CardTitle =
@@ -39,84 +31,50 @@ const Cards = () => {
     "Shift Timings": <LuCalendarClock className={iconClassName} />,
   };
 
-  const fetchCardsData = async () => {
-    try {
-      setLoading(true);
-      const response = await apiClient.get("/dashboard/cards");
-      setCardsData(response.data.data);
-    } catch (err: any) {
-      if (err.response) {
-        if (err.response.status === 401 || err.response.status === 403) {
-          router.push("/auth/login");
-          toast.error("You need to login first");
-        } else {
-          setError(
-            `Error: ${err.response.status} - ${
-              err.response.data.message || "Failed to fetch cards"
-            }`
-          );
-        }
-      } else if (err.request) {
-        setError("Network error: Failed to receive a response");
-      } else {
-        setError(`Error: ${err.message}`);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCardsData();
-  }, []);
-
   return (
     <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-[20px] lg:grid-flow-row-dense mx-auto w-full max-w-full">
-      {cardsData &&
-        Object.values(cardsData).map((card: any, index: number) => (
-          <Card
-            key={index}
-            className="h-[100px] xl:w-[240px] lg:w-[380px] md:w-[450px] overflow-hidden p-4 border-none bg-[#cfe2e2] dark:bg-[#2CA58D] shadow-lg rounded-md text-left mx-auto"
-          >
-            <CardContent className="p-0 h-full flex flex-row items-center justify-around">
-              <CardDescription className="p-0 pr-2 flex">
-                <span>
-                  {/* Render icon based on card.title */}
-                  {iconMap[card.title as CardTitle] || (
-                    <PiTornadoThin className="h-[50px] w-[50px]" />
-                  )}{" "}
-                  {/* Default icon */}
-                </span>
-              </CardDescription>
-              <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-[#2CA58D] dark:text-[#cfe2e2]">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      {card.title === "Next Meeting" ? (
-                        <span className="text-[16px] font-extrabold cursor-default">
-                          {getInitials(card.value)}
-                        </span>
-                      ) : (
-                        <span className="text-[16px] font-extrabold cursor-default">
-                          {card.value}
-                        </span>
-                      )}
-                    </TooltipTrigger>
-
-                    {card.value.length > 12 && (
-                      <TooltipContent>
-                        <p>{card.value}</p>
-                      </TooltipContent>
+      {Object.values(cardsData).map((card: any, index: number) => (
+        <Card
+          key={index}
+          className="h-[100px] xl:w-[240px] lg:w-[380px] md:w-[450px] overflow-hidden p-4 border-none bg-[#cfe2e2] dark:bg-[#2CA58D] shadow-lg rounded-md text-left mx-auto"
+        >
+          <CardContent className="p-0 h-full flex flex-row items-center justify-around">
+            <CardDescription className="p-0 pr-2 flex">
+              <span>
+                {iconMap[card.title as CardTitle] || (
+                  <PiTornadoThin className="h-[50px] w-[50px]" />
+                )}
+              </span>
+            </CardDescription>
+            <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-[#2CA58D] dark:text-[#cfe2e2]">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    {card.title === "Next Meeting" ? (
+                      <span className="text-[16px] font-extrabold cursor-default">
+                        {getInitials(card.value)}
+                      </span>
+                    ) : (
+                      <span className="text-[16px] font-extrabold cursor-default">
+                        {card.value}
+                      </span>
                     )}
-                  </Tooltip>
-                </TooltipProvider>
-                <span className="text-[10px]">{card?.title}</span>
-              </CardDescription>
-            </CardContent>
-          </Card>
-        ))}
+                  </TooltipTrigger>
+
+                  {card.value.length > 12 && (
+                    <TooltipContent>
+                      <p>{card.value}</p>
+                    </TooltipContent>
+                  )}
+                </Tooltip>
+              </TooltipProvider>
+              <span className="text-[10px]">{card?.title}</span>
+            </CardDescription>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 };
 
-export default Cards;
+export default DashboardCards;

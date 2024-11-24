@@ -1,6 +1,6 @@
 // app/components/WelcomeHeaderWrapper.tsx (Server Component)
 import { cookies } from "next/headers";
-import WelcomeHeader from "./WelcomeHeader";
+import WelcomeHeader from "../WelcomeHeader";
 
 const WelcomeHeaderWrapper = () => {
   const cookieStore = cookies();
