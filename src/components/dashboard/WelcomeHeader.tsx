@@ -53,13 +53,13 @@ const WelcomeHeader = ({ userName }: { userName: string | null }) => {
         {userName ? (
           <>
             <span>{getGreeting()},&nbsp;</span>
-            <span className="text-2xl font-semibold">{userName}!</span>
+            <span className="font-semibold">{userName}!</span>
           </>
         ) : (
-          <Skeleton className="w-full h-full py-[2px] rounded-md" />
+          <Skeleton className="w-full h-full rounded-md" />
         )}
       </div>
-      <div className="flex items-end justify-end text-xs h-full">
+      <div className="flex items-end justify-end text-[11px] h-full">
         <div className="flex flex-col items-end text-left">
           <div className="font-semibold">{day}</div>
           <div>{date}</div>
