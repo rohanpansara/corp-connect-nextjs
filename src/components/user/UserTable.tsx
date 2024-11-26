@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
-import { FaTrashAlt } from "react-icons/fa";
-import { BiSolidUserDetail } from "react-icons/bi";
-import { FcOk } from "react-icons/fc";
-import { TbUserPlus } from "react-icons/tb";
 import { fetchUsersData } from "@/app/api/fetchers/fetchAllUsers";
+import { Button } from "@/components/ui/button";
+import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
+import { FcOk } from "react-icons/fc";
 import { Checkbox } from "../ui/checkbox";
 import {
   Tooltip,
@@ -17,25 +15,16 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 
+import { DataTable } from "@/app/(with-sidebar)/users/data-table";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { FaUserPen } from "react-icons/fa6";
-import { DataTable } from "@/app/(with-sidebar)/users/data-table";
-import AddUserDialog from "./AddUserDialog";
-import UserProfileImage from "./UserProfileImage";
-import DeleteDialog from "../common/DeleteDialog";
 import { UserDTO } from "@/contracts/types/user";
 import {
   PiDotsThreeOutlineVerticalLight,
@@ -43,6 +32,10 @@ import {
   PiPencilSimpleLineLight,
   PiTrashLight,
 } from "react-icons/pi";
+import { TiUserAdd } from "react-icons/ti";
+import DeleteDialog from "../common/DeleteDialog";
+import AddUserDialog from "./AddUserDialog";
+import UserProfileImage from "./UserProfileImage";
 
 const UserTable = () => {
   const router = useRouter();
@@ -158,24 +151,24 @@ const UserTable = () => {
                 <PiDotsThreeOutlineVerticalLight />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-44">
-              <DropdownMenuLabel>User Actions</DropdownMenuLabel>
+            <DropdownMenuContent className="w-34">
+              <DropdownMenuLabel className="text-xs">User Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuGroup>
+              <DropdownMenuGroup className="text-xs">
                 <DropdownMenuItem className="group">
-                  <Button variant="plain" size="nothing" className="flex justify-start items-center w-full">
+                  <Button variant="plain" size="nothing" className="text-xs flex justify-start items-center w-full">
                     <PiIdentificationBadgeLight className="group-hover:text-green-500" />
                     <span>View Profile</span>
                   </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="group">
-                  <Button variant="plain" size="nothing" className="flex justify-start items-center w-full">
+                  <Button variant="plain" size="nothing" className="text-xs flex justify-start items-center w-full">
                     <PiPencilSimpleLineLight className="group-hover:text-blue-500" />
                     <span>Edit</span>
                   </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="group">
-                  <Button variant="plain" size="nothing" className="flex justify-start items-center w-full">
+                  <Button variant="plain" size="nothing" className="text-xs flex justify-start items-center w-full">
                     <PiTrashLight className="group-hover:text-red-500" />
                     <span>Remove</span>
                   </Button>
@@ -221,7 +214,7 @@ const UserTable = () => {
             variant="default"
             onClick={() => setIsAddUserDialogOpen(true)}
           >
-            <TbUserPlus />
+            <TiUserAdd />
             Add
           </Button>
         </div>
