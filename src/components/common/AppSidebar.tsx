@@ -1,17 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
-import clsx from "clsx";
-import {
-  PiSquaresFourLight,
-  PiCalendarXLight,
-  PiCalendarDotsLight,
-  PiUsersLight,
-  PiUserSquareLight,
-  PiGearLight,
-  PiSignOutLight,
-} from "react-icons/pi";
+import { apiClient } from "@/app/api/apiClient";
 import {
   Sidebar,
   SidebarContent,
@@ -23,8 +12,19 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { getLastPathSegment } from "@/utils/getLastURLSegment";
-import { apiClient } from "@/app/api/apiClient";
-import toast from "react-hot-toast";
+import clsx from "clsx";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import {
+  PiCalendarDotsLight,
+  PiCalendarXLight,
+  PiGearLight,
+  PiSignOutLight,
+  PiSquaresFourLight,
+  PiUsersLight,
+  PiUserSquareLight,
+} from "react-icons/pi";
+import { toast } from "sonner";
 
 // Menu items.
 const upperMenuItems = [

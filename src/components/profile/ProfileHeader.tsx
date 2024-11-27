@@ -2,9 +2,9 @@
 import { apiClient } from "@/app/api/apiClient";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
 
-import { UserDTO } from "@/types/user";
+import { UserDTO } from "@/contracts/types/user";
+import { toast } from "sonner";
 import ProfileBackground from "./ProfileBackground";
 import UserAvatar from "./UserAvatar";
 

@@ -1,6 +1,6 @@
 import { apiClient } from "@/app/api/apiClient";
-import { toast } from "react-hot-toast";
 import { FetchUsersDataProps } from "../interfaces/props/FetchUserDataProps";
+import { toast } from "sonner";
 
 export const fetchUsersData = async ({
   setUsersData,

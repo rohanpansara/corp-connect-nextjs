@@ -1,5 +1,5 @@
 import axios from "axios";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 // Create Axios instance
 export const apiClient = axios.create({

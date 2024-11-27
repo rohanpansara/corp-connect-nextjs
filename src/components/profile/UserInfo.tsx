@@ -1,13 +1,9 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { apiClient } from "@/app/api/apiClient";
+import { UserDTO } from "@/contracts/types/user";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
-
-import { UserDTO } from "@/types/user";
-import { getInitials } from "@/utils/getInitials";
-import profileBackground from "../../assets/profile-background.jpg";
+import { toast } from "sonner";
 
 const UserInfo = ({ id }: { id: string }) => {
   const fetchRef = useRef(false);

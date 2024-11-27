@@ -1,11 +1,9 @@
 "use client";
 
-import { apiClient } from "@/app/api/apiClient";
+import { fetchCardsData } from "@/app/api/fetchers/fetchDashboardCardData";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import DashboardCards from "../DashboardCards";
-import { fetchCardsData } from "@/app/api/fetchers/fetchDashboardCardData";
 
 const DashboardCardsWrapper = () => {
   const router = useRouter();

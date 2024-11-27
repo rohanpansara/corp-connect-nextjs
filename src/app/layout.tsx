@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 //👇 Import our second font
@@ -40,7 +40,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
-        <Toaster position="top-center" reverseOrder={true} />
+        <Toaster richColors={true}/>
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 import { apiClient } from "@/app/api/apiClient";
-import { toast } from "react-hot-toast";
 import { FetchCardsDataProps } from "../interfaces/props/FetchDashboardCardDataProps";
+import { toast } from "sonner";
 
 export const fetchCardsData = async ({
   setCardsData,

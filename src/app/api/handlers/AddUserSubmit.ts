@@ -1,7 +1,7 @@
 import { UserFormValues } from "@/app/api/interfaces/AddUserFormValues";  // Adjust the import according to your file structure
 import { FormikHelpers } from "formik";
 import { apiClient } from "@/app/api/apiClient"; // Ensure this is correctly imported
-import { toast } from "react-hot-toast";
+import { toast } from "sonner";
 
 export const handleAddUserSubmit = async (
   values: UserFormValues,
