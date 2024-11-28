@@ -40,7 +40,11 @@ const lowerMenuItems = [
   { title: "Logout", url: "/auth/login", icon: PiSignOutLight },
 ];
 
-export function AppSidebar() {
+type AppSidebarProps = {
+  userId: string;
+};
+
+export function AppSidebar({ userId }: AppSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const currentSegment = getLastPathSegment(pathname);
@@ -53,7 +57,7 @@ export function AppSidebar() {
       const response = await apiClient.post("/user/logout");
       if (response?.status === 200) {
         router.push("/auth/login");
-        toast.success(response?.data?.message || "Logged Out")
+        toast.success(response?.data?.message || "Logged Out");
       } else {
         console.error("Logout failed", response);
       }
@@ -141,7 +145,7 @@ export function AppSidebar() {
                       </button>
                     ) : (
                       <a
-                        href={item.url}
+                        href={`${item.url}/${userId}`}
                         className={clsx(
                           "anchor-common",
                           currentSegment === getLastPathSegment(item.url)

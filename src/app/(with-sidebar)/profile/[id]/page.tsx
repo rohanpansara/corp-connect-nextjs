@@ -17,7 +17,7 @@ const ProfilePage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div
-      className={`min-h-screen w-full bg-[#F8F6F4] flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
+      className={`min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
     >
       <ProfileHeader id={id} />
       <UserInfo id={id} />
