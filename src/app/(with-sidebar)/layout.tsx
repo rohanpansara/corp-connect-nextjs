@@ -6,6 +6,14 @@ import { AuthProvider } from "@/components/common/AuthProvider";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { getCookieAsString } from "@/utils/cookieUtils";
 import "./../globals.css";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 
 export default function SidebarLayout({
@@ -19,7 +27,7 @@ export default function SidebarLayout({
     <SidebarProvider>
       <AppSidebar userId={userId} />
       <SidebarTrigger />
-      <main className="w-full">
+      <main className={`w-full ${poppins.className}`}>
         <AppNavbar />
         <AuthProvider>{children}</AuthProvider>
       </main>

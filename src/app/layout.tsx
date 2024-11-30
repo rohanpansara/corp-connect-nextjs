@@ -1,23 +1,14 @@
 // app/layout.tsx
 import { Toaster } from "sonner";
 import "./globals.css";
+import { Poppins } from "next/font/google";
 
-//👇 Import our second font
-import { Open_Sans, Roboto_Mono } from 'next/font/google'
-
-const openSans = Open_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  //👇 Add variable to our object
-  variable: '--font-opensans',
-})
-
-//👇 Configure the object for our second font
-const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
-})
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export default function RootLayout({
   children,
@@ -25,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={robotoMono.className}>
+    <html lang="en" className={poppins.className}>
       <head>
         <script
           dangerouslySetInnerHTML={{

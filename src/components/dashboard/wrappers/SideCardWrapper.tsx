@@ -3,15 +3,13 @@
 import { fetchCardsData } from "@/app/api/fetchers/fetchDashboardCardData";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import DashboardCards from "../DashboardCards";
+import SideCards from "../SideCards";
 
-const DashboardCardsWrapper = () => {
+const SideCardsWrapper = () => {
   const router = useRouter();
   const handleNavigation = (path: string) => router.push(path);
 
-  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(
-    null
-  );
+  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,7 +22,7 @@ const DashboardCardsWrapper = () => {
     });
   }, []);
 
-  return cardsData ? <DashboardCards cardsData={cardsData} /> : null;
+  return cardsData ? <SideCards cardsData={cardsData} /> : null;
 };
 
-export default DashboardCardsWrapper;
+export default SideCardsWrapper;

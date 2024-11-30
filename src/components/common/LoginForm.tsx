@@ -47,10 +47,10 @@ const LoginForm = () => {
         router.push("/dashboard");
         // Dismiss the loading toast after navigation
         toast.dismiss(loadingToastId);
+        toast.success(response.data.message || "Credentials verified")
       }
     } catch (err: any) {
       toast.dismiss(loadingToastId);
-      console.error("Login failed:", err);
 
       const errorMessage =
         err?.response?.data?.message ||
@@ -58,7 +58,7 @@ const LoginForm = () => {
 
       toast.error(errorMessage);
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 

@@ -25,6 +25,14 @@ import {
   PiUserSquareLight,
 } from "react-icons/pi";
 import { toast } from "sonner";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 // Menu items.
 const upperMenuItems = [
@@ -70,7 +78,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="bg-sidebarBackground">
+      <SidebarContent className={`bg-sidebarBackground ${poppins.className}`}>
         <SidebarGroup>
           <SidebarGroupLabel>CorpConnect</SidebarGroupLabel>
           <SidebarGroupContent>

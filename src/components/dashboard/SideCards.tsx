@@ -8,7 +8,7 @@ type CardsProps = {
   cardsData: { [key: string]: any };
 };
 
-const DashboardCards = ({ cardsData }: CardsProps) => {
+const SideCards = ({ cardsData }: CardsProps) => {
   const iconClassName = "h-[50px] w-[50px] text-[#2CA58D] dark:text-[#cfe2e2]";
 
   type CardTitle = "Leaves Available" | "Shift Timings";
@@ -46,4 +46,4 @@ const DashboardCards = ({ cardsData }: CardsProps) => {
   );
 };
 
-export default DashboardCards;
+export default SideCards;
