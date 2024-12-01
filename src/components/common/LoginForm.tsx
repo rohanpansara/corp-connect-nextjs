@@ -32,9 +32,7 @@ const LoginForm = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid format").required("*Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("*Password is required"),
+    password: Yup.string().required("*Password is required"),
   });
 
   const handleSubmit = async (values: { email: string; password: string }) => {
