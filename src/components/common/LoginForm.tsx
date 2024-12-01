@@ -1,8 +1,8 @@
 "use client";
 
-import { apiClient } from "@/app/api/apiClient";
+import { checkSession } from "@/app/api/checkSession";
+import { handleLoginSubmit } from "@/app/api/handlers/Login";
 import illustration from "@/assets/illustration.png";
-import ToastManager from "@/utils/toastManager";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
@@ -11,69 +11,26 @@ import * as Yup from "yup";
 
 const LoginForm = () => {
   const router = useRouter();
+  const handleNavigation = (path: string) => router.push(path);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const response = await apiClient.get("/user/validate-token");
-        if (response.status === 200) {
-          router.push("/dashboard");
-        }
-      } catch (err) {
-        console.log(err)
-      } finally {
+    const validateSession = async () => {
+      const isLoggedIn = await checkSession();
+      if (isLoggedIn) {
+        router.push("/dashboard");
+      } else {
         setLoading(false);
       }
     };
 
-    checkSession();
+    validateSession();
   }, [router]);
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid format").required("*Email is required"),
     password: Yup.string().required("*Password is required"),
   });
-
-  const handleSubmit = async (values: { email: string; password: string }) => {
-    setLoading(true);
-
-    try {
-      const response = await apiClient.post("/user/login", values);
-
-      if (response.status === 200) {
-        // Show the loading toast until the dashboard renders
-        router.push("/dashboard");
-        // Dismiss the loading toast after navigation
-        ToastManager.toast({
-          title: "Success",
-          description: response.data.message,
-          variant: "success",
-          action: {
-            altText: "Token Refresh Failed",
-            onClick: () => {},
-            label: "Token Refresh",
-          },
-        });
-      }
-    } catch (err: any) {
-      const errorMessage =
-        err?.response?.data?.message ||
-        "An unexpected error occurred. Please try again later.";
-      ToastManager.toast({
-        title: "Error",
-        description: errorMessage,
-        variant: "success",
-        action: {
-          altText: "Token Refresh Failed",
-          onClick: () => {},
-          label: "Token Refresh",
-        },
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <main className="flex w-[90%] h-screen min-h-screen bg-[#0940AE] gap-x-10">
@@ -96,23 +53,9 @@ const LoginForm = () => {
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={validationSchema}
-            onSubmit={async (values, { setSubmitting, setFieldError }) => {
+            onSubmit={async (values, { setSubmitting }) => {
               try {
-                await handleSubmit(values);
-              } catch (err: any) {
-                const errorMessage =
-                  err?.response?.data?.message ||
-                  "An unexpected error occurred. Please try again later.";
-                ToastManager.toast({
-                  title: "Error",
-                  description: errorMessage,
-                  variant: "success",
-                  action: {
-                    altText: "Token Refresh Failed",
-                    onClick: () => {},
-                    label: "Token Refresh",
-                  },
-                });
+                await handleLoginSubmit(values, setLoading, handleNavigation);
               } finally {
                 setSubmitting(false);
               }

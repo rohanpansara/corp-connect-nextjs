@@ -138,7 +138,7 @@ const UserTable = () => {
     },
     {
       id: "isAccountEnabled",
-      header: "Acct. Enabled",
+      header: "Enabled",
       cell: ({ row }) => <FcOk className="h-4 w-4" />,
     },
     {
