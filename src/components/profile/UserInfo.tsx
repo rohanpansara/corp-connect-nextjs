@@ -1,9 +1,9 @@
 "use client";
 import { apiClient } from "@/app/api/apiClient";
 import { UserDTO } from "@/contracts/types/user";
+import ToastManager from "@/utils/toastManager";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
 
 const UserInfo = ({ id }: { id: string }) => {
   const fetchRef = useRef(false);
@@ -22,7 +22,19 @@ const UserInfo = ({ id }: { id: string }) => {
       if (err.response) {
         if (err.response.status === 401 || err.response.status === 403) {
           router.push("/auth/login");
-          toast.error("You need to login first");
+          const errorMessage =
+            err?.response?.data?.message ||
+            "An unexpected error occurred. Please try again later.";
+          ToastManager.toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "success",
+            action: {
+              altText: "Token Refresh Failed",
+              onClick: () => {},
+              label: "Token Refresh",
+            },
+          });
         } else {
           setError(
             `Error: ${err.response.status} - ${

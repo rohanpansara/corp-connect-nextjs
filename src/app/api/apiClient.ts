@@ -1,5 +1,5 @@
+import ToastManager from "@/utils/toastManager";
 import axios from "axios";
-import { toast } from "sonner";
 
 // Create Axios instance
 export const apiClient = axios.create({
@@ -32,16 +32,25 @@ apiClient.interceptors.response.use(
         );
 
         if (refreshResponse.status === 200) {
-          return apiClient(originalRequest);
+          return apiClient(originalRequest); // Retry the original request
         }
       } catch (refreshError) {
         console.error("Token refresh failed:", refreshError);
 
         // Show a toast notification on refresh token failure
-        toast.error("Session expired. Please login again.");
+        ToastManager.toast({
+          title: "Error",
+          description: "Couldn't refresh token for the user",
+          variant: "error",
+          action: {
+            altText: "Token Refresh Failed",
+            onClick: () => {},
+            label: "Token Refresh",
+          },
+        });
 
-        // Use window.location.href to redirect to login page
-        window.location.href = "/auth/login"; // Redirect user to login on refresh token failure
+        // Redirect user to login on refresh token failure
+        window.location.href = "/auth/login";
         return Promise.reject(refreshError);
       }
     }

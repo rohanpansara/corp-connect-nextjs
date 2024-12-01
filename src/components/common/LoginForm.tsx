@@ -2,11 +2,11 @@
 
 import { apiClient } from "@/app/api/apiClient";
 import illustration from "@/assets/illustration.png";
+import ToastManager from "@/utils/toastManager";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 import * as Yup from "yup";
 
 const LoginForm = () => {
@@ -20,7 +20,9 @@ const LoginForm = () => {
         if (response.status === 200) {
           router.push("/dashboard");
         }
-      } catch (err) {} finally {
+      } catch (err) {
+        console.log(err)
+      } finally {
         setLoading(false);
       }
     };
@@ -36,7 +38,6 @@ const LoginForm = () => {
   });
 
   const handleSubmit = async (values: { email: string; password: string }) => {
-    const loadingToastId = toast.loading("Verifying credentials");
     setLoading(true);
 
     try {
@@ -46,17 +47,31 @@ const LoginForm = () => {
         // Show the loading toast until the dashboard renders
         router.push("/dashboard");
         // Dismiss the loading toast after navigation
-        toast.dismiss(loadingToastId);
-        toast.success(response.data.message || "Credentials verified")
+        ToastManager.toast({
+          title: "Success",
+          description: response.data.message,
+          variant: "success",
+          action: {
+            altText: "Token Refresh Failed",
+            onClick: () => {},
+            label: "Token Refresh",
+          },
+        });
       }
     } catch (err: any) {
-      toast.dismiss(loadingToastId);
-
       const errorMessage =
         err?.response?.data?.message ||
         "An unexpected error occurred. Please try again later.";
-
-      toast.error(errorMessage);
+      ToastManager.toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "success",
+        action: {
+          altText: "Token Refresh Failed",
+          onClick: () => {},
+          label: "Token Refresh",
+        },
+      });
     } finally {
       setLoading(false);
     }
@@ -86,8 +101,20 @@ const LoginForm = () => {
             onSubmit={async (values, { setSubmitting, setFieldError }) => {
               try {
                 await handleSubmit(values);
-              } catch (err) {
-                toast.error("Error-" + err);
+              } catch (err: any) {
+                const errorMessage =
+                  err?.response?.data?.message ||
+                  "An unexpected error occurred. Please try again later.";
+                ToastManager.toast({
+                  title: "Error",
+                  description: errorMessage,
+                  variant: "success",
+                  action: {
+                    altText: "Token Refresh Failed",
+                    onClick: () => {},
+                    label: "Token Refresh",
+                  },
+                });
               } finally {
                 setSubmitting(false);
               }

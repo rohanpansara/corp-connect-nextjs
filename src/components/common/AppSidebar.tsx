@@ -12,7 +12,9 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { getLastPathSegment } from "@/utils/getLastURLSegment";
+import ToastManager from "@/utils/toastManager";
 import clsx from "clsx";
+import { Poppins } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -24,8 +26,6 @@ import {
   PiUsersLight,
   PiUserSquareLight,
 } from "react-icons/pi";
-import { toast } from "sonner";
-import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -65,7 +65,16 @@ export function AppSidebar({ userId }: AppSidebarProps) {
       const response = await apiClient.post("/user/logout");
       if (response?.status === 200) {
         router.push("/auth/login");
-        toast.success(response?.data?.message || "Logged Out");
+        ToastManager.toast({
+          title: "Success",
+          description: "User logged out",
+          variant: "success",
+          action: {
+            altText: "Token Refresh Failed",
+            onClick: () => {},
+            label: "Token Refresh",
+          },
+        });
       } else {
         console.error("Logout failed", response);
       }

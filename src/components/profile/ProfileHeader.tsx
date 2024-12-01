@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { UserDTO } from "@/contracts/types/user";
-import { toast } from "sonner";
+import ToastManager from "@/utils/toastManager";
 import ProfileBackground from "./ProfileBackground";
 import UserAvatar from "./UserAvatar";
 
@@ -25,7 +25,19 @@ const ProfileHeader = ({ id }: { id: string }) => {
       if (err.response) {
         if (err.response.status === 401 || err.response.status === 403) {
           router.push("/auth/login");
-          toast.error("You need to login first");
+          const errorMessage =
+            err?.response?.data?.message ||
+            "An unexpected error occurred. Please try again later.";
+          ToastManager.toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "success",
+            action: {
+              altText: "Token Refresh Failed",
+              onClick: () => {},
+              label: "Token Refresh",
+            },
+          });
         } else {
           setError(
             `Error: ${err.response.status} - ${

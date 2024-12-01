@@ -1,18 +1,28 @@
 "use client";
 
+import ToastManager from "@/utils/toastManager";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { apiClient } from "../apiClient";
 
 // Handle logout
 export const handleLogout = async ({ setLoading }: any, {}) => {
   const router = useRouter();
+
   setLoading(true);
   try {
     const response = await apiClient.post("/user/logout");
     if (response?.status === 200) {
       router.push("/auth/login");
-      toast.success(response?.data?.message || "Logged Out");
+      ToastManager.toast({
+        title: "Success",
+        description: "User logged out successfully",
+        variant: "success",
+        action: {
+          altText: "Token Refresh Failed",
+          onClick: () => {},
+          label: "Token Refresh",
+        },
+      });
     } else {
       console.error("Logout failed", response);
     }

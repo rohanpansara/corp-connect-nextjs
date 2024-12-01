@@ -2,8 +2,6 @@ import { dashboardMetadata } from "@/app/metadata/dashboardMetadata";
 import RightSideCards from "@/components/dashboard/RightCards";
 import SideCardsWrapper from "@/components/dashboard/wrappers/SideCardWrapper";
 import WelcomeHeaderWrapper from "@/components/dashboard/wrappers/WelcomeHeaderWrapper";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader } from "@/components/ui/card";
 export const metadata = dashboardMetadata;
 
 const DashboardPage = () => {

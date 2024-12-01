@@ -1,6 +1,6 @@
 import { apiClient } from "@/app/api/apiClient";
+import ToastManager from "@/utils/toastManager";
 import { FetchUsersDataProps } from "../interfaces/props/FetchUserDataProps";
-import { toast } from "sonner";
 
 export const fetchUsersData = async ({
   setUsersData,
@@ -8,28 +8,67 @@ export const fetchUsersData = async ({
   setLoading,
   onNavigate,
 }: FetchUsersDataProps) => {
-  const loadingToastId = toast.loading("Fetching user records");
+
   setLoading(true);
-  
+
   try {
     const response = await apiClient.get("/employee");
-    
+
     if (response.data?.data) {
       setUsersData(response.data.data);
-      toast.dismiss(loadingToastId);
-      toast.success("Users found successfully");
+      ToastManager.toast({
+        title: "Loading",
+        description:
+          "Fetching user records",
+        variant: "loading",
+        action: {
+          altText: "Token Refresh Failed",
+          onClick: () => {},
+          label: "Token Refresh",
+        },
+      });
+
+      ToastManager.toast({
+        title: "Success",
+        description:
+          "User records fetched successfully",
+        variant: "success",
+        action: {
+          altText: "Token Refresh Failed",
+          onClick: () => {},
+          label: "Token Refresh",
+        },
+      });
+
     } else {
       setError("No data found");
     }
   } catch (err: any) {
-    toast.dismiss(loadingToastId);
-    
+
     if (err.response) {
       if (err.response.status == 401 || err.response.status == 403) {
         onNavigate("/auth/login");
-        toast.error("You need to log in first");
+        ToastManager.toast({
+          title: "You are not logged in",
+          description: err.response,
+          variant: "error",
+          action: {
+            altText: "Token Refresh Failed",
+            onClick: () => {},
+            label: "Token Refresh",
+          },
+        });
       } else if (err.response.status == 500) {
-        toast.error("You don't have access to user records!");
+        ToastManager.toast({
+          title: "You don't have access to this record",
+          description: err.response,
+          variant: "error",
+          action: {
+            altText: "Token Refresh Failed",
+            onClick: () => {},
+            label: "Token Refresh",
+          },
+        });
       } else {
         setError(
           `Error: ${err.response.status} - ${

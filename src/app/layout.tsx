@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/common/Toaster";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 
@@ -31,7 +31,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
-        <Toaster richColors={true}/>
+        <Toaster />
       </body>
     </html>
   );
