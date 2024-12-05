@@ -1,11 +1,16 @@
-"use client"
+"use client";
 
-import { useState } from "react";
 import { Button } from "../ui/button";
 
-const AttendanceToggleButtons = () => {
-  const [active, setActive] = useState<"daily" | "weekly">("daily");
+interface AttendanceToggleButtonsProps {
+  active: "daily" | "weekly";
+  setActive: (value: "daily" | "weekly") => void;
+}
 
+const AttendanceToggleButtons = ({
+  active,
+  setActive,
+}: AttendanceToggleButtonsProps) => {
   return (
     <div className="flex justify-between items-center w-full">
       <Button

@@ -8,7 +8,7 @@ type CardsProps = {
   cardsData: { [key: string]: any };
 };
 
-const SideCards = ({ cardsData }: CardsProps) => {
+const LeftSideCards = ({ cardsData }: CardsProps) => {
   const iconClassName = "h-[50px] w-[50px] text-[#2CA58D] dark:text-[#cfe2e2]";
 
   type CardTitle = "Leaves Available" | "Shift Timings";
@@ -46,4 +46,4 @@ const SideCards = ({ cardsData }: CardsProps) => {
   );
 };
 
-export default SideCards;
+export default LeftSideCards;

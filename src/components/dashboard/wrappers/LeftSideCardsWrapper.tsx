@@ -3,9 +3,9 @@
 import { fetchCardsData } from "@/app/api/fetchers/fetchDashboardCardData";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import SideCards from "../SideCards";
+import LeftSideCards from "../LeftSideCards";
 
-const SideCardsWrapper = () => {
+const LeftSideCardsWrapper = () => {
   const router = useRouter();
   const handleNavigation = (path: string) => router.push(path);
 
@@ -22,7 +22,7 @@ const SideCardsWrapper = () => {
     });
   }, []);
 
-  return cardsData ? <SideCards cardsData={cardsData} /> : null;
+  return cardsData ? <LeftSideCards cardsData={cardsData} /> : null;
 };
 
-export default SideCardsWrapper;
+export default LeftSideCardsWrapper;
