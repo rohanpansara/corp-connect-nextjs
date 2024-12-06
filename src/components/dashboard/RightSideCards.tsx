@@ -3,12 +3,7 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import AttendanceToggleButtons from "./AttendanceToggle";
-
-interface CardDataDTO {
-  title: string;
-  value: string;
-  description: string;
-}
+import { CardDataDTO } from "@/contracts/interfaces/CardDataDTO";
 
 interface RightSideCardsProps {
   data: {
