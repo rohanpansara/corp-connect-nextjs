@@ -45,7 +45,7 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
         </CardDescription>
       </CardContent>
       <CardFooter className="p-1 w-full text-xs flex justify-center items-center uppercase">
-        <span className={`p-[2px] px-1 text-xs rounded-lg uppercase ${activeCard?.onTime === true ? "bg-lime-200 dark:bg-lime-700 border-[1px] text-lime-700 dark:text-lime-200 border-lime-700 dark:border-lime-200" : "bg-red-200 dark:bg-red-600 border-[1px] text-red-600 dark:text-red-200 border-red-600 dark:border-red-200"}`}>
+        <span className={`p-[2px] px-1 text-xs rounded-lg uppercase ${activeCard?.onTime === true ? "bg-green-200 dark:bg-green-700 border-[1px] text-green-700 dark:text-green-200 border-green-700 dark:border-green-200" : "bg-red-200 dark:bg-red-600 border-[1px] text-red-600 dark:text-red-200 border-red-600 dark:border-red-200"}`}>
           {activeCard?.description}
         </span>
         &nbsp;{active === "daily" ? "today" : "this week"}  
