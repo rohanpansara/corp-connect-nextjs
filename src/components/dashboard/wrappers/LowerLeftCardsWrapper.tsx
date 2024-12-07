@@ -1,11 +1,11 @@
 "use client";
 
-import { fetchUpperLeftCardsData } from "@/app/api/fetchers/fetchUpperLeftCardsData";
+import { fetchLowerLeftCardsData } from "@/app/api/fetchers/fetchLowerLeftCardsData";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import UpperLeftCards from "../UpperLeftCards";
+import LowerLeftCards from "../LowerLeftCards";
 
-const UpperLeftCardsWrapper = () => {
+const LowerLeftCardsWrapper = () => {
   const router = useRouter();
   const handleNavigation = (path: string) => router.push(path);
 
@@ -14,7 +14,7 @@ const UpperLeftCardsWrapper = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchUpperLeftCardsData({
+    fetchLowerLeftCardsData({
       setCardsData,
       setError,
       setLoading,
@@ -22,7 +22,7 @@ const UpperLeftCardsWrapper = () => {
     });
   }, []);
 
-  return cardsData ? <UpperLeftCards cardsData={cardsData} /> : null;
+  return cardsData ? <LowerLeftCards cardsData={cardsData} /> : null;
 };
 
-export default UpperLeftCardsWrapper;
+export default LowerLeftCardsWrapper;

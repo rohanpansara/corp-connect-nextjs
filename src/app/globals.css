@@ -41,6 +41,8 @@ body {
     --mainBackground: #F8F6F4;
     --sidebarBackground: #FFFFFF;
     --deleteRed: #ff0800;
+    --cardBackgroundColor: #cfe2e2;
+    --cardTextColor: #2CA58D;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -80,6 +82,8 @@ body {
     --mainBackground: #1E2022;
     --sidebarBackground: #35383A;
     --deleteRed: #c80802;
+    --cardBackgroundColor: #2CA58D;
+    --cardTextColor: #cfe2e2;
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;

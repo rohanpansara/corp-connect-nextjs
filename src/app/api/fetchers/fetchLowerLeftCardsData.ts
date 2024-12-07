@@ -2,7 +2,7 @@ import { apiClient } from "@/app/api/apiClient";
 import ToastManager from "@/utils/toastManager";
 import { FetchCardsDataProps } from "../interfaces/props/FetchDashboardCardDataProps";
 
-export const fetchCardsData = async ({
+export const fetchLowerLeftCardsData = async ({
   setCardsData,
   setError,
   setLoading,
@@ -12,7 +12,7 @@ export const fetchCardsData = async ({
   try {
     setLoading(true);
 
-    const response = await apiClient.get("/dashboard/cards/left");
+    const response = await apiClient.get("/dashboard/cards/left-down");
     setCardsData(response.data.data);
   } catch (err: any) {
     if (err.response) {
