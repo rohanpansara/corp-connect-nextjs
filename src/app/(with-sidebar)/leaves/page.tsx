@@ -1,5 +1,4 @@
 import { leavesMetadata } from "@/app/metadata/leavesMetadata";
-import AttendanceToggleButtons from "@/components/dashboard/AttendanceToggle";
 import {
   Card,
   CardContent,
@@ -7,11 +6,11 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { BsCalendarRangeFill } from "react-icons/bs";
+import { IoCalendarOutline } from "react-icons/io5";
 export const metadata = leavesMetadata;
 
 const LeavesPage = () => {
-  const iconClassName = "h-[50px] w-[50px] text-[#2CA58D] dark:text-[#cfe2e2]";
+  const iconClassName = "h-[50px] w-[50px] text-cardTextColor";
 
   return (
     <div className="min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4">
@@ -23,7 +22,7 @@ const LeavesPage = () => {
                 <CardContent className="p-0 h-full flex flex-row items-center justify-around">
                   <CardDescription className="p-0 pr-2 flex">
                     <span>
-                      <BsCalendarRangeFill className={iconClassName} />
+                      <IoCalendarOutline className={iconClassName} />
                     </span>
                   </CardDescription>
                   <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-cardTextColor">
@@ -40,7 +39,7 @@ const LeavesPage = () => {
                 <CardContent className="p-0 h-full flex flex-row items-center justify-around">
                   <CardDescription className="p-0 pr-2 flex">
                     <span>
-                      <BsCalendarRangeFill className={iconClassName} />
+                      <IoCalendarOutline className={iconClassName} />
                     </span>
                   </CardDescription>
                   <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-cardTextColor">
@@ -59,7 +58,7 @@ const LeavesPage = () => {
                 <CardContent className="p-0 h-full flex flex-row items-center justify-around">
                   <CardDescription className="p-0 pr-2 flex">
                     <span>
-                      <BsCalendarRangeFill className={iconClassName} />
+                      <IoCalendarOutline className={iconClassName} />
                     </span>
                   </CardDescription>
                   <CardDescription className="p-0 pl-2 flex flex-col justify-center items-left text-cardTextColor">
