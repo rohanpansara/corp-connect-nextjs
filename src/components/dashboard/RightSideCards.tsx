@@ -1,14 +1,20 @@
 "use client";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { AttendanceAverageCardDTO } from "@/contracts/interfaces/CardDataDTO";
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import AttendanceToggleButtons from "./AttendanceToggle";
-import { CardDataDTO } from "@/contracts/interfaces/CardDataDTO";
 
 interface RightSideCardsProps {
   data: {
-    dailyAttendanceCard: CardDataDTO;
-    weeklyAttendanceCard: CardDataDTO;
+    dailyAttendanceCard: AttendanceAverageCardDTO;
+    weeklyAttendanceCard: AttendanceAverageCardDTO;
   };
 }
 
@@ -16,7 +22,8 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
   const { dailyAttendanceCard, weeklyAttendanceCard } = data;
   const [active, setActive] = useState<"daily" | "weekly">("daily");
 
-  const activeCard = active === "daily" ? dailyAttendanceCard : weeklyAttendanceCard;
+  const activeCard =
+    active === "daily" ? dailyAttendanceCard : weeklyAttendanceCard;
 
   return (
     <Card className="w-1/2 h-[216px] p-2 bg-[#cfe2e2] dark:bg-[#2CA58D] shadow-lg rounded-md">
@@ -37,8 +44,11 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
           </div>
         </CardDescription>
       </CardContent>
-      <CardFooter className="p-1 w-full flex justify-center items-center">
-        <span className="text-xs text-gray-600 dark:text-gray-800">{activeCard?.description}</span>
+      <CardFooter className="p-1 w-full text-xs flex justify-center items-center uppercase">
+        <span className={`p-[2px] px-1 text-xs rounded-lg uppercase ${activeCard?.onTime === true ? "bg-lime-200 dark:bg-lime-700 border-[1px] text-lime-700 dark:text-lime-200 border-lime-700 dark:border-lime-200" : "bg-red-200 dark:bg-red-600 border-[1px] text-red-600 dark:text-red-200 border-red-600 dark:border-red-200"}`}>
+          {activeCard?.description}
+        </span>
+        &nbsp;{active === "daily" ? "today" : "this week"}  
       </CardFooter>
     </Card>
   );

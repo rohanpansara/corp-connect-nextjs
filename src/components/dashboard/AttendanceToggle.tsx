@@ -21,7 +21,7 @@ const AttendanceToggleButtons = ({
         }`}
         onClick={() => setActive("daily")}
       >
-        Daily
+        Today
       </Button>
       <Button
         variant={active === "weekly" ? "toggle_btn" : "plain"}

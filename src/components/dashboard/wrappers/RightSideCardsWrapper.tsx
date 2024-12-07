@@ -1,19 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-import RightSideCards from "../RightSideCards";
 import { apiClient } from "@/app/api/apiClient";
-
-interface CardDataDTO {
-  title: string;
-  value: string;
-  description: string;
-}
+import { AttendanceAverageCardDTO } from "@/contracts/interfaces/CardDataDTO";
+import { useEffect, useState } from "react";
+import RightSideCards from "../RightSideCards";
 
 interface RightSideCardsDTO {
-  dailyAttendanceCard: CardDataDTO;
-  weeklyAttendanceCard: CardDataDTO;
+  dailyAttendanceCard: AttendanceAverageCardDTO;
+  weeklyAttendanceCard: AttendanceAverageCardDTO;
 }
 
 const RightSideCardsWrapper = () => {
