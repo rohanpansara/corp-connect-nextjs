@@ -18,7 +18,7 @@ const LeavesPage = () => {
         <div className="w-1/2 h-full flex flex-col gap-1 rounded-md overflow-hidden">
           <div className="w-full h-1/2 gap-1 flex overflow-hidden">
             <div className="w-1/2 h-full rounded-sm rounded-tl-md">
-              <Card className="h-full w-full overflow-hidden p-4 border-none bg-cardBackgroundColor shadow-lg rounded-md text-left">
+              <Card className="h-full w-full overflow-hidden p-4 border-none bg-cardBackgroundColor rounded-md text-left">
                 <CardContent className="p-0 h-full flex flex-row items-center justify-around">
                   <CardDescription className="p-0 pr-2 flex">
                     <span>

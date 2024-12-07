@@ -11,8 +11,7 @@ export const fetchLowerLeftCardsData = async ({
 
   try {
     setLoading(true);
-
-    const response = await apiClient.get("/dashboard/cards/left-down");
+    const response = await apiClient.get("/dashboard/cards/left");
     setCardsData(response.data.data);
   } catch (err: any) {
     if (err.response) {
