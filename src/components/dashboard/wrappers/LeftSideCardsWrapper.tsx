@@ -5,11 +5,37 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LeftSideCards from "../LeftSideCards";
 
-const LowerLeftCardsWrapper = () => {
+interface LeaveDetailsCard {
+  title: string;
+  value: string;
+  description: string;
+}
+
+interface ShiftDetailsCard {
+  title: string;
+  value: string;
+  description: string;
+}
+
+interface MonthlyAttendanceCard {
+  title: string;
+  value: string;
+  description: string;
+  totalValue: string;
+  absent: boolean;
+}
+
+interface CardsData {
+  leaveDetailsCard: LeaveDetailsCard;
+  shiftDetailsCard: ShiftDetailsCard;
+  monthlyAttendanceCard: MonthlyAttendanceCard;
+}
+
+const LeftSideCardsWrapper = () => {
   const router = useRouter();
   const handleNavigation = (path: string) => router.push(path);
 
-  const [cardsData, setCardsData] = useState<{ [key: string]: any } | null>(null);
+  const [cardsData, setCardsData] = useState<CardsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +48,10 @@ const LowerLeftCardsWrapper = () => {
     });
   }, []);
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return cardsData ? <LeftSideCards cardsData={cardsData} /> : null;
 };
 
-export default LowerLeftCardsWrapper;
+export default LeftSideCardsWrapper;

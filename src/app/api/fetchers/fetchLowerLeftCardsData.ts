@@ -1,6 +1,6 @@
 import { apiClient } from "@/app/api/apiClient";
 import ToastManager from "@/utils/toastManager";
-import { FetchCardsDataProps } from "../interfaces/props/FetchDashboardCardDataProps";
+import { FetchCardsDataProps, CardsData } from "../interfaces/props/FetchDashboardCardDataProps";
 
 export const fetchLeftCardsData = async ({
   setCardsData,
@@ -8,11 +8,10 @@ export const fetchLeftCardsData = async ({
   setLoading,
   onNavigate,
 }: FetchCardsDataProps) => {
-
   try {
     setLoading(true);
     const response = await apiClient.get("/dashboard/cards/left");
-    setCardsData(response.data.data);
+    setCardsData(response.data.data as CardsData); // Ensure the response matches the CardsData type
   } catch (err: any) {
     if (err.response) {
       if (err.response.status === 401 || err.response.status === 403) {
