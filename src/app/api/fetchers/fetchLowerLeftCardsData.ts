@@ -2,7 +2,7 @@ import { apiClient } from "@/app/api/apiClient";
 import ToastManager from "@/utils/toastManager";
 import { FetchCardsDataProps } from "../interfaces/props/FetchDashboardCardDataProps";
 
-export const fetchLowerLeftCardsData = async ({
+export const fetchLeftCardsData = async ({
   setCardsData,
   setError,
   setLoading,

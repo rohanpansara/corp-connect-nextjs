@@ -1,9 +1,9 @@
 "use client";
 
-import { fetchLowerLeftCardsData } from "@/app/api/fetchers/fetchLowerLeftCardsData";
+import { fetchLeftCardsData } from "@/app/api/fetchers/fetchLowerLeftCardsData";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import LowerLeftCards from "../LowerLeftCards";
+import LeftSideCards from "../LeftSideCards";
 
 const LowerLeftCardsWrapper = () => {
   const router = useRouter();
@@ -14,7 +14,7 @@ const LowerLeftCardsWrapper = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchLowerLeftCardsData({
+    fetchLeftCardsData({
       setCardsData,
       setError,
       setLoading,
@@ -22,7 +22,7 @@ const LowerLeftCardsWrapper = () => {
     });
   }, []);
 
-  return cardsData ? <LowerLeftCards cardsData={cardsData} /> : null;
+  return cardsData ? <LeftSideCards cardsData={cardsData} /> : null;
 };
 
 export default LowerLeftCardsWrapper;
