@@ -1,18 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
 
-interface LeaveDetailsCard {
+export interface LeaveDetailsCard {
   title: string;
   value: string;
   description: string;
 }
 
-interface ShiftDetailsCard {
+export interface ShiftDetailsCard {
   title: string;
   value: string;
   description: string;
 }
 
-interface MonthlyAttendanceCard {
+export interface MonthlyAttendanceCard {
   title: string;
   value: string;
   description: string;

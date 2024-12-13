@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchLeftCardsData } from "@/app/api/fetchers/fetchLowerLeftCardsData";
+import { fetchLeftCardsData } from "@/app/api/fetchers/fetchLeftCardsData";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LeftSideCards from "../LeftSideCards";
