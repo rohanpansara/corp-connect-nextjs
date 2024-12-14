@@ -16,11 +16,6 @@ export const handleLoginSubmit = async (
         title: "Success",
         description: response.data.message,
         variant: "success",
-        action: {
-          altText: "Token Refresh Successful",
-          onClick: () => {},
-          label: "Token Refresh",
-        },
       });
 
       // Navigate to the dashboard
