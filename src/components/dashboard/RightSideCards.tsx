@@ -3,13 +3,13 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
 import { AttendanceAverageCardDTO } from "@/contracts/interfaces/CardDataDTO";
 import { useState } from "react";
-import AttendanceToggleButtons from "./AttendanceToggle";
+import { Button } from "../ui/button";
+import { GoArrowUpRight } from "react-icons/go";
 
 interface RightSideCardsProps {
   data: {
@@ -26,31 +26,72 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
     active === "daily" ? dailyAttendanceCard : weeklyAttendanceCard;
 
   return (
-    <Card className="w-1/2 h-[216px] p-2 bg-[#cfe2e2] dark:bg-[#2CA58D] shadow-lg rounded-md">
-      <CardHeader className="flex flex-row justify-between items-center p-1">
-        <span className="text-xs font-medium text-gray-600 dark:text-gray-800">
-          {activeCard?.title}
-        </span>
-        <div className="flex items-center w-[100px] border-[1px] overflow-hidden border-gray-600 dark:border-gray-300 rounded-[4px]">
-          <AttendanceToggleButtons active={active} setActive={setActive} />
-        </div>
-      </CardHeader>
-      <CardContent className="h-[70%] pb-0 w-full flex items-center justify-center">
-        <CardDescription className="h-full flex justify-center items-center">
-          <div className="w-full flex justify-center items-center">
-            <span className="font-bold xl:text-7xl lg:text-6xl md:text-3xl sm:text-xl text-gray-600 dark:text-gray-800">
-              {activeCard?.value}
-            </span>
-          </div>
-        </CardDescription>
-      </CardContent>
-      <CardFooter className="p-1 w-full text-xs flex justify-center items-center uppercase">
-        <span className={`p-[2px] px-1 text-xs rounded-lg uppercase ${activeCard?.onTime === true ? "bg-green-200 dark:bg-green-700 border-[1px] text-green-700 dark:text-green-200 border-green-700 dark:border-green-200" : "bg-red-200 dark:bg-red-600 border-[1px] text-red-600 dark:text-red-200 border-red-600 dark:border-red-200"}`}>
-          {activeCard?.description}
-        </span>
-        &nbsp;{active === "daily" ? "today" : "this week"}  
-      </CardFooter>
-    </Card>
+    <div className="w-1/2 h-full flex gap-1 rounded-md overflow-hidden">
+      <div className="w-1/2 h-full rounded-md">
+        <Card className="h-full flex flex-col p-2 border-none bg-cardBackgroundColor rounded-md">
+          <CardHeader className="p-2">
+            <div className="flex justify-between items-center w-full">
+              <div className="w-1/2 text-xs text-gray-600">Average Hours</div>
+              <div className="w-1/2 h-[26px] bg-mainBackground text-center rounded-sm flex justify-between items-center overflow-hidden p-1 gap-1">
+                <Button
+                  size="nothing"
+                  variant="plain"
+                  className={`w-1/2 text-[9px] text-gray-600 rounded-sm flex justify-center items-center 
+                    ${
+                      active === "daily"
+                        ? "bg-cardTextColor text-gray-100 shadow-lg h-[20px]"
+                        : "h-[10px] bg-gray-100"
+                    }`}
+                  onClick={() => setActive("daily")}
+                >
+                  Today
+                </Button>
+                <Button
+                  size="nothing"
+                  variant="plain"
+                  className={`w-1/2 text-[10px] text-gray-600 rounded-sm flex justify-center items-center ${
+                    active === "weekly"
+                      ? "bg-cardTextColor text-gray-100 shadow-lg h-[20px]"
+                      : "h-[10px] bg-gray-100"
+                  }`}
+                  onClick={() => setActive("weekly")}
+                >
+                  Weekly
+                </Button>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="flex-grow p-0 px-2">
+            {/* show dailyAttendanceCard.value here */}
+            {data?.dailyAttendanceCard?.value}
+          </CardContent>
+          <CardFooter className="p-2">
+            <div className="flex justify-center items-center w-full text-xs">
+              {/* show dailyAttendanceCard.description here */}
+              {data?.dailyAttendanceCard?.description}
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+      <div className="w-1/2 h-full rounded-md">
+        <Card className="h-full flex flex-col p-4 border-none bg-cardBackgroundColor rounded-md">
+          <CardContent className="flex-grow p-0 flex flex-col space-y-1">
+            <div className="flex-1 bg-mainBackground rounded-sm"></div>
+            <div className="flex-1 bg-mainBackground rounded-sm"></div>
+            <div className="flex-[0.3] rounded-sm flex justify-center items-center text-xs pt-1">
+              <Button
+                size="nothing"
+                variant="plain"
+                className="pl-1 font-normal text-xs text-cardTextColor hover:text-cardTextColorDark"
+              >
+                <GoArrowUpRight />
+                View Calendar
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
 };
 

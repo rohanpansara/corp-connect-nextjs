@@ -64,6 +64,7 @@ const config: Config = {
         mainBackground: "var(--mainBackground)",
         sidebarBackground: "var(--sidebarBackground)",
         cardTextColor: "var(--cardTextColor)",
+        cardTextColorDark: "var(--cardTextColorDark)",
         cardBackgroundColor: "var(--cardBackgroundColor)",
         deleteRed: "var(--deleteRed)",
         background: "hsl(var(--background))",

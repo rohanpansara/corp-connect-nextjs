@@ -25,6 +25,7 @@ import {
   PiSquaresFourLight,
   PiUsersLight,
   PiUserSquareLight,
+  PiClockUserLight
 } from "react-icons/pi";
 
 const poppins = Poppins({
@@ -38,7 +39,8 @@ const poppins = Poppins({
 const upperMenuItems = [
   { title: "Dashboard", url: "/dashboard", icon: PiSquaresFourLight },
   { title: "Leaves", url: "/leaves", icon: PiCalendarXLight },
-  { title: "Attendance", url: "/attendance", icon: PiCalendarDotsLight },
+  { title: "Attendance", url: "/attendance", icon: PiClockUserLight },
+  { title: "Calendar", url: "/calendar", icon: PiCalendarDotsLight },
   { title: "Users", url: "/users", icon: PiUsersLight },
 ];
 
