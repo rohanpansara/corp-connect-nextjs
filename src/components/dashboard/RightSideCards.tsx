@@ -14,17 +14,17 @@ import { Button } from "../ui/button";
 
 interface RightSideCardsProps {
   data: {
-    dailyAttendanceCard: AttendanceAverageCardDTO;
+    todayAttendanceCard: AttendanceAverageCardDTO;
     weeklyAttendanceCard: AttendanceAverageCardDTO;
   };
 }
 
 const RightSideCards = ({ data }: RightSideCardsProps) => {
-  const { dailyAttendanceCard, weeklyAttendanceCard } = data;
-  const [active, setActive] = useState<"daily" | "weekly">("daily");
+  const { todayAttendanceCard, weeklyAttendanceCard } = data;
+  const [active, setActive] = useState<"today" | "weekly">("today");
 
   const activeCard =
-    active === "daily" ? dailyAttendanceCard : weeklyAttendanceCard;
+    active === "today" ? todayAttendanceCard : weeklyAttendanceCard;
 
   return (
     <div className="w-1/2 h-full flex gap-1 rounded-md overflow-hidden">
@@ -41,11 +41,11 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
                   variant="plain"
                   className={`w-1/2 text-[10px] text-gray-600 rounded-sm flex justify-center items-center 
                     ${
-                      active === "daily"
+                      active === "today"
                         ? "bg-cardTextColor text-gray-100 shadow-lg h-[20px]"
                         : "h-[10px] bg-gray-100 my-auto"
                     }`}
-                  onClick={() => setActive("daily")}
+                  onClick={() => setActive("today")}
                 >
                   Today
                 </Button>
@@ -70,26 +70,39 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
               value={parseInt(activeCard?.value || "0", 10)}
               max={activeCard?.maxValue || 0}
               strokeWidth={10}
-              radius={55}
+              radius={75}
               variant={
                 activeCard?.remainingValue <= 0
                   ? "success"
-                  : activeCard?.remainingValue > 0 && activeCard?.remainingValue <= 1
+                  : activeCard?.remainingValue > 0 &&
+                    activeCard?.remainingValue <= 1
                   ? "warning"
                   : "error"
               }
               showAnimation
+              markerWidth={40}
             >
-              <span className="font-bold text-cardTextColor text-[20px]">
-                {activeCard?.value}
-              </span>
+              <div className="flex justify-center items-center flex-col">
+                <span className={`font-bold text-cardTextColor ${activeCard?.remainingValue < 0 ? `text-[40px]` : `text-[25px]`}`}>
+                  {activeCard?.value}
+                </span>
+                {activeCard?.remainingValue > 0 && (
+                  <span
+                    className={`p-1 text-[10px] rounded-md ${
+                      activeCard?.remainingValue <= 1 ? "bg-[#FEF08A] text-[#EAB308] dark:bg-[#EAB308] dark:text-[#FEF08A]" : "bg-[#FECACA] text-[#EF4444] dark:bg-[#EF4444] dark:text-[#FECACA]"
+                    }`}
+                  >
+                    <span className="font-semibold">{activeCard?.remainingValue}</span> hours left
+                  </span>
+                )}
+              </div>
             </ProgressCircle>
           </CardContent>
-          <CardFooter className="p-2">
+          {/* <CardFooter className="p-2">
             <div className="flex justify-center items-center w-full text-xs">
               {activeCard?.description}
             </div>
-          </CardFooter>
+          </CardFooter> */}
         </Card>
       </div>
       <div className="w-1/2 h-full rounded-md">
