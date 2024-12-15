@@ -19,9 +19,6 @@ const UserPage = () => {
     <div
       className={`min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
     >
-      <div className="flex justify-center items-center mr-auto">
-        <BreadcrumbCreator routes={routes} />
-      </div>
       <div className="flex w-full">
         <UserTable />
       </div>
