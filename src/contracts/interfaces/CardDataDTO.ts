@@ -3,4 +3,6 @@ export interface AttendanceAverageCardDTO {
   value: string;
   description: string;
   onTime: boolean;
+  maxValue: number;
+  remainingValue: number;
 }

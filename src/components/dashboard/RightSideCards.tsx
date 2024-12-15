@@ -8,8 +8,9 @@ import {
 } from "@/components/ui/card";
 import { AttendanceAverageCardDTO } from "@/contracts/interfaces/CardDataDTO";
 import { useState } from "react";
-import { Button } from "../ui/button";
 import { GoArrowUpRight } from "react-icons/go";
+import { ProgressCircle } from "../chart/ProgressCircle";
+import { Button } from "../ui/button";
 
 interface RightSideCardsProps {
   data: {
@@ -31,16 +32,18 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
         <Card className="h-full flex flex-col p-2 border-none bg-cardBackgroundColor rounded-md">
           <CardHeader className="p-2">
             <div className="flex justify-between items-center w-full">
-              <div className="w-1/2 text-xs text-gray-600">Average Hours</div>
-              <div className="w-1/2 h-[26px] bg-mainBackground text-center rounded-sm flex justify-between items-center overflow-hidden p-1 gap-1">
+              <div className="w-1/2 text-xs text-gray-600">
+                {activeCard?.title}
+              </div>
+              <div className="w-1/2 h-[26px] bg-mainBackground text-center rounded-sm flex justify-between items-center my-auto overflow-hidden p-1 gap-1">
                 <Button
                   size="nothing"
                   variant="plain"
-                  className={`w-1/2 text-[9px] text-gray-600 rounded-sm flex justify-center items-center 
+                  className={`w-1/2 text-[10px] text-gray-600 rounded-sm flex justify-center items-center 
                     ${
                       active === "daily"
                         ? "bg-cardTextColor text-gray-100 shadow-lg h-[20px]"
-                        : "h-[10px] bg-gray-100"
+                        : "h-[10px] bg-gray-100 my-auto"
                     }`}
                   onClick={() => setActive("daily")}
                 >
@@ -52,7 +55,7 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
                   className={`w-1/2 text-[10px] text-gray-600 rounded-sm flex justify-center items-center ${
                     active === "weekly"
                       ? "bg-cardTextColor text-gray-100 shadow-lg h-[20px]"
-                      : "h-[10px] bg-gray-100"
+                      : "h-[10px] bg-gray-100 my-auto"
                   }`}
                   onClick={() => setActive("weekly")}
                 >
@@ -61,14 +64,30 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="flex-grow p-0 px-2">
-            {/* show dailyAttendanceCard.value here */}
-            {data?.dailyAttendanceCard?.value}
+          <CardContent className="flex-grow flex justify-center items-center p-0 px-2">
+            <ProgressCircle
+              min={0}
+              value={parseInt(activeCard?.value || "0", 10)}
+              max={activeCard?.maxValue || 0}
+              strokeWidth={10}
+              radius={55}
+              variant={
+                activeCard?.remainingValue <= 0
+                  ? "success"
+                  : activeCard?.remainingValue > 0 && activeCard?.remainingValue <= 1
+                  ? "warning"
+                  : "error"
+              }
+              showAnimation
+            >
+              <span className="font-bold text-cardTextColor text-[20px]">
+                {activeCard?.value}
+              </span>
+            </ProgressCircle>
           </CardContent>
           <CardFooter className="p-2">
             <div className="flex justify-center items-center w-full text-xs">
-              {/* show dailyAttendanceCard.description here */}
-              {data?.dailyAttendanceCard?.description}
+              {activeCard?.description}
             </div>
           </CardFooter>
         </Card>

@@ -32,6 +32,10 @@ const progressCircleVariants = tv({
         background: "stroke-emerald-200 dark:stroke-emerald-500/30",
         circle: "stroke-emerald-500 dark:stroke-emerald-500",
       },
+      attendance: {
+        background: "stroke-mainBackground dark:stroke-mainBackground",
+        circle: "stroke-cardTextColor dark:stroke-cardTextColor",
+      }
     },
   },
   defaultVariants: {
