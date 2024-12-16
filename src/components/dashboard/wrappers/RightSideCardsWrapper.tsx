@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import RightSideCards from "../RightSideCards";
 
 interface RightSideCardsDTO {
-  dailyAttendanceCard: AttendanceAverageCardDTO;
+  todayAttendanceCard: AttendanceAverageCardDTO;
   weeklyAttendanceCard: AttendanceAverageCardDTO;
 }
 

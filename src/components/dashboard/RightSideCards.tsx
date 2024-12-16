@@ -35,15 +35,15 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
               <div className="w-1/2 text-xs text-gray-600">
                 {activeCard?.title}
               </div>
-              <div className="w-1/2 h-[26px] bg-mainBackground text-center rounded-sm flex justify-between items-center my-auto overflow-hidden p-1 gap-1">
+              <div className="w-1/2 h-[25px] bg-mainBackground text-center rounded-[6px] flex justify-between items-center my-auto overflow-hidden py-1 px-[3px]">
                 <Button
                   size="nothing"
                   variant="plain"
-                  className={`w-1/2 text-[10px] text-gray-600 rounded-sm flex justify-center items-center 
+                  className={`w-1/2 mr-[2px] text-[10px] text-gray-600 rounded-sm flex justify-center items-center 
                     ${
                       active === "today"
-                        ? "bg-cardTextColor text-gray-100 shadow-lg h-[20px]"
-                        : "h-[10px] bg-gray-100 my-auto"
+                        ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 shadow-lg h-[20px]"
+                        : "h-[10px] bg-mainBackground my-auto"
                     }`}
                   onClick={() => setActive("today")}
                 >
@@ -52,10 +52,10 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
                 <Button
                   size="nothing"
                   variant="plain"
-                  className={`w-1/2 text-[10px] text-gray-600 rounded-sm flex justify-center items-center ${
+                  className={`w-1/2 ml-[2px] text-[10px] text-gray-600 rounded-sm flex justify-center items-center ${
                     active === "weekly"
-                      ? "bg-cardTextColor text-gray-100 shadow-lg h-[20px]"
-                      : "h-[10px] bg-gray-100 my-auto"
+                      ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 shadow-lg h-[20px]"
+                      : "h-[10px] bg-mainBackground my-auto"
                   }`}
                   onClick={() => setActive("weekly")}
                 >
