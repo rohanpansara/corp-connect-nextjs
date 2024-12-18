@@ -17,7 +17,6 @@ const RightSideCardsWrapper = () => {
     const fetchData = async () => {
       try {
         const response = await apiClient.get("/dashboard/cards/right");
-        console.log(response)
         setCardData(response.data.data);
       } catch (error) {
         console.error("Error fetching card data:", error);
