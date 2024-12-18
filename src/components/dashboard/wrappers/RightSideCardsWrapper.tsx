@@ -4,6 +4,7 @@ import { apiClient } from "@/app/api/apiClient";
 import { AttendanceAverageCardDTO } from "@/contracts/interfaces/CardDataDTO";
 import { useEffect, useState } from "react";
 import RightSideCards from "../RightSideCards";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface RightSideCardsDTO {
   todayAttendanceCard: AttendanceAverageCardDTO;
@@ -27,7 +28,10 @@ const RightSideCardsWrapper = () => {
   }, []);
 
   if (!cardData) {
-    return <div>Loading...</div>;
+    return <div className="w-1/2 h-full gap-1 flex">
+      <Skeleton className="w-1/2 h-full"/>
+      <Skeleton className="w-1/2 h-full"/>
+    </div>;
   }
 
   return <RightSideCards data={cardData} />;

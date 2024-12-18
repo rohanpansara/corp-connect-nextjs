@@ -4,6 +4,7 @@ import { fetchLeftCardsData } from "@/app/api/fetchers/fetchLeftCardsData";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LeftSideCards from "../LeftSideCards";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface LeaveDetailsCard {
   title: string;
@@ -48,8 +49,19 @@ const LeftSideCardsWrapper = () => {
     });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (!cardsData) {
+    return (
+      <div className="w-1/2 h-full gap-1 flex flex-col">
+        <div className="w-full flex h-1/2 gap-1">
+          <Skeleton className="w-1/2 h-full" />
+          <Skeleton className="w-1/2 h-full" />
+        </div>
+        <div className="w-full flex h-1/2">
+          <Skeleton className="w-full h-full" />
+        </div>
+      </div>
+    );
+  }
 
   return cardsData ? <LeftSideCards cardsData={cardsData} /> : null;
 };
