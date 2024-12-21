@@ -16,11 +16,11 @@ body {
   }
 
   .anchor-active {
-    @apply text-gray-900 dark:text-gray-200;
+    @apply text-gray-900 font-medium dark:text-gray-200;
   }
 
   .anchor-inactive {
-    @apply text-gray-600 dark:text-gray-400;
+    @apply text-gray-500 font-normal dark:text-gray-400;
   }
 
   .icon-common {
@@ -28,7 +28,7 @@ body {
   }
 
   .icon-active {
-    @apply text-gray-900 dark:text-gray-200 fill-gray-900 dark:fill-gray-200;
+    @apply text-gray-900 dark:text-gray-200 stroke-[5] dark:fill-gray-200 dark:stroke-[5];
   }
 
   .icon-inactive {

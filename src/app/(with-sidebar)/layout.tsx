@@ -26,7 +26,7 @@ export default function SidebarLayout({
   return (
     <SidebarProvider>
       <AppSidebar userId={userId} />
-      <SidebarTrigger />
+      {/* <SidebarTrigger /> */}
       <main className={`w-full ${poppins.className}`}>
         <AppNavbar />
         <AuthProvider>{children}</AuthProvider>

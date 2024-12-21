@@ -20,12 +20,12 @@ import { useState } from "react";
 import {
   PiCalendarDotsLight,
   PiCalendarXLight,
+  PiClockUserLight,
   PiGearLight,
   PiSignOutLight,
   PiSquaresFourLight,
   PiUsersLight,
-  PiUserSquareLight,
-  PiClockUserLight
+  PiUserSquareLight
 } from "react-icons/pi";
 
 const poppins = Poppins({
@@ -106,12 +106,6 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                           : "anchor-inactive"
                       )}
                     >
-                      <div
-                        className={clsx({
-                          "text-xl bg-primary h-full w-[2px] rounded-full":
-                            currentSegment === getLastPathSegment(item.url),
-                        })}
-                      ></div>
                       <item.icon
                         className={clsx(
                           "icon-common",
@@ -146,12 +140,6 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                         )}
                         disabled={loading}
                       >
-                        <div
-                          className={clsx({
-                            "text-xl bg-primary h-full w-[2px] rounded-full":
-                              currentSegment === getLastPathSegment(item.url),
-                          })}
-                        ></div>
                         <item.icon
                           className={clsx(
                             "icon-common",
@@ -172,12 +160,6 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                             : "anchor-inactive"
                         )}
                       >
-                        <div
-                          className={clsx({
-                            "text-xl bg-primary h-full w-[2px] rounded-full":
-                              currentSegment === getLastPathSegment(item.url),
-                          })}
-                        ></div>
                         <item.icon
                           className={clsx(
                             "icon-common",
