@@ -6,7 +6,7 @@ export const metadata = dashboardMetadata;
 
 const DashboardPage = () => {
   return (
-    <div className="min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4">
+    <div className="h-[calc(100vh-30px)] w-full bg-mainBackground flex items-center flex-col space-y-4 p-4">
       <WelcomeHeaderWrapper />
       <div className="w-full p-1 gap-1 flex h-[240px] rounded-md">
         <LeftSideCardsWrapper />

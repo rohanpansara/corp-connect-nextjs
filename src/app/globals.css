@@ -34,6 +34,18 @@ body {
   .icon-inactive {
     @apply text-gray-600 dark:text-gray-400;
   }
+
+  .notification-icon-green {
+    @apply text-[#237e13]
+  }
+
+  .notification-icon-red {
+    @apply text-[#7e1313]
+  }
+
+  .notification-icon-general {
+    @apply text-[#13517e]
+  }
 }
 
 @layer base {
