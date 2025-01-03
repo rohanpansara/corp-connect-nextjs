@@ -1,16 +1,14 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { AttendanceAverageCardDTO } from "@/contracts/interfaces/CardDataDTO";
 import { useState } from "react";
+import { BiSolidParty } from "react-icons/bi";
 import { GoArrowUpRight } from "react-icons/go";
+import { IoVideocam } from "react-icons/io5";
 import { ProgressCircle } from "../chart/ProgressCircle";
 import { Button } from "../ui/button";
+import { Avatar } from "../ui/avatar";
 
 interface RightSideCardsProps {
   data: {
@@ -83,16 +81,27 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
               markerWidth={40}
             >
               <div className="flex justify-center items-center flex-col">
-                <span className={`font-bold text-cardTextColor ${activeCard?.remainingValue < 0 ? `text-[40px]` : `text-[25px]`}`}>
+                <span
+                  className={`font-bold text-cardTextColor ${
+                    activeCard?.remainingValue < 0
+                      ? `text-[40px]`
+                      : `text-[25px]`
+                  }`}
+                >
                   {activeCard?.value}
                 </span>
                 {activeCard?.remainingValue > 0 && (
                   <span
                     className={`p-1 text-[10px] rounded-md ${
-                      activeCard?.remainingValue <= 1 ? "bg-[#FEF08A] text-[#EAB308] dark:bg-[#EAB308] dark:text-[#FEF08A]" : "bg-[#FECACA] text-[#EF4444] dark:bg-[#EF4444] dark:text-[#FECACA]"
+                      activeCard?.remainingValue <= 1
+                        ? "bg-[#FEF08A] text-[#EAB308] dark:bg-[#EAB308] dark:text-[#FEF08A]"
+                        : "bg-[#FECACA] text-[#EF4444] dark:bg-[#EF4444] dark:text-[#FECACA]"
                     }`}
                   >
-                    <span className="font-semibold">{activeCard?.remainingValue}</span> hours left
+                    <span className="font-semibold">
+                      {activeCard?.remainingValue}
+                    </span>{" "}
+                    hours left
                   </span>
                 )}
               </div>
@@ -108,8 +117,40 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
       <div className="w-1/2 h-full rounded-md">
         <Card className="h-full flex flex-col p-4 border-none bg-cardBackgroundColor rounded-md">
           <CardContent className="flex-grow p-0 flex flex-col space-y-1">
-            <div className="flex-1 bg-mainBackground rounded-sm"></div>
-            <div className="flex-1 bg-mainBackground rounded-sm"></div>
+            <div className="flex-1 bg-mainBackground rounded-sm">
+              <div className="w-full h-full flex flex-col justify-between text-xs px-2 py-1">
+                <div className="flex flex-[0.25] justify-between items-center gap-1 font-semibold">
+                  <span className="flex items-center gap-1 font-semibold">
+                    <IoVideocam className="text-blue-800" />
+                    11:00 AM
+                  </span>
+                  <span className="font-semibold rounded-full hover:bg-gray-200 hover:cursor-pointer p-1">
+                    <GoArrowUpRight />
+                  </span>
+                </div>
+                <div className="flex flex-1 justify-between items-center gap-1">
+                  <span className="text-sm">Daily Scrum Meeting</span>
+                  <div className="rounded-full bg-gray-600 text-gray-100 p-1">RP</div>
+                </div>
+              </div>
+            </div>
+            <div className="flex-1 bg-mainBackground rounded-sm">
+              <div className="w-full h-full flex flex-col justify-between text-xs px-2 py-1">
+                <div className="flex flex-[0.25] justify-between items-center gap-1 font-semibold">
+                  <span className="flex items-center gap-1 font-semibold">
+                    <BiSolidParty className="text-orange-800" />
+                    4:30 PM
+                  </span>
+                  <span className="font-semibold rounded-full hover:bg-gray-200 hover:cursor-pointer p-1">
+                    <GoArrowUpRight />
+                  </span>
+                </div>
+                <div className="flex flex-1 justify-between items-center gap-1">
+                  <span className="text-sm">Fun Friday!</span>
+                  <div className="rounded-full bg-gray-600 text-gray-100 p-1">RP</div>
+                </div>
+              </div>
+            </div>
             <div className="flex-[0.3] rounded-sm flex justify-center items-center text-xs pt-1">
               <Button
                 size="nothing"
