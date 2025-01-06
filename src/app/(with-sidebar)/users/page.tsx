@@ -17,7 +17,7 @@ const UserPage = () => {
 
   return (
     <div
-      className={`min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
+      className={`h-[calc(100vh-30px)] w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
     >
       <div className="flex w-full">
         <UserTable />

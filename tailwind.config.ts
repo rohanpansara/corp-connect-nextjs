@@ -60,6 +60,9 @@ const config: Config = {
           to: { opacity: "0", transform: "translateX(100%)" },
         },
       },
+      animation: {
+        spin: 'spin 1s linear infinite',
+      },
       colors: {
         mainBackground: "var(--mainBackground)",
         sidebarBackground: "var(--sidebarBackground)",

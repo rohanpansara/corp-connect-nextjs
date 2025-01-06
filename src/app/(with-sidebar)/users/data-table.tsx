@@ -33,10 +33,10 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border w-full bg-sidebarBackground">
-      <Table>
-        <TableHeader>
+      <Table className="rounded-t-md overflow-hidden">
+        <TableHeader className="rounded-t-md overflow-hidden">
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <TableRow className="hover:bg-sidebarBackground overflow-hidden" key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead key={header.id} className="text-[12px]">

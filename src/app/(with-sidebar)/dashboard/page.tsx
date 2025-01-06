@@ -11,7 +11,7 @@ const DashboardPage = () => {
       <div className="w-full p-1 gap-1 flex h-[240px] rounded-md">
         <LeftSideCardsWrapper />
         <RightSideCardsWrapper />
-      </div>
+      </div>  
     </div>
   );
 };
