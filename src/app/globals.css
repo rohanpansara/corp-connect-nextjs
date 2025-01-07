@@ -27,6 +27,10 @@ body {
     @apply text-xl;
   }
 
+  .icon-hover {
+    @apply stroke-[5] dark:fill-gray-200 dark:stroke-[5];
+  }
+
   .icon-active {
     @apply text-gray-900 dark:text-gray-200 stroke-[5] dark:fill-gray-200 dark:stroke-[5];
   }
