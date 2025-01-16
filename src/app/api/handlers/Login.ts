@@ -39,6 +39,13 @@ export const handleLoginSubmit = async (
             label: "Login Again",
           },
         });
+      } else if (err.response.status === 409) {
+        onNavigate("/auth/login");
+        console.log(err.response);
+        ToastManager.toast({
+          title: err.response?.data?.message || "Your account is needs to be verified",
+          variant: "error"
+        });
       }
     } else {
       ToastManager.toast({
