@@ -25,7 +25,7 @@ import {
   PiSignOutLight,
   PiSquaresFourLight,
   PiUsersLight,
-  PiUserSquareLight
+  PiUserSquareLight,
 } from "react-icons/pi";
 
 const poppins = Poppins({
@@ -152,7 +152,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                       </button>
                     ) : (
                       <a
-                        href={`${item.url}/${userId}`}
+                        href={item.url}
                         className={clsx(
                           "anchor-common",
                           currentSegment === getLastPathSegment(item.url)
