@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import { FcOk } from "react-icons/fc";
+import { FcCancel, FcOk } from "react-icons/fc";
 import { Checkbox } from "../ui/checkbox";
 import {
   Tooltip,
@@ -23,7 +23,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserDTO } from "@/contracts/types/user";
 import {
@@ -119,9 +119,9 @@ const UserTable = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span>{row.original.name}</span>
+              <span>{row.original?.name}</span>
             </TooltipTrigger>
-            <TooltipContent>{row.original.name}</TooltipContent>
+            <TooltipContent>{row.original?.name}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       ),
@@ -129,18 +129,26 @@ const UserTable = () => {
     {
       accessorKey: "roles",
       header: "Roles",
-      cell: ({ row }) => row.original.roles,
+      cell: ({ row }) => row.original?.roles,
     },
     {
       accessorKey: "createdDate",
       header: "Created Date",
-      cell: ({ row }) => row.original.createdDate,
+      cell: ({ row }) => row.original?.createdDate,
     },
     {
       id: "isAccountEnabled",
       header: "Enabled",
-      cell: ({ row }) => <FcOk className="h-4 w-4" />,
-    },
+      cell: ({ row }) => (
+        <div className="w-full pl-2">
+          {row.original?.isAccountEnabled === "true" ? (
+            <FcOk className="h-4 w-4" />
+          ) : (
+            <FcCancel className="h-4 w-4" />
+          )}
+        </div>
+      ),
+    },    
     {
       id: "actions",
       cell: ({ row }) => (
@@ -152,23 +160,37 @@ const UserTable = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-34">
-              <DropdownMenuLabel className="text-xs">User Actions</DropdownMenuLabel>
+              <DropdownMenuLabel className="text-xs">
+                User Actions
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup className="text-xs">
                 <DropdownMenuItem className="group">
-                  <Button variant="plain" size="nothing" className="text-xs flex justify-start items-center w-full">
+                  <Button
+                    variant="plain"
+                    size="nothing"
+                    className="text-xs flex justify-start items-center w-full"
+                  >
                     <PiIdentificationBadgeLight className="group-hover:text-green-500" />
                     <span>View Profile</span>
                   </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="group">
-                  <Button variant="plain" size="nothing" className="text-xs flex justify-start items-center w-full">
+                  <Button
+                    variant="plain"
+                    size="nothing"
+                    className="text-xs flex justify-start items-center w-full"
+                  >
                     <PiPencilSimpleLineLight className="group-hover:text-blue-500" />
                     <span>Edit</span>
                   </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="group">
-                  <Button variant="plain" size="nothing" className="text-xs flex justify-start items-center w-full">
+                  <Button
+                    variant="plain"
+                    size="nothing"
+                    className="text-xs flex justify-start items-center w-full"
+                  >
                     <PiTrashLight className="group-hover:text-red-500" />
                     <span>Remove</span>
                   </Button>

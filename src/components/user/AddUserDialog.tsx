@@ -58,7 +58,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                   <Field
                     id="name"
                     name="name"
-                    className="border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.name ? 'border-red-600' : ''} "
+                    className="border-[1px] pl-2 text-sm md:text-xs rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.name ? 'border-red-600' : ''} "
                   />
                 </div>
 
@@ -82,7 +82,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     name="email"
                     type="email"
                     autoComplete="off"
-                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.email ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.email ? 'border-red-600' : ''}"
                   />
                 </div>
 
@@ -106,7 +106,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     name="password"
                     type="password"
                     autoComplete="off"
-                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.password ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-2 text-sm md:text-xs rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.password ? 'border-red-600' : ''}"
                   />
                 </div>
 
@@ -129,18 +129,18 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     id="confirmPassword"
                     name="confirmPassword"
                     type="password"
-                    className="input border-[1px] pl-1 rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.confirmPassword ? 'border-red-600' : ''}"
+                    className="input border-[1px] pl-2 text-sm md:text-xs rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.confirmPassword ? 'border-red-600' : ''}"
                   />
                 </div>
 
-                {/* Status (Dropdown) */}
+                {/* Capacity (Dropdown) */}
                 <div className="col-span-2 lg:row-start-4 md:row-start-3">
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="userStatus"
                       className="text-right text-sm text-muted-foreground"
                     >
-                      User Status
+                      User Capacity
                     </label>
                     <ErrorMessage
                       name="userStatus"
@@ -152,10 +152,10 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     as="select"
                     id="userStatus"
                     name="userStatus"
-                    className="input border-[1px] text-sm px-2 bg-mainBackground rounded-sm border-gray-300 w-full h-8 max-w-full ${errors.userStatus ? 'border-red-600' : ''}"
+                    className="input border-[1px] text-sm md:text-xs px-2 bg-mainBackground rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.userStatus ? 'border-red-600' : ''}"
                   >
                     <option value="" hidden>
-                      Select Status
+                      Select Capacity
                     </option>
                     <option value="FULL_TIME">Full Time</option>
                     <option value="PART_TIME">Part Time</option>
@@ -181,13 +181,12 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     as="select"
                     id="roles"
                     name="roles"
-                    className="input border-[1px] text-sm px-2 rounded-sm bg-mainBackground border-gray-300 w-full h-8 max-w-full focus:outline-none ${errors.userStatus ? 'border-red-600' : ''}"
+                    className="input border-[1px] text-sm md:text-xs px-2 rounded-sm bg-mainBackground border-gray-300 w-full h-8 max-w-full focus:border-none focus:outline-none ${errors.userStatus ? 'border-red-600' : ''}"
                   >
                     <option value="" hidden>
                       Select Role
                     </option>
                     <option value="ADMIN">Project Admin</option>
-                    <option value="HR_ADMIN">HR Admin</option>
                     <option value="PMS_MANAGER">Project Manager</option>
                     <option value="HR_MANAGER">HR Manager</option>
                     <option value="USER">User</option>

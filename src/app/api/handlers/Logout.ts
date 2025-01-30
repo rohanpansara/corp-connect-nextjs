@@ -16,15 +16,15 @@ export const handleLogout = async ({ setLoading }: any, {}) => {
       ToastManager.toast({
         title: "Success",
         description: "User logged out successfully",
-        variant: "success",
-        action: {
-          altText: "Token Refresh Failed",
-          onClick: () => {},
-          label: "Token Refresh",
-        },
+        variant: "success"
       });
     } else {
       console.error("Logout failed", response);
+      ToastManager.toast({
+        title: "Failed",
+        description: "Logout failed",
+        variant: "error"
+      });
     }
   } catch (error) {
     console.error("Error during logout", error);

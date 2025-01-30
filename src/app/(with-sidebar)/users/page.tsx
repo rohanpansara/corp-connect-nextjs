@@ -1,9 +1,7 @@
 import { userMetadata } from "@/app/metadata/usersMetadata";
-import UserTable from "@/components/user/UserTable";
-import { generateBreadcrumbsFromPathname } from "@/utils/generateBreadcrumbRoutes";
-import { BreadcrumbCreator } from "@/components/common/Breadcrumb";
-import { Poppins } from "next/font/google";
 import PageHeader from "@/components/common/PageHeader";
+import UserTable from "@/components/user/UserTable";
+import { Poppins } from "next/font/google";
 export const metadata = userMetadata;
 
 const poppins = Poppins({
@@ -14,13 +12,13 @@ const poppins = Poppins({
 });
 
 const UserPage = () => {
-  const routes = generateBreadcrumbsFromPathname("/dashboard/users");
-
   return (
     <div
       className={`h-[calc(100vh-30px)] w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
     >
-      <PageHeader pageName="Users" />
+      <div className="h-[30px] w-full max-w-full">
+        <PageHeader pageName="Users" />
+      </div>
       <div className="flex w-full">
         <UserTable />
       </div>

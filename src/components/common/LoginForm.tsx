@@ -7,12 +7,14 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import * as Yup from "yup";
 
 const LoginForm = () => {
   const router = useRouter();
   const handleNavigation = (path: string) => router.push(path);
   const [loading, setLoading] = useState(true);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
     const validateSession = async () => {
@@ -100,7 +102,7 @@ const LoginForm = () => {
                 </div>
 
                 {/* Password Input */}
-                <div>
+                {/* <div>
                   <label
                     htmlFor="password"
                     className="flex flex-row justify-start items-center text-sm font-medium text-[#444e60d2] my-2"
@@ -127,6 +129,41 @@ const LoginForm = () => {
                       setFieldError("password", ""); // Clear error message on focus
                     }}
                   />
+                </div> */}
+                <div className="relative">
+                  <label
+                    htmlFor="password"
+                    className="flex flex-row justify-start items-center text-sm font-medium text-[#444e60d2] my-2"
+                  >
+                    Password{" "}
+                    <ErrorMessage
+                      name="password"
+                      component="p"
+                      className="text-[#ff0800] text-xs ml-auto"
+                    />
+                  </label>
+                  <Field
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"} // Toggle between 'text' and 'password'
+                    className={`mt-1 block w-full p-2 border ${
+                      errors.password && touched.password
+                        ? "border-[#ff0800] placeholder:text-[#caadad]"
+                        : "border-gray-300"
+                    } rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
+                    placeholder="Enter your password"
+                    onFocus={() => {
+                      setFieldTouched("password", false); // Clear "touched" status
+                      setFieldError("password", ""); // Clear error message on focus
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 transform translate-y-[36%] text-xl"
+                    onClick={() => setShowPassword((prev) => !prev)} // Toggle the visibility
+                  >
+                    {showPassword ? <BsEyeFill className="h-4 w-4 fill-[#384150]"/> : <BsEyeSlashFill className="h-4 w-4 fill-[#444E60]"/>}
+                  </button>
                 </div>
 
                 {/* Submit Button */}

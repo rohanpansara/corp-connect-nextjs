@@ -1,6 +1,6 @@
 import { attendanceMetadata } from "@/app/metadata/attendanceMetadata";
 import PageHeader from "@/components/common/PageHeader";
-import SettingsWidgetsGrid from "@/components/settings/WidgetsGrid";
+import SettingsWidgetsGrid from "@/components/settings/SettingsWidgetsGrid";
 
 export const metadata = attendanceMetadata;
 

@@ -1,6 +1,6 @@
 "use client"
 
-// components/AuthProvider.tsx
+// components/common/AuthProvider.tsx
 import { apiClient } from '@/app/api/apiClient';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

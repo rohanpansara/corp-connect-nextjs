@@ -2,10 +2,11 @@ import { apiClient } from "@/app/api/apiClient";
 import { AddUserFormValues } from "@/app/api/interfaces/AddUserFormValues"; // Adjust the import according to your file structure
 import ToastManager from "@/utils/toastManager";
 import { FormikHelpers } from "formik";
+import { EditUserFormValues } from "../interfaces/EditUserFormValues";
 
-export const handleAddUserSubmit = async (
-  values: AddUserFormValues,
-  { resetForm, setSubmitting }: FormikHelpers<AddUserFormValues>
+export const handleEditUserSubmit = async (
+  values: EditUserFormValues,
+  { resetForm, setSubmitting }: FormikHelpers<EditUserFormValues>
 ) => {
 
   try {
