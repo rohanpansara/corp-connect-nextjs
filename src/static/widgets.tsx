@@ -51,7 +51,7 @@ export const widgets = [
     title: "Meeting Rooms",
     icon: PiDoorFill,
     iconFill: "#cfb002",
-    bgColor: "#d6dae2",
+    bgColor: "#E7DFB1",
   },
   {
     title: "Reimbursement Types",

@@ -5,7 +5,7 @@ import WidgetCard from "./WidgetCard";
 const SettingsWidgetsGrid = () => {
   return (
     <div
-      className="grid w-full h-full gap-2
+      className="grid w-full h-full gap-5
       grid-cols-1 grid-rows-12
       sm:grid-cols-2 sm:grid-rows-6
       md:grid-cols-3 md:grid-rows-4
