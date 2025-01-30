@@ -15,11 +15,11 @@ const SettingsWidgetsGrid = () => {
     >
       {widgets.map((widget) => (
         <WidgetCard 
-          key={widget.title} 
-          title={widget.title} 
-          icon={widget.icon}
-          bgColor={widget.bgColor} 
-        />
+        title={widget.title}
+        Icon={widget.icon}
+        iconFill={widget.iconFill}
+        bgColor={widget.bgColor}
+      />
       ))}
     </div>
   );

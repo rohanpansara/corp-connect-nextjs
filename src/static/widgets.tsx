@@ -1,34 +1,69 @@
-import { FaUserCog, FaShieldAlt, FaBell, FaChartPie, FaDatabase, FaGlobe } from "react-icons/fa";
+import { RiBuilding2Fill, RiListSettingsFill } from "@remixicon/react";
+import { FaMapLocationDot } from "react-icons/fa6";
+import { HiReceiptRefund } from "react-icons/hi2";
+import { MdOutlineWeb } from "react-icons/md";
+import { PiCalendarDotFill, PiCalendarStarFill, PiDoorFill, PiSubtitlesFill, PiTimerFill } from "react-icons/pi";
 
 export const widgets = [
   {
-    title: "User Settings",
-    icon: <FaUserCog />,
-    bgColor: "bg-blue-500 text-white",
+    title: "Configurations",
+    icon: RiListSettingsFill,
+    iconFill: "#4682B4",
+    bgColor: "#d6dde2"
   },
   {
-    title: "Security",
-    icon: <FaShieldAlt />,
-    bgColor: "bg-red-500 text-white",
+    title: "Email Templates",
+    icon: MdOutlineWeb,
+    iconFill: "#8c46b4",
+    bgColor: "#e0d6e2",
   },
   {
-    title: "Notifications",
-    icon: <FaBell />,
-    bgColor: "bg-yellow-500 text-white",
+    title: "Departments",
+    icon: RiBuilding2Fill,
+    iconFill: "#46b488",
+    bgColor: "#d6e2d9",
   },
   {
-    title: "Analytics",
-    icon: <FaChartPie />,
-    bgColor: "bg-green-500 text-white",
+    title: "Holidays",
+    icon: PiCalendarStarFill,
+    iconFill: "#b46046",
+    bgColor: "#e2dad6",
   },
   {
-    title: "Database",
-    icon: <FaDatabase />,
-    bgColor: "bg-purple-500 text-white",
+    title: "Job Titles",
+    icon: PiSubtitlesFill,
+    iconFill: "#6451a9",
+    bgColor: "#d6d7e2",
   },
   {
-    title: "Global Settings",
-    icon: <FaGlobe />,
-    bgColor: "bg-gray-500 text-white",
+    title: "Leave Type",
+    icon: PiCalendarDotFill,
+    iconFill: "#8f6138",
+    bgColor: "#e2e2d6",
   },
-];
+  {
+    title: "Locations",
+    icon: FaMapLocationDot,
+    iconFill: "#3e9a98",
+    bgColor: "#d6e0e2",
+  },
+  {
+    title: "Meeting Rooms",
+    icon: PiDoorFill,
+    iconFill: "#cfb002",
+    bgColor: "#d6dae2",
+  },
+  {
+    title: "Reimbursement Types",
+    icon: HiReceiptRefund,
+    iconFill: "#556B2F",
+    bgColor: "#dce2d6",
+  },
+  {
+    title: "Work Shifts",
+    icon: PiTimerFill,
+    iconFill: "#DC143C",
+    bgColor: "#e2d6d6",
+  },
+]
+;

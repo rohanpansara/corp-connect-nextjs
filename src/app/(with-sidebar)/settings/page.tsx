@@ -1,8 +1,8 @@
-import { attendanceMetadata } from "@/app/metadata/attendanceMetadata";
+import { settingsMetadata } from "@/app/metadata/settingsMetadata";
 import PageHeader from "@/components/common/PageHeader";
 import SettingsWidgetsGrid from "@/components/settings/SettingsWidgetsGrid";
 
-export const metadata = attendanceMetadata;
+export const metadata = settingsMetadata;
 
 const SettingsPage = () => {
   return (
