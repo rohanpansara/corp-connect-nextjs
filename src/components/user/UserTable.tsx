@@ -36,6 +36,7 @@ import { TiUserAdd } from "react-icons/ti";
 import DeleteDialog from "../common/DeleteDialog";
 import AddUserDialog from "./AddUserDialog";
 import UserProfileImage from "./UserProfileImage";
+import { deleteUsers } from "@/app/api/handlers/DeleteUsersSubmit";
 
 const UserTable = () => {
   const router = useRouter();
@@ -82,6 +83,15 @@ const UserTable = () => {
     }
 
     setSelectedUsers(updatedSelection);
+  };
+
+  const handleDeleteUsers = async () => {
+    try {
+      await deleteUsers(Array.from(selectedUsers));
+      setIsDeleteDialogOpen(false);
+    } catch (error) {
+      console.error("Failed to delete users:", error);
+    }
   };
 
   const columns: ColumnDef<UserDTO>[] = [
@@ -148,7 +158,7 @@ const UserTable = () => {
           )}
         </div>
       ),
-    },    
+    },
     {
       id: "actions",
       cell: ({ row }) => (
@@ -213,21 +223,21 @@ const UserTable = () => {
             entity="User"
             entitySize={selectedUsers.size}
             all={selectedUsers.size === usersData.length}
-            onDelete={() => console.log("Deleted")}
+            onDelete={handleDeleteUsers}
           />
           {selectedUsers.size > 0 && (
             <Button
               variant="destructive"
               onClick={() => setIsDeleteDialogOpen(true)}
             >
-              <FaTrashAlt />
+              <FaTrashAlt className="h-6 w-6" />
               {selectedUsers.size === usersData.length
                 ? `Delete All (${selectedUsers.size})`
                 : `Delete Selected (${selectedUsers.size})`}
             </Button>
           )}
         </div>
-        <div className="ml-auto ">
+        <div className="ml-auto">
           <AddUserDialog
             isOpen={isAddUserDialogOpen}
             onClose={() => setIsAddUserDialogOpen(false)}

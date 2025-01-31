@@ -13,21 +13,23 @@ export const handleEditUserSubmit = async (
       values
     );
     
+    const successMessage = response?.data?.message || "User updated successfully";
     ToastManager.toast({
       title: "Success",
-      description: response?.data?.message || "User addedd successfully",
+      description: successMessage,
       variant: "success"
     });
     
     resetForm();
   } catch (error: any) {
+
     const errorMessage = error?.response?.data?.message || "Failed to add user";
-    
     ToastManager.toast({
       title: "Something went wrong",
-      description: "Something went wrong",
+      description: errorMessage,
       variant: "error"
     });
+    
   } finally {
     setSubmitting(false);
   }

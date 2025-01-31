@@ -19,7 +19,7 @@ const ProfileHeader = ({ id }: { id: string }) => {
   const fetchUserHeaderData = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.get(`/employee/${id}`);
+      const response = await apiClient.get(`/user/${id}`);
       setUserHeaderData(response.data.data);
     } catch (err: any) {
       if (err.response) {

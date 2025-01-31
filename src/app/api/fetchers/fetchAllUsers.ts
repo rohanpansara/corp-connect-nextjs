@@ -12,7 +12,7 @@ export const fetchUsersData = async ({
   setLoading(true);
 
   try {
-    const response = await apiClient.get("/employee");
+    const response = await apiClient.get("/user");
 
     if (response.data?.data) {
       setUsersData(response.data.data);

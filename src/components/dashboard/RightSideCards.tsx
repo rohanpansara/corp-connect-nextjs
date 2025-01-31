@@ -37,7 +37,7 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
                 <Button
                   size="nothing"
                   variant="plain"
-                  className={`w-1/2 mr-[2px] text-[10px] text-gray-600 rounded-sm flex justify-center items-center 
+                  className={`w-1/2 mr-[2px] text-[10px] text-gray-600 rounded-sm flex justify-center items-center transition-transform
                     ${
                       active === "today"
                         ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 shadow-lg h-[20px]"
@@ -50,10 +50,11 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
                 <Button
                   size="nothing"
                   variant="plain"
-                  className={`w-1/2 ml-[2px] text-[10px] text-gray-600 rounded-sm flex justify-center items-center ${
-                    active === "weekly"
-                      ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 shadow-lg h-[20px]"
-                      : "h-[10px] bg-mainBackground my-auto"
+                  className={`w-1/2 ml-[2px] text-[10px] text-gray-600 rounded-sm flex justify-center items-center transition-transform 
+                    ${
+                      active === "weekly"
+                        ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 shadow-lg h-[20px]"
+                        : "h-[10px] bg-mainBackground my-auto"
                   }`}
                   onClick={() => setActive("weekly")}
                 >
@@ -107,11 +108,6 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
               </div>
             </ProgressCircle>
           </CardContent>
-          {/* <CardFooter className="p-2">
-            <div className="flex justify-center items-center w-full text-xs">
-              {activeCard?.description}
-            </div>
-          </CardFooter> */}
         </Card>
       </div>
       <div className="w-1/2 h-full rounded-md">
