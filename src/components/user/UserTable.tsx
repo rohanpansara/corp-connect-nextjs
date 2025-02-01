@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaUserPlus } from "react-icons/fa";
 import { FcCancel, FcOk } from "react-icons/fc";
 import { Checkbox } from "../ui/checkbox";
 import {
@@ -16,6 +16,7 @@ import {
 } from "../ui/tooltip";
 
 import { DataTable } from "@/app/(with-sidebar)/users/data-table";
+import { deleteUsers } from "@/app/api/handlers/DeleteUsersSubmit";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,11 +33,9 @@ import {
   PiPencilSimpleLineLight,
   PiTrashLight,
 } from "react-icons/pi";
-import { TiUserAdd } from "react-icons/ti";
 import DeleteDialog from "../common/DeleteDialog";
 import AddUserDialog from "./AddUserDialog";
 import UserProfileImage from "./UserProfileImage";
-import { deleteUsers } from "@/app/api/handlers/DeleteUsersSubmit";
 
 const UserTable = () => {
   const router = useRouter();
@@ -227,10 +226,11 @@ const UserTable = () => {
           />
           {selectedUsers.size > 0 && (
             <Button
-              variant="destructive"
+              variant="plain"
               onClick={() => setIsDeleteDialogOpen(true)}
+              className="text-xs py-0.5 px-3 bg-red-500 text-primary-foreground"
             >
-              <FaTrashAlt className="h-6 w-6" />
+              <FaTrashAlt className="h-4 w-4" />
               {selectedUsers.size === usersData.length
                 ? `Delete All (${selectedUsers.size})`
                 : `Delete Selected (${selectedUsers.size})`}
@@ -243,10 +243,11 @@ const UserTable = () => {
             onClose={() => setIsAddUserDialogOpen(false)}
           />
           <Button
-            variant="default"
+            variant="plain"
             onClick={() => setIsAddUserDialogOpen(true)}
+            className="text-xs py-0.5 px-3 bg-primary text-primary-foreground"
           >
-            <TiUserAdd />
+            <FaUserPlus className="h-4 w-4" />
             Add
           </Button>
         </div>
