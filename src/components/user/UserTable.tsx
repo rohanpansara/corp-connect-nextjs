@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchUsersData } from "@/app/api/fetchers/fetchAllUsers";
+import { fetchAllUsers } from "@/app/api/fetchers/fetchAllUsers";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
@@ -51,7 +51,7 @@ const UserTable = () => {
   const handleNavigation = (path: string) => router.push(path);
 
   useEffect(() => {
-    fetchUsersData({
+    fetchAllUsers({
       setUsersData,
       setError,
       setLoading,
