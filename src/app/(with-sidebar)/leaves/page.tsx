@@ -1,13 +1,5 @@
 import { leavesMetadata } from "@/app/metadata/leavesMetadata";
 import PageHeader from "@/components/common/PageHeader";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { IoCalendarOutline } from "react-icons/io5";
 export const metadata = leavesMetadata;
 
 const LeavesPage = () => {
@@ -15,7 +7,9 @@ const LeavesPage = () => {
 
   return (
     <div className="min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4">
-      <PageHeader pageName="Leave"/>
+      <div className="h-[30px] w-full max-w-full pl-2">
+        <PageHeader pageName="Leaves" />
+      </div>
     </div>
   );
 };
