@@ -31,12 +31,7 @@ const ProfileHeader = ({ id }: { id: string }) => {
           ToastManager.toast({
             title: "Error",
             description: errorMessage,
-            variant: "success",
-            action: {
-              altText: "Token Refresh Failed",
-              onClick: () => {},
-              label: "Token Refresh",
-            },
+            variant: "success"
           });
         } else {
           setError(
@@ -67,7 +62,7 @@ const ProfileHeader = ({ id }: { id: string }) => {
       <div className="flex w-full h-[150px] p-2 pt-0">
         <ProfileBackground userHeaderData={userHeaderData || ""} />
       </div>
-      <div className="absolute top-[50px]">
+      <div className="absolute top-[70px]">
         <UserAvatar userHeaderData={userHeaderData} />
       </div>
     </>

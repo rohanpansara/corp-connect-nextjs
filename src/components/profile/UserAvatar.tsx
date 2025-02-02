@@ -1,20 +1,20 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getInitials } from "@/utils/getInitials";
-import { FaUserEdit } from "react-icons/fa";
+import github from "@/assets/github-default.jpg";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
-  DialogTitle,
   DialogDescription,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import github from "@/assets/github-default.jpg";
 import { UserDTO } from "@/contracts/types/user";
+import { getInitials } from "@/utils/getInitials";
+import { RiImageEditFill } from "@remixicon/react";
+import Image from "next/image";
+import { useState } from "react";
 
 interface UserAvatarProps {
   userHeaderData: UserDTO | undefined; // Ensure it's the correct type
@@ -48,7 +48,7 @@ const UserAvatar = ({ userHeaderData }: UserAvatarProps) => {
         className="max-h-[120px] max-w-[120px] absolute overflow-hidden inset-0 flex items-center justify-center bg-black bg-opacity-60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
         onClick={openDialog}
       >
-        <FaUserEdit className="text-white text-2xl overflow-hidden" />
+        <RiImageEditFill className="text-white text-2xl overflow-hidden" />
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>

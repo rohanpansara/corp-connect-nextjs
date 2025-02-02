@@ -28,12 +28,7 @@ const UserInfo = ({ id }: { id: string }) => {
           ToastManager.toast({
             title: "Error",
             description: errorMessage,
-            variant: "success",
-            action: {
-              altText: "Token Refresh Failed",
-              onClick: () => {},
-              label: "Token Refresh",
-            },
+            variant: "success"
           });
         } else {
           setError(
