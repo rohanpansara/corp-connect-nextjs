@@ -20,6 +20,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
     confirmPassword: "",
     userStatus: "",
     roles: "",
+    gender: ""
   };
 
   return (
@@ -39,9 +40,9 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
         >
           {({ isSubmitting }) => (
             <Form className="space-y-4 sm:space-y-2 ">
-              <div className="grid grid-cols-4 grid-rows-3 gap-4 sm:gap-2">
+              <div className="grid grid-cols-6 grid-rows-3 gap-4 sm:gap-2">
                 {/* Name */}
-                <div className="col-span-4 sm:col-span-2 lg:col-span-4">
+                <div className="col-span-6 sm:col-span-3 lg:col-span-6">
                   <div className="flex items-center justify-between w-full">
                     <label
                       htmlFor="name"
@@ -63,7 +64,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Email */}
-                <div className="col-span-4 sm:col-span-2 lg:row-start-2 lg:col-span-4 sm:row-start-1 row-start-2">
+                <div className="col-span-6 sm:col-span-3 lg:row-start-2 lg:col-span-6 sm:row-start-1 row-start-2">
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="email"
@@ -87,7 +88,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Password */}
-                <div className="col-span-2 lg:row-start-3 md:row-start-2">
+                <div className="col-span-3 lg:row-start-3 md:row-start-2">
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="password"
@@ -111,7 +112,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Confirm Password */}
-                <div className="col-span-2 col-start-3 lg:row-start-3 md:row-start-2">
+                <div className="col-span-3 col-start-4 lg:row-start-3 md:row-start-2">
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="confirmPassword"
@@ -131,6 +132,36 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({ isOpen, onClose }) => {
                     type="password"
                     className="input border-[1px] pl-2 text-sm md:text-xs rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.confirmPassword ? 'border-red-600' : ''}"
                   />
+                </div>
+
+                {/* Gender (Dropdown) */}
+                <div className="col-span-2 lg:row-start-4 md:row-start-3">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="gender"
+                      className="text-right text-sm text-muted-foreground"
+                    >
+                      User Gender
+                    </label>
+                    <ErrorMessage
+                      name="gender"
+                      component="span"
+                      className="text-xs text-red-600"
+                    />
+                  </div>
+                  <Field
+                    as="select"
+                    id="gender"
+                    name="gender"
+                    className="input border-[1px] text-sm md:text-xs px-2 bg-mainBackground rounded-sm border-gray-300 w-full h-8 max-w-full focus:border-none ${errors.userStatus ? 'border-red-600' : ''}"
+                  >
+                    <option value="" hidden>
+                      Select Gender
+                    </option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                    <option value="OTHER">Other</option>
+                  </Field>
                 </div>
 
                 {/* Capacity (Dropdown) */}

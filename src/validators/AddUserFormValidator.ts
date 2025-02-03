@@ -1,17 +1,27 @@
 import * as Yup from "yup";
 
+const commonRequireMessage = "*required";
+
 export const addUserValidationSchema = Yup.object({
-  name: Yup.string().required("*Name is required"),
+
+  name: Yup.string().required(commonRequireMessage),
+
   email: Yup.string()
     .email("*Invalid email format")
-    .required("*Email is required"),
+    .required(commonRequireMessage),
+
   password: Yup.string()
     .min(6, "*Password must be at least 8 characters")
-    .required("*Password is required"),
+    .required(commonRequireMessage),
+
   confirmPassword: Yup.string().oneOf(
     [Yup.ref("password"), ""],
-    "*Passwords must match"
+    commonRequireMessage
   ),
-  userStatus: Yup.string().required("*User status is required"),
-  roles: Yup.string().required("*Role is required"),
+
+  gender : Yup.string().required(commonRequireMessage),
+
+  userStatus: Yup.string().required(commonRequireMessage),
+
+  roles: Yup.string().required(commonRequireMessage),
 });

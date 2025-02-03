@@ -5,8 +5,6 @@ import ToastManager from "@/utils/toastManager";
 export const deleteUsers = async (userIdList: string[]): Promise<void> => {
   try {
 
-      console.log("User Ids: ", userIdList);
-
     if (userIdList.length === 0) {
       ToastManager.toast({
         title: "Warning",
@@ -16,7 +14,6 @@ export const deleteUsers = async (userIdList: string[]): Promise<void> => {
       return;
     }
 
-    // Join the list into a comma-separated string
     const queryString = `userIdsToDelete=${userIdList.join(",")}`;
 
     const response = await apiClient.delete(`/user?${queryString}`);

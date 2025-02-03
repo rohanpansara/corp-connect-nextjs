@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -37,15 +37,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 import { HiViewColumns } from "react-icons/hi2";
+import SearchInput from "@/components/common/SearchInput";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  onNoResultsFound: () => void; // New prop for the parent to know when no results are found
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onNoResultsFound, // Destructure the prop
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -68,25 +71,34 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  // Check if no results after filtering
+  const noResults = table.getRowModel().rows?.length === 0;
+
+  // Notify parent about no results
+  useEffect(() => {
+    if (noResults) {
+      onNoResultsFound(); // Pass the information to the parent
+    }
+  }, [noResults, onNoResultsFound]);
+
   return (
     <div className="rounded-md border w-full bg-sidebarBackground">
       {/* Filters */}
-      <div className="flex items-center justify-end p-3 gap-2">
-        <Input
-          placeholder="Search by name..."
+      <div className="flex items-center justify-end px-3 pt-3 gap-2">
+        <SearchInput
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
-          className="max-w-xs placeholder:text-gray-400"
+          onClear={() => table.getColumn("name")?.setFilterValue("")}
+          placeholder="Search by name..."
         />
-
         {/* Column visibility */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="plain"
-              className="rounded-[5px] h-8 text-sm border-[1px] shadow-sm"
+              className="rounded-[5px] h-8 px-2 py-1 text-sm border-[1px] shadow-sm border-gray-300 dark:border-gray-600"
             >
               <HiViewColumns />
             </Button>
@@ -134,8 +146,17 @@ export function DataTable<TData, TValue>({
           </TableHeader>
 
           <TableBody className="p-3">
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+            {noResults ? (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-12 text-center text-gray-400 italic"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            ) : (
+              table.getRowModel().rows?.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -150,15 +171,6 @@ export function DataTable<TData, TValue>({
                   ))}
                 </TableRow>
               ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
             )}
           </TableBody>
         </Table>

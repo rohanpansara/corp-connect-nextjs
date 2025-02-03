@@ -36,6 +36,7 @@ import {
 import DeleteDialog from "../common/DeleteDialog";
 import AddUserDialog from "./AddUserDialog";
 import UserProfileImage from "./UserProfileImage";
+import ToastManager from "@/utils/toastManager";
 
 const UserTable = () => {
   const router = useRouter();
@@ -88,23 +89,45 @@ const UserTable = () => {
     try {
       await deleteUsers(Array.from(selectedUsers));
       setIsDeleteDialogOpen(false);
+
+      fetchAllUsers({
+        setUsersData,
+        setError,
+        setLoading,
+        onNavigate: handleNavigation,
+      });
     } catch (error) {
-      console.error("Failed to delete users:", error);
+      ToastManager.toast({
+        title: "Error",
+        description: "Error while deleting user",
+        variant: "success",
+      });
+    } finally {
+      setSelectedUsers(new Set());
     }
+  };
+
+  const handleNoResultsFound = () => {
+    console.log("No results found after applying filter.");
+    // You can update state, show a message, or take any other action here.
   };
 
   const columns: ColumnDef<UserDTO>[] = [
     {
       id: "select",
       header: ({ table }) => (
-        <Checkbox checked={selectAll} onClick={handleSelectAll} />
+        usersData.length > 0 && (
+          <Checkbox checked={selectAll} onClick={handleSelectAll} />
+        )
       ),
       cell: ({ row }) => (
-        <Checkbox
-          className="mr-auto"
-          checked={selectedUsers.has(row.original.id)}
-          onClick={() => handleSelectUser(row.original.id)}
-        />
+        usersData.length > 0 && (
+          <Checkbox
+            className="mr-auto"
+            checked={selectedUsers.has(row.original.id)}
+            onClick={() => handleSelectUser(row.original.id)}
+          />
+        )
       ),
     },
     {
@@ -253,7 +276,11 @@ const UserTable = () => {
         </div>
       </div>
       <div className="py-4">
-        <DataTable columns={columns} data={usersData} />
+        <DataTable
+          columns={columns}
+          data={usersData}
+          onNoResultsFound={handleNoResultsFound}
+        />
       </div>
     </div>
   );
