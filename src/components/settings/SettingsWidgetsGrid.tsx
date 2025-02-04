@@ -1,5 +1,5 @@
 "use client";
-import { widgets } from "@/static/widgets";
+import { widgets } from "@/static/SettingsGridWidgets";
 import WidgetCard from "./WidgetCard";
 
 const SettingsWidgetsGrid = () => {
