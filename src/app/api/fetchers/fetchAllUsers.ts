@@ -7,6 +7,7 @@ export const fetchAllUsers = async ({
   setError,
   setLoading,
   onNavigate,
+  filter,
 }: FetchUsersDataProps) => {
   setLoading(true);
 
