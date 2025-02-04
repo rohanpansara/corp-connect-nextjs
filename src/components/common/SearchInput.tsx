@@ -1,4 +1,5 @@
 import { Input } from "@/components/ui/input";
+import { BiSearchAlt } from "react-icons/bi";
 import { FaX } from "react-icons/fa6";
 
 interface SearchInputProps {
@@ -15,13 +16,16 @@ const SearchInput: React.FC<SearchInputProps> = ({
   placeholder = "Search anything...",
 }) => {
   return (
-    <div className="relative max-w-xs">
+    <div className="relative min-w-[300px]">
       <Input
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="w-full text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 placeholder:text-gray-400 placeholder:dark:text-gray-500 pr-10"
+        className="w-full text-xs text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 placeholder:text-gray-400 placeholder:dark:text-gray-500 placeholder:pl-[1.25rem]"
       />
+      {!value && (
+        <BiSearchAlt className="absolute left-3 top-[54%] transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
+      )}
       {value && (
         <button
           onClick={onClear}

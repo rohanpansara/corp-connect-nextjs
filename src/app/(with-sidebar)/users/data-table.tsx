@@ -48,7 +48,7 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-  onNoResultsFound, // Destructure the prop
+  onNoResultsFound,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -87,9 +87,7 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center justify-end px-3 pt-3 gap-2">
         <SearchInput
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
           onClear={() => table.getColumn("name")?.setFilterValue("")}
           placeholder="Search by name..."
         />

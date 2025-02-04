@@ -4,6 +4,7 @@ import { FetchUsersDataProps } from "../interfaces/props/FetchUserDataProps";
 
 export const fetchAllUsers = async ({
   setUsersData,
+  setNoResultFound,
   setError,
   setLoading,
   onNavigate,
@@ -15,6 +16,9 @@ export const fetchAllUsers = async ({
     const response = await apiClient.get("/user?deleted=false");
 
     if (response.data?.data) {
+      if (response.data.data.length === 0) {
+        setNoResultFound(true);
+      }
       setUsersData(response.data.data);
     } else {
       setError("No data found");

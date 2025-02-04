@@ -37,12 +37,14 @@ import DeleteDialog from "../common/DeleteDialog";
 import AddUserDialog from "./AddUserDialog";
 import UserProfileImage from "./UserProfileImage";
 import ToastManager from "@/utils/toastManager";
+import Loader from "../common/Loader";
 
 const UserTable = () => {
   const router = useRouter();
   const [usersData, setUsersData] = useState<UserDTO[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<Set<string>>(new Set());
   const [selectAll, setSelectAll] = useState(false);
+  const [noResultFound, setNoResultFound] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false);
@@ -53,6 +55,7 @@ const UserTable = () => {
   useEffect(() => {
     fetchAllUsers({
       setUsersData,
+      setNoResultFound,
       setError,
       setLoading,
       onNavigate: handleNavigation,
@@ -92,6 +95,7 @@ const UserTable = () => {
 
       fetchAllUsers({
         setUsersData,
+        setNoResultFound,
         setError,
         setLoading,
         onNavigate: handleNavigation,
@@ -108,27 +112,24 @@ const UserTable = () => {
   };
 
   const handleNoResultsFound = () => {
-    console.log("No results found after applying filter.");
-    // You can update state, show a message, or take any other action here.
+    setNoResultFound(true);
   };
 
   const columns: ColumnDef<UserDTO>[] = [
     {
       id: "select",
-      header: ({ table }) => (
-        usersData.length > 0 && (
+      header: ({ table }) =>
+        usersData.length > 0 && !noResultFound && (
           <Checkbox checked={selectAll} onClick={handleSelectAll} />
-        )
-      ),
-      cell: ({ row }) => (
+        ),
+      cell: ({ row }) =>
         usersData.length > 0 && (
           <Checkbox
             className="mr-auto"
             checked={selectedUsers.has(row.original.id)}
             onClick={() => handleSelectUser(row.original.id)}
           />
-        )
-      ),
+        ),
     },
     {
       accessorKey: "profile",
@@ -235,6 +236,14 @@ const UserTable = () => {
     },
   ];
 
+  if (loading) {
+    return (
+      <div className="w-full">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full">
       <div className="flex justify-between items-center">
@@ -247,7 +256,7 @@ const UserTable = () => {
             all={selectedUsers.size === usersData.length}
             onDelete={handleDeleteUsers}
           />
-          {selectedUsers.size > 0 && (
+          {selectedUsers.size > 0 && !noResultFound && (
             <Button
               variant="plain"
               onClick={() => setIsDeleteDialogOpen(true)}
