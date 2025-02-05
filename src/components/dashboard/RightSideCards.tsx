@@ -30,7 +30,7 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
         <Card className="h-full flex flex-col p-2 border-none bg-cardBackgroundColor rounded-md">
           <CardHeader className="p-2">
             <div className="flex justify-between items-center w-full">
-              <div className="w-1/2 text-xs text-gray-600">
+              <div className="w-1/2 text-xs text-cardTextColor font-medium">
                 {activeCard?.title}
               </div>
               <div className="w-1/2 h-[25px] bg-mainBackground text-center rounded-[6px] flex justify-between items-center my-auto overflow-hidden py-1 px-[3px]">
