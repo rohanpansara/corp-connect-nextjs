@@ -37,12 +37,8 @@ import {
 import DeleteDialog from "../common/DeleteDialog";
 import AddUserDialog from "./AddUserDialog";
 import UserProfileImage from "./UserProfileImage";
-<<<<<<< Updated upstream
-import ToastManager from "@/utils/toastManager";
 import Loader from "../common/Loader";
-=======
 import PaginatedDataTable from "../common/PaginatedDataTable";
->>>>>>> Stashed changes
 
 const UserTable = () => {
   const router = useRouter();
@@ -124,11 +120,7 @@ const UserTable = () => {
     {
       id: "select",
       header: ({ table }) =>
-<<<<<<< Updated upstream
         usersData.length > 0 && !noResultFound && (
-=======
-        usersData.length > 0 && (
->>>>>>> Stashed changes
           <Checkbox checked={selectAll} onClick={handleSelectAll} />
         ),
       cell: ({ row }) =>
