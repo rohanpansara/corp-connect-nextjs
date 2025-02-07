@@ -8,9 +8,10 @@ interface WidgetProps {
   Icon: IconType | RemixiconComponentType;
   iconFill: string;
   bgColor: string;
+  onClick?: () => void; // Added onClick function prop
 }
 
-const WidgetCard: FC<WidgetProps> = ({ title, Icon, iconFill, bgColor }) => {
+const WidgetCard: FC<WidgetProps> = ({ title, Icon, iconFill, bgColor, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -19,6 +20,7 @@ const WidgetCard: FC<WidgetProps> = ({ title, Icon, iconFill, bgColor }) => {
       style={{ background: isHovered ? bgColor : undefined }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       <div className="w-full h-full flex justify-start items-center p-1 px-4 rounded-[3px]">
         <div

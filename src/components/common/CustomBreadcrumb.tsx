@@ -6,12 +6,12 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-type Route = {
+export type RouteDataProp = {
   path: string;
   label: string;
 };
 
-export const BreadcrumbCreator = ({ routes }: { routes: Route[] }) => {
+export const CustomBreadcrumb = ({ routes }: { routes: RouteDataProp[] }) => {
   return (
     <Breadcrumb>
       <BreadcrumbList>

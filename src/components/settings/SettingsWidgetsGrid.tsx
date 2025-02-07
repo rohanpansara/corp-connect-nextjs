@@ -1,8 +1,12 @@
 "use client";
 import { widgets } from "@/static/SettingsGridWidgets";
 import WidgetCard from "./WidgetCard";
+import { useRouter } from "next/navigation";
 
 const SettingsWidgetsGrid = () => {
+
+  const router = useRouter();
+
   return (
     <div
       className="grid w-full h-full gap-5
@@ -19,6 +23,7 @@ const SettingsWidgetsGrid = () => {
         Icon={widget.icon}
         iconFill={widget.iconFill}
         bgColor={widget.bgColor}
+        onClick={() => router.push(widget.path)}
       />
       ))}
     </div>
