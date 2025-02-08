@@ -1,5 +1,4 @@
 import { RiBuilding2Fill, RiListSettingsFill } from "@remixicon/react";
-import path from "path";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { HiReceiptRefund } from "react-icons/hi2";
 import { MdOutlineWeb } from "react-icons/md";
@@ -59,7 +58,7 @@ export const widgets = [
     title: "Meeting Rooms",
     icon: PiDoorFill,
     iconFill: "#cfb002",
-    bgColor: "#E7DFB1",
+    bgColor: "#F1EBD0",
     path: "/settings/meeting-rooms"
   },
   {
@@ -76,5 +75,4 @@ export const widgets = [
     bgColor: "#e2d6d6",
     path: "/settings/work-shifts"
   },
-]
-;
+];

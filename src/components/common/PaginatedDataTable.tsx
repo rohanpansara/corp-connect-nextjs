@@ -1,23 +1,22 @@
 "use client";
 
+import { apiClient } from "@/app/api/apiClient";
 import { Button } from "@/components/ui/button";
 import {
-    ColumnFiltersState,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    OnChangeFn,
-    SortingState,
-    useReactTable,
-    VisibilityState,
+  ColumnFiltersState,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  OnChangeFn,
+  SortingState,
+  useReactTable,
+  VisibilityState,
 } from "@tanstack/react-table";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import ColumnVisibilityDropdown from "./ColumnVisibilityDropdown";
 import SearchInput from "./SearchInput";
 import TableComponent from "./TableComponent";
-import { apiClient } from "@/app/api/apiClient";
 
 interface PaginatedDataTableProps<TData> {
   columns: any[];

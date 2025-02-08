@@ -1,11 +1,8 @@
 "use client";
 import { widgets } from "@/static/SettingsGridWidgets";
 import WidgetCard from "./WidgetCard";
-import { useRouter } from "next/navigation";
 
 const SettingsWidgetsGrid = () => {
-
-  const router = useRouter();
 
   return (
     <div
@@ -18,13 +15,13 @@ const SettingsWidgetsGrid = () => {
       2xl:grid-cols-4 2xl:grid-rows-3"
     >
       {widgets.map((widget) => (
-        <WidgetCard 
-        title={widget.title}
-        Icon={widget.icon}
-        iconFill={widget.iconFill}
-        bgColor={widget.bgColor}
-        onClick={() => router.push(widget.path)}
-      />
+        <WidgetCard
+          title={widget.title}
+          Icon={widget.icon}
+          iconFill={widget.iconFill}
+          bgColor={widget.bgColor}
+          redirectRoute={widget.path}
+        />
       ))}
     </div>
   );

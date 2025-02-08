@@ -11,12 +11,17 @@ const SettingsPageHeader = () => {
     .split("/")
     .filter((segment) => segment) // Remove empty segments
     .map((segment, index, arr) => ({
-      label: segment.charAt(0).toUpperCase() + segment.slice(1), // Capitalize first letter
+      label: segment
+        .split("-") // Split by hyphen
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+        .join(" "), // Join words with spaces
       path: "/" + arr.slice(0, index + 1).join("/"), // Construct URL for each segment
     }));
 
   return (
-    <div className={`flex flex-col justify-start px-1 text-gray-600 dark:text-gray-400`}>
+    <div
+      className={`flex flex-col justify-start px-1 text-gray-600 dark:text-gray-400`}
+    >
       <CustomBreadcrumb routes={breadcrumb} />
     </div>
   );
