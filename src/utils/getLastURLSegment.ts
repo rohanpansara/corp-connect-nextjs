@@ -10,3 +10,18 @@ export const getLastPathSegment = (url: string) => {
 
   return lastSegment;
 };
+
+export const getFirstPathSegment = (url: string) => {
+  const segments = url.split("/").filter(Boolean); // Filter out empty segments
+  return segments.length > 0 ? segments[0] : ""; // Return first segment if it exists
+};
+
+// export const doesSegmentExistInUrl = (url: string, segment: string) => {
+//   const segments = url.split("/").filter(Boolean).map(s => s.toLowerCase()); // Convert all segments to lowercase
+//   return segments.includes(segment.toLowerCase()); // Compare in lowercase
+// };
+
+export const doesSegmentExistInUrl = (url: string, segment: string) => {
+  const segments = url.split("/").filter(Boolean).map(s => s.toLowerCase()); // Normalize segments to lowercase
+  return segments.includes(segment.toLowerCase()); // Check if any matches
+};

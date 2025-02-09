@@ -11,7 +11,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { getLastPathSegment } from "@/utils/getLastURLSegment";
+import {
+  doesSegmentExistInUrl,
+  getLastPathSegment,
+} from "@/utils/getLastURLSegment";
 import ToastManager from "@/utils/toastManager";
 import clsx from "clsx";
 import { Poppins } from "next/font/google";
@@ -101,7 +104,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                       href={item.url}
                       className={clsx(
                         "anchor-common",
-                        currentSegment === getLastPathSegment(item.url)
+                        doesSegmentExistInUrl(item.url, currentSegment)
                           ? "anchor-active"
                           : "anchor-inactive"
                       )}
@@ -109,7 +112,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                       <item.icon
                         className={clsx(
                           "icon-common",
-                          currentSegment === getLastPathSegment(item.url)
+                          doesSegmentExistInUrl(item.url, currentSegment)
                             ? "icon-active"
                             : "icon-inactive"
                         )}
@@ -134,7 +137,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                         onClick={handleLogout}
                         className={clsx(
                           "anchor-common",
-                          currentSegment === getLastPathSegment(item.url)
+                          doesSegmentExistInUrl(item.url.toLowerCase(), currentSegment)
                             ? "anchor-active"
                             : "anchor-inactive"
                         )}
@@ -143,7 +146,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                         <item.icon
                           className={clsx(
                             "icon-common",
-                            currentSegment === getLastPathSegment(item.url)
+                            doesSegmentExistInUrl(item.url.toLowerCase(), currentSegment)
                               ? "icon-active"
                               : "icon-inactive"
                           )}
@@ -155,7 +158,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                         href={item.url}
                         className={clsx(
                           "anchor-common",
-                          currentSegment === getLastPathSegment(item.url)
+                          doesSegmentExistInUrl(item.url.toLowerCase(), currentSegment)
                             ? "anchor-active"
                             : "anchor-inactive"
                         )}
@@ -163,7 +166,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
                         <item.icon
                           className={clsx(
                             "icon-common",
-                            currentSegment === getLastPathSegment(item.url)
+                            doesSegmentExistInUrl(item.url.toLowerCase(), currentSegment)
                               ? "icon-active"
                               : "icon-inactive"
                           )}
