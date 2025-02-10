@@ -15,7 +15,6 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 
-import { DataTable } from "@/app/(with-sidebar)/users/data-table";
 import { deleteUsers } from "@/app/api/handlers/DeleteUsersSubmit";
 import {
   DropdownMenu,
@@ -35,10 +34,10 @@ import {
   PiTrashLight,
 } from "react-icons/pi";
 import DeleteDialog from "../common/DeleteDialog";
-import AddUserDialog from "./AddUserDialog";
-import UserProfileImage from "./UserProfileImage";
 import Loader from "../common/Loader";
 import PaginatedDataTable from "../common/PaginatedDataTable";
+import AddUserDialog from "./AddUserDialog";
+import UserProfileImage from "./UserProfileImage";
 
 const UserTable = () => {
   const router = useRouter();
