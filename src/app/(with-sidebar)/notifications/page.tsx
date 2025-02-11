@@ -1,7 +1,10 @@
 "use client";
 import { apiClient } from "@/app/api/apiClient";
 import { Poppins } from "next/font/google";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -16,7 +19,7 @@ const NotificationPage = () => {
 
   useEffect(() => {
     // Construct the WebSocket URL with the token as a query parameter
-    const socket = new WebSocket("ws://192.168.24.101:8089/api/auth/ws");
+    const socket = new WebSocket("ws://localhost:8089/api/auth/ws");
 
     // Handle connection opening
     socket.onopen = () => {
@@ -62,26 +65,32 @@ const NotificationPage = () => {
 
   return (
     <div
-      className={`min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
+      className={`min-h-screen w-full bg-mainBackground flex items-center flex-col gap-6 p-6 ${poppins.className}`}
     >
-      <button
-        style={{ width: "40px", height: "30px" }}
-        type="button"
-        value={count}
-        onClick={handleClick}
-      >
+      {/* Click Button */}
+      <Button onClick={handleClick} className="w-12 h-8">
         {count}
-      </button>
-      <div>
-        <h1>Notifications</h1>
-        <ul>
-          {notifications.map((note, index) => (
-            <li key={index}>
-              {note?.message} {note?.user && " " + note.user}{" "}
-            </li>
-          ))}
-        </ul>
-      </div>
+      </Button>
+
+      {/* Notifications Card */}
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader>
+          <h1 className="text-xl font-semibold">Notifications</h1>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-2">
+            {notifications.length > 0 ? (
+              notifications.map((note, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  <span>{note?.message}</span>
+                </li>
+              ))
+            ) : (
+              <p className="text-gray-500">No new notifications</p>
+            )}
+          </ul>
+        </CardContent>
+      </Card>
     </div>
   );
 };
