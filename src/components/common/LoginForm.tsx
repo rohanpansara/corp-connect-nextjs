@@ -100,36 +100,6 @@ const LoginForm = () => {
                     }}
                   />
                 </div>
-
-                {/* Password Input */}
-                {/* <div>
-                  <label
-                    htmlFor="password"
-                    className="flex flex-row justify-start items-center text-sm font-medium text-[#444e60d2] my-2"
-                  >
-                    Password{" "}
-                    <ErrorMessage
-                      name="password"
-                      component="p"
-                      className="text-[#ff0800] text-xs ml-auto "
-                    />
-                  </label>
-                  <Field
-                    id="password"
-                    name="password"
-                    type="password"
-                    className={`mt-1 block w-full p-2 border ${
-                      errors.password && touched.password
-                        ? "border-[#ff0800] placeholder:text-[#caadad]"
-                        : "border-gray-300"
-                    } rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
-                    placeholder="Enter your password"
-                    onFocus={() => {
-                      setFieldTouched("password", false); // Clear "touched" status
-                      setFieldError("password", ""); // Clear error message on focus
-                    }}
-                  />
-                </div> */}
                 <div className="relative">
                   <label
                     htmlFor="password"
