@@ -1,10 +1,9 @@
 "use client";
 import { apiClient } from "@/app/api/apiClient";
-import { Poppins } from "next/font/google";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Poppins } from "next/font/google";
+import { useEffect, useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
