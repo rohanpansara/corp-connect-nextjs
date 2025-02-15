@@ -42,14 +42,13 @@ const upperMenuItems = [
     title: 'Dashboard',
     url: '/dashboard',
     icon: PiSquaresFourLight,
-    roles: ['User']
+    roles: ['User'],
   },
   {
     title: 'Leaves',
     url: '/leaves',
     icon: PiCalendarXLight,
-    roles: ['User'],
-    permissions: ['user:read']
+    permissions: ['user:read'],
   },
   {
     title: 'Attendance',
@@ -72,11 +71,7 @@ const lowerMenuItems = [
   { title: 'Logout', url: '/auth/login', icon: PiSignOutLight },
 ]
 
-type AppSidebarProps = {
-  userId: string
-}
-
-export function AppSidebar({ userId }: AppSidebarProps) {
+export function AppSidebar() {
   const pathname = usePathname()
   const router = useRouter()
   const currentSegment = getLastPathSegment(pathname)

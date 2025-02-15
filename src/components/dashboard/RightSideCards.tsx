@@ -30,17 +30,17 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
         <Card className="h-full flex flex-col p-2 border-none bg-cardBackgroundColor rounded-md">
           <CardHeader className="p-2">
             <div className="flex justify-between items-center w-full">
-              <div className="w-1/2 text-xs text-cardTextColor font-medium">
+              <div className="w-1/2 text-xs text-cardTextColor font-semibold">
                 {activeCard?.title}
               </div>
               <div className="w-1/2 h-[25px] bg-mainBackground text-center rounded-[6px] flex justify-between items-center my-auto overflow-hidden py-1 px-[3px]">
                 <Button
                   size="nothing"
                   variant="plain"
-                  className={`w-1/2 mr-[2px] text-[10px] text-gray-600 rounded-sm flex justify-center items-center transition-transform
+                  className={`w-1/2 mr-[2px] text-[10px] text-gray-600 dark:text-gray-400 rounded-sm flex justify-center items-center transition-transform
                     ${
                       active === "today"
-                        ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 shadow-lg h-[20px]"
+                        ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 dark:text-gray-50 shadow-lg h-[20px]"
                         : "h-[10px] bg-mainBackground my-auto"
                     }`}
                   onClick={() => setActive("today")}
@@ -50,10 +50,10 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
                 <Button
                   size="nothing"
                   variant="plain"
-                  className={`w-1/2 ml-[2px] text-[10px] text-gray-600 rounded-sm flex justify-center items-center transition-transform 
+                  className={`w-1/2 ml-[2px] text-[10px] text-gray-600 dark:text-gray-400 rounded-sm flex justify-center items-center transition-transform 
                     ${
                       active === "weekly"
-                        ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 shadow-lg h-[20px]"
+                        ? "bg-cardTextColor dark:bg-cardBackgroundColor text-gray-100 dark:text-gray-50 shadow-lg h-[20px]"
                         : "h-[10px] bg-mainBackground my-auto"
                   }`}
                   onClick={() => setActive("weekly")}

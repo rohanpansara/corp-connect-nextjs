@@ -2,6 +2,16 @@ import { useState } from 'react'
 import { Field, ErrorMessage } from 'formik'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 
+interface PasswordFieldProps {
+  label: string
+  name: string
+  placeholder: string
+  setFieldTouched: (field: string, touched: boolean) => void
+  setFieldError: (field: string, errorMsg: string) => void
+  errors: Record<string, string>
+  touched: Record<string, boolean>
+}
+
 const PasswordField = ({
   label,
   name,
@@ -10,15 +20,7 @@ const PasswordField = ({
   setFieldError,
   errors,
   touched,
-}: {
-  label: string
-  name: string
-  placeholder: string
-  setFieldTouched: (field: string, touched: boolean) => void
-  setFieldError: (field: string, errorMsg: string) => void
-  errors: Record<string, string>
-  touched: Record<string, boolean>
-}) => {
+}: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
