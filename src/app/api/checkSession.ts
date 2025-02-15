@@ -5,7 +5,7 @@ export const checkSession = async (): Promise<boolean> => {
     const response = await apiClient.get("/user/validate-token");
     return response.status === 200;
   } catch (error) {
-    console.error("Error during session validation:", error);
+    console.log("User not logged in");
     return false;
   }
 };
