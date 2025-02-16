@@ -1,21 +1,16 @@
-"use client";
+'use client'
 
-import { fetchAllUsers } from "@/app/api/fetchers/fetchAllUsers";
-import { Button } from "@/components/ui/button";
-import { ColumnDef } from "@tanstack/react-table";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { FaTrashAlt, FaUserPlus } from "react-icons/fa";
-import { FcCancel, FcOk } from "react-icons/fc";
-import { Checkbox } from "../ui/checkbox";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { fetchAllUsers } from '@/app/api/fetchers/fetchAllUsers'
+import { Button } from '@/components/ui/button'
+import { ColumnDef } from '@tanstack/react-table'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { FaTrashAlt, FaUserPlus } from 'react-icons/fa'
+import { FcCancel, FcOk } from 'react-icons/fc'
+import { Checkbox } from '../ui/checkbox'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
 
-import { deleteUsers } from "@/app/api/handlers/DeleteUsersSubmit";
+import { deleteUsers } from '@/app/api/handlers/DeleteUsersSubmit'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,33 +19,33 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { UserDTO } from "@/contracts/types/user";
-import ToastManager from "@/utils/toastManager";
+} from '@/components/ui/dropdown-menu'
+import { UserDTO } from '@/types/User'
+import ToastManager from '@/utils/toastManager'
 import {
   PiDotsThreeOutlineVerticalLight,
   PiIdentificationBadgeLight,
   PiPencilSimpleLineLight,
   PiTrashLight,
-} from "react-icons/pi";
-import DeleteDialog from "../common/DeleteDialog";
-import Loader from "../common/Loader";
-import PaginatedDataTable from "../common/PaginatedDataTable";
-import AddUserDialog from "./AddUserDialog";
-import UserProfileImage from "./UserProfileImage";
+} from 'react-icons/pi'
+import DeleteDialog from '../common/DeleteDialog'
+import Loader from '../common/Loader'
+import PaginatedDataTable from '../common/PaginatedDataTable'
+import AddUserDialog from './AddUserDialog'
+import UserProfileImage from './UserProfileImage'
 
 const UserTable = () => {
-  const router = useRouter();
-  const [usersData, setUsersData] = useState<UserDTO[]>([]);
-  const [selectedUsers, setSelectedUsers] = useState<Set<string>>(new Set());
-  const [selectAll, setSelectAll] = useState(false);
-  const [noResultFound, setNoResultFound] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const router = useRouter()
+  const [usersData, setUsersData] = useState<UserDTO[]>([])
+  const [selectedUsers, setSelectedUsers] = useState<Set<string>>(new Set())
+  const [selectAll, setSelectAll] = useState(false)
+  const [noResultFound, setNoResultFound] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
-  const handleNavigation = (path: string) => router.push(path);
+  const handleNavigation = (path: string) => router.push(path)
 
   useEffect(() => {
     fetchAllUsers({
@@ -59,39 +54,39 @@ const UserTable = () => {
       setError,
       setLoading,
       onNavigate: handleNavigation,
-    });
-  }, []);
+    })
+  }, [])
 
   const handleSelectAll = () => {
     if (selectAll) {
-      setSelectedUsers(new Set());
+      setSelectedUsers(new Set())
     } else {
-      const allUserIds = usersData.map((user) => user.id);
-      setSelectedUsers(new Set(allUserIds));
+      const allUserIds = usersData.map(user => user.id)
+      setSelectedUsers(new Set(allUserIds))
     }
-    setSelectAll(!selectAll);
-  };
+    setSelectAll(!selectAll)
+  }
 
   const handleSelectUser = (userId: string) => {
-    const updatedSelection = new Set(selectedUsers);
+    const updatedSelection = new Set(selectedUsers)
 
     if (updatedSelection.has(userId)) {
-      updatedSelection.delete(userId);
-      setSelectAll(false);
+      updatedSelection.delete(userId)
+      setSelectAll(false)
     } else {
-      updatedSelection.add(userId);
+      updatedSelection.add(userId)
       if (updatedSelection.size === usersData.length) {
-        setSelectAll(true);
+        setSelectAll(true)
       }
     }
 
-    setSelectedUsers(updatedSelection);
-  };
+    setSelectedUsers(updatedSelection)
+  }
 
   const handleDeleteUsers = async () => {
     try {
-      await deleteUsers(Array.from(selectedUsers));
-      setIsDeleteDialogOpen(false);
+      await deleteUsers(Array.from(selectedUsers))
+      setIsDeleteDialogOpen(false)
 
       fetchAllUsers({
         setUsersData,
@@ -99,41 +94,39 @@ const UserTable = () => {
         setError,
         setLoading,
         onNavigate: handleNavigation,
-      });
+      })
     } catch (error) {
       ToastManager.toast({
-        title: "Error",
-        description: "Error while deleting user",
-        variant: "success",
-      });
+        title: 'Error',
+        description: 'Error while deleting user',
+        variant: 'success',
+      })
     } finally {
-      setSelectedUsers(new Set());
+      setSelectedUsers(new Set())
     }
-  };
+  }
 
   const handleNoResultsFound = () => {
-    setNoResultFound(true);
-  };
+    setNoResultFound(true)
+  }
 
   const columns: ColumnDef<UserDTO>[] = [
     {
-      id: "select",
+      id: 'select',
       header: ({ table }) =>
-        usersData.length > 0 && !noResultFound && (
-          <Checkbox checked={selectAll} onClick={handleSelectAll} />
-        ),
+        usersData.length > 0 && !noResultFound && <Checkbox checked={selectAll} onClick={handleSelectAll} />,
       cell: ({ row }) =>
         usersData.length > 0 && (
           <Checkbox
-            className="mr-auto"
+            className='mr-auto'
             checked={selectedUsers.has(row.original.id)}
             onClick={() => handleSelectUser(row.original.id)}
           />
         ),
     },
     {
-      accessorKey: "profile",
-      header: "Profile",
+      accessorKey: 'profile',
+      header: 'Profile',
       cell: ({ row }) => (
         <TooltipProvider>
           <Tooltip>
@@ -146,8 +139,8 @@ const UserTable = () => {
       ),
     },
     {
-      accessorKey: "name",
-      header: "Name",
+      accessorKey: 'name',
+      header: 'Name',
       cell: ({ row }) => (
         <TooltipProvider>
           <Tooltip>
@@ -160,71 +153,53 @@ const UserTable = () => {
       ),
     },
     {
-      accessorKey: "roles",
-      header: "Roles",
+      accessorKey: 'roles',
+      header: 'Roles',
       cell: ({ row }) => row.original?.roles,
     },
     {
-      accessorKey: "createdDate",
-      header: "Created Date",
+      accessorKey: 'createdDate',
+      header: 'Created Date',
       cell: ({ row }) => row.original?.createdDate,
     },
     {
-      id: "isAccountEnabled",
-      header: "Enabled",
+      id: 'isAccountEnabled',
+      header: 'Enabled',
       cell: ({ row }) => (
-        <div className="w-full pl-2">
-          {row.original?.isAccountEnabled === "true" ? (
-            <FcOk className="h-4 w-4" />
-          ) : (
-            <FcCancel className="h-4 w-4" />
-          )}
+        <div className='w-full pl-2'>
+          {row.original?.isAccountEnabled === 'true' ? <FcOk className='h-4 w-4' /> : <FcCancel className='h-4 w-4' />}
         </div>
       ),
     },
     {
-      id: "actions",
+      id: 'actions',
       cell: ({ row }) => (
-        <div className="flex">
+        <div className='flex'>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="plain" size="nothing">
+              <Button variant='plain' size='nothing'>
                 <PiDotsThreeOutlineVerticalLight />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-34">
-              <DropdownMenuLabel className="text-xs">
-                User Actions
-              </DropdownMenuLabel>
+            <DropdownMenuContent className='w-34'>
+              <DropdownMenuLabel className='text-xs'>User Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuGroup className="text-xs">
-                <DropdownMenuItem className="group">
-                  <Button
-                    variant="plain"
-                    size="nothing"
-                    className="text-xs flex justify-start items-center w-full"
-                  >
-                    <PiIdentificationBadgeLight className="group-hover:text-green-500" />
+              <DropdownMenuGroup className='text-xs'>
+                <DropdownMenuItem className='group'>
+                  <Button variant='plain' size='nothing' className='text-xs flex justify-start items-center w-full'>
+                    <PiIdentificationBadgeLight className='group-hover:text-green-500' />
                     <span>View Profile</span>
                   </Button>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="group">
-                  <Button
-                    variant="plain"
-                    size="nothing"
-                    className="text-xs flex justify-start items-center w-full"
-                  >
-                    <PiPencilSimpleLineLight className="group-hover:text-blue-500" />
+                <DropdownMenuItem className='group'>
+                  <Button variant='plain' size='nothing' className='text-xs flex justify-start items-center w-full'>
+                    <PiPencilSimpleLineLight className='group-hover:text-blue-500' />
                     <span>Edit</span>
                   </Button>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="group">
-                  <Button
-                    variant="plain"
-                    size="nothing"
-                    className="text-xs flex justify-start items-center w-full"
-                  >
-                    <PiTrashLight className="group-hover:text-red-500" />
+                <DropdownMenuItem className='group'>
+                  <Button variant='plain' size='nothing' className='text-xs flex justify-start items-center w-full'>
+                    <PiTrashLight className='group-hover:text-red-500' />
                     <span>Remove</span>
                   </Button>
                 </DropdownMenuItem>
@@ -234,61 +209,58 @@ const UserTable = () => {
         </div>
       ),
     },
-  ];
+  ]
 
   if (loading) {
     return (
-      <div className="w-full">
+      <div className='w-full'>
         <Loader />
       </div>
-    );
+    )
   }
 
   return (
-    <div className="w-full">
-      <div className="flex justify-between items-center">
-        <div className="mr-auto">
+    <div className='w-full'>
+      <div className='flex justify-between items-center'>
+        <div className='mr-auto'>
           <DeleteDialog
             isOpen={isDeleteDialogOpen}
             onClose={() => setIsDeleteDialogOpen(false)}
-            entity="User"
+            entity='User'
             entitySize={selectedUsers.size}
             all={selectedUsers.size === usersData.length}
             onDelete={handleDeleteUsers}
           />
           {selectedUsers.size > 0 && !noResultFound && (
             <Button
-              variant="plain"
+              variant='plain'
               onClick={() => setIsDeleteDialogOpen(true)}
-              className="text-xs py-0.5 px-3 bg-red-500 text-primary-foreground"
+              className='text-xs py-0.5 px-3 bg-red-500 text-primary-foreground'
             >
-              <FaTrashAlt className="h-4 w-4" />
+              <FaTrashAlt className='h-4 w-4' />
               {selectedUsers.size === usersData.length
                 ? `Delete All (${selectedUsers.size})`
                 : `Delete Selected (${selectedUsers.size})`}
             </Button>
           )}
         </div>
-        <div className="ml-auto">
-          <AddUserDialog
-            isOpen={isAddUserDialogOpen}
-            onClose={() => setIsAddUserDialogOpen(false)}
-          />
+        <div className='ml-auto'>
+          <AddUserDialog isOpen={isAddUserDialogOpen} onClose={() => setIsAddUserDialogOpen(false)} />
           <Button
-            variant="plain"
+            variant='plain'
             onClick={() => setIsAddUserDialogOpen(true)}
-            className="text-xs py-0.5 px-3 bg-primary text-primary-foreground"
+            className='text-xs py-0.5 px-3 bg-primary text-primary-foreground'
           >
-            <FaUserPlus className="h-4 w-4" />
+            <FaUserPlus className='h-4 w-4' />
             Add
           </Button>
         </div>
       </div>
-      <div className="py-4">
-        <PaginatedDataTable columns={columns} apiEndpoint="/user/filter"/>
+      <div className='py-4'>
+        <PaginatedDataTable columns={columns} apiEndpoint='/user/filter' />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserTable;
+export default UserTable

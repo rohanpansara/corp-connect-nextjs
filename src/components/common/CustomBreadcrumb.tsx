@@ -4,12 +4,12 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from '@/components/ui/breadcrumb'
 
 export type RouteDataProp = {
-  path: string;
-  label: string;
-};
+  path: string
+  label: string
+}
 
 export const CustomBreadcrumb = ({ routes }: { routes: RouteDataProp[] }) => {
   return (
@@ -27,5 +27,5 @@ export const CustomBreadcrumb = ({ routes }: { routes: RouteDataProp[] }) => {
         ))}
       </BreadcrumbList>
     </Breadcrumb>
-  );
-};
+  )
+}

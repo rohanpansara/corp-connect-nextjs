@@ -1,11 +1,9 @@
-import { settingsJobTitlesMetadata } from "@/app/metadata/settingsMetadata";
+import { settingsJobTitlesMetadata } from '@/app/metadata/settingsMetadata'
 
-export const metadata = settingsJobTitlesMetadata;
+export const metadata = settingsJobTitlesMetadata
 
 const SettingsConfigurations = () => {
-  return (
-    <>Job Titles</>
-  );
-};
+  return <>Job Titles</>
+}
 
-export default SettingsConfigurations;
+export default SettingsConfigurations

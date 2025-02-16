@@ -1,9 +1,9 @@
-import { UserDTO } from "@/contracts/types/user";
-import { UserEditDTO } from "@/contracts/types/userEdit";
+import { UserDTO } from '@/types/User'
+import { UserEditDTO } from '@/types/EditUser'
 
 export interface EditUserDialogProps {
-    isOpen: boolean;
-    onClose: () => void;
-    user: UserDTO | null;
-    onSubmit: (values: UserEditDTO) => void;
-  }
+  isOpen: boolean
+  onClose: () => void
+  user: UserDTO | null
+  onSubmit: (values: UserEditDTO) => void
+}

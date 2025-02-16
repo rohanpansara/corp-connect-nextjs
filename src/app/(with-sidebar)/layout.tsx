@@ -2,7 +2,7 @@
 import { AppNavbar } from '@/components/common/AppNavbar'
 import { AppSidebar } from '@/components/common/AppSidebar'
 import { AuthProvider } from '@/components/common/AuthProvider'
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 import { getCookieAsString } from '@/utils/cookieUtils'
 import './../globals.css'
 import { Poppins } from 'next/font/google'

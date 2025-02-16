@@ -1,44 +1,35 @@
-import { apiClient } from "@/app/api/apiClient";
-import ToastManager from "@/utils/toastManager";
-import { FetchCardsDataProps, CardsData } from "../interfaces/props/FetchDashboardCardDataProps";
+import { apiClient } from '@/app/api/apiClient'
+import ToastManager from '@/utils/toastManager'
+import { FetchCardsDataProps, CardsData } from '../interfaces/props/FetchDashboardCardDataProps'
 
-export const fetchRightCardsData = async ({
-  setCardsData,
-  setError,
-  setLoading,
-  onNavigate,
-}: FetchCardsDataProps) => {
+export const fetchRightCardsData = async ({ setCardsData, setError, setLoading, onNavigate }: FetchCardsDataProps) => {
   try {
-    setLoading(true);
-    const response = await apiClient.get("/dashboard/cards/right");
-    setCardsData(response.data.data as CardsData);
+    setLoading(true)
+    const response = await apiClient.get('/dashboard/cards/right')
+    setCardsData(response.data.data as CardsData)
   } catch (err: any) {
     if (err.response) {
       if (err.response.status === 401 || err.response.status === 403) {
-        onNavigate("/auth/login");
+        onNavigate('/auth/login')
         ToastManager.toast({
-          title: "You are not logged in",
+          title: 'You are not logged in',
           description: err.response,
-          variant: "error",
+          variant: 'error',
           action: {
-            altText: "Token Refresh Failed",
+            altText: 'Token Refresh Failed',
             onClick: () => {},
-            label: "Token Refresh",
+            label: 'Token Refresh',
           },
-        });
+        })
       } else {
-        setError(
-          `Error: ${err.response.status} - ${
-            err.response.data.message || "Failed to fetch cards"
-          }`
-        );
+        setError(`Error: ${err.response.status} - ${err.response.data.message || 'Failed to fetch cards'}`)
       }
     } else if (err.request) {
-      setError("Network error: Failed to receive a response");
+      setError('Network error: Failed to receive a response')
     } else {
-      setError(`Error: ${err.message}`);
+      setError(`Error: ${err.message}`)
     }
   } finally {
-    setLoading(false);
+    setLoading(false)
   }
-};
+}

@@ -40,25 +40,25 @@ body {
   }
 
   .notification-icon-green {
-    @apply text-[#237e13]
+    @apply text-[#237e13];
   }
 
   .notification-icon-red {
-    @apply text-[#7e1313]
+    @apply text-[#7e1313];
   }
 
   .notification-icon-general {
-    @apply text-[#13517e]
+    @apply text-[#13517e];
   }
 }
 
 @layer base {
   :root {
-    --mainBackground: #F8F6F4;
-    --sidebarBackground: #FFFFFF;
+    --mainBackground: #f8f6f4;
+    --sidebarBackground: #ffffff;
     --deleteRed: #ff0800;
     --cardBackgroundColor: #d4eaef;
-    --cardTextColor: #1995AD;
+    --cardTextColor: #1995ad;
     --cardTextColorDark: #136d7e;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -96,11 +96,11 @@ body {
   }
 
   .dark {
-    --mainBackground: #1E2022;
-    --sidebarBackground: #35383A;
+    --mainBackground: #1e2022;
+    --sidebarBackground: #35383a;
     --deleteRed: #c80802;
-    --cardBackgroundColor: #1995AD;
-    --cardTextColor: #A1D6E2;
+    --cardBackgroundColor: #1995ad;
+    --cardTextColor: #a1d6e2;
     --cardTextColorDark: #aee6f3;
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;

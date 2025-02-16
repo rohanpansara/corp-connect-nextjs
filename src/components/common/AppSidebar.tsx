@@ -107,28 +107,20 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {upperMenuItems.map(item => (
-                <ProtectedContent
-                  key={item.title}
-                  allowedRoles={item.roles}
-                  allowedPermissions={item.permissions}
-                >
+                <ProtectedContent key={item.title} allowedRoles={item.roles} allowedPermissions={item.permissions}>
                   <SidebarMenuItem className='group'>
                     <SidebarMenuButton asChild>
                       <a
                         href={item.url}
                         className={clsx(
                           'anchor-common',
-                          doesSegmentExistInUrl(item.url, currentSegment)
-                            ? 'anchor-active'
-                            : 'anchor-inactive',
+                          doesSegmentExistInUrl(item.url, currentSegment) ? 'anchor-active' : 'anchor-inactive',
                         )}
                       >
                         <item.icon
                           className={clsx(
                             'icon-common',
-                            doesSegmentExistInUrl(item.url, currentSegment)
-                              ? 'icon-active'
-                              : 'icon-inactive',
+                            doesSegmentExistInUrl(item.url, currentSegment) ? 'icon-active' : 'icon-inactive',
                           )}
                         />
                         <span>{item.title}</span>

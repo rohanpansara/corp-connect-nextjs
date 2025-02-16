@@ -1,49 +1,48 @@
-"use client";
+'use client'
 
-import { Skeleton } from "@/components/ui/skeleton";
-import { Poppins } from "next/font/google";
-import { PiCalendarBlankLight } from "react-icons/pi";
+import { Skeleton } from '@/components/ui/skeleton'
+import { Poppins } from 'next/font/google'
 
 const poppins = Poppins({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-poppins",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+})
 
 const getGreeting = (): string => {
-  const currentHour = new Date().getHours();
+  const currentHour = new Date().getHours()
 
   if (currentHour < 12) {
-    return "Good Morning";
+    return 'Good Morning'
   } else if (currentHour < 18) {
-    return "Good Afternoon";
+    return 'Good Afternoon'
   } else {
-    return "Good Evening";
+    return 'Good Evening'
   }
-};
+}
 
 const formatDate = (): { day: string; date: string } => {
-  const today = new Date();
+  const today = new Date()
   const options: Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  };
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }
 
-  const day = today.toLocaleDateString(undefined, { weekday: "long" });
+  const day = today.toLocaleDateString(undefined, { weekday: 'long' })
   const date = today.toLocaleDateString(undefined, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
 
-  return { day, date };
-};
+  return { day, date }
+}
 
 const WelcomeHeader = ({ userName }: { userName: string | null }) => {
-  const { day, date } = formatDate();
+  const { day, date } = formatDate()
 
   return (
     <div
@@ -53,20 +52,20 @@ const WelcomeHeader = ({ userName }: { userName: string | null }) => {
         {userName ? (
           <>
             <span>{getGreeting()},&nbsp;</span>
-            <span className="font-semibold">{userName}!</span>
+            <span className='font-semibold'>{userName}!</span>
           </>
         ) : (
-          <Skeleton className="w-full h-full rounded-md" />
+          <Skeleton className='w-full h-full rounded-md' />
         )}
       </div>
-      <div className="flex items-end justify-end text-[11px] h-full">
-        <div className="flex flex-col items-end text-left">
-          <div className="font-semibold">{day}</div>
+      <div className='flex items-end justify-end text-[11px] h-full'>
+        <div className='flex flex-col items-end text-left'>
+          <div className='font-semibold'>{day}</div>
           <div>{date}</div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WelcomeHeader;
+export default WelcomeHeader

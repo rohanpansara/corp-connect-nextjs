@@ -13,9 +13,7 @@ const LoginForm = ({ validationSchema, setLoading }: any) => {
       <h2 className='text-2xl font-bold text-center text-gray-700'>
         Welcome To <span className='text-[#407BFD]'>CorpConnect</span>
       </h2>
-      <p className='text-xs text-center text-gray-400 mb-6'>
-        Use credentials provided to you by the HR team
-      </p>
+      <p className='text-xs text-center text-gray-400 mb-6'>Use credentials provided to you by the HR team</p>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={validationSchema}

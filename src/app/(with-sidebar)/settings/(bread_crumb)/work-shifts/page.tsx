@@ -1,11 +1,9 @@
-import { settingsWorkShiftsMetadata } from "@/app/metadata/settingsMetadata";
+import { settingsWorkShiftsMetadata } from '@/app/metadata/settingsMetadata'
 
-export const metadata = settingsWorkShiftsMetadata;
+export const metadata = settingsWorkShiftsMetadata
 
 const SettingsConfigurations = () => {
-  return (
-    <>Work Shifts</>
-  );
-};
+  return <>Work Shifts</>
+}
 
-export default SettingsConfigurations;
+export default SettingsConfigurations

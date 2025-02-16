@@ -1,65 +1,63 @@
-import { apiClient } from "@/app/api/apiClient";
-import ToastManager from "@/utils/toastManager";
+import { apiClient } from '@/app/api/apiClient'
+import ToastManager from '@/utils/toastManager'
 
 export const handleLoginSubmit = async (
   values: { email: string; password: string },
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  onNavigate: (path: string) => void // Callback function for navigation
+  onNavigate: (path: string) => void, // Callback function for navigation
 ) => {
-  setLoading(true);
+  setLoading(true)
 
   try {
-    const response = await apiClient.post("/user/login", values);
+    const response = await apiClient.post('/user/login', values)
 
     if (response.status === 200) {
       ToastManager.toast({
-        title: "Success",
+        title: 'Success',
         description: response.data.message,
-        variant: "success",
-      });
+        variant: 'success',
+      })
 
       // Navigate to the dashboard
-      onNavigate("/dashboard");
+      onNavigate('/dashboard')
     }
   } catch (err: any) {
-    const errorMessage =
-      err?.response?.data?.message ||
-      "An unexpected error occurred. Please try again later.";
+    const errorMessage = err?.response?.data?.message || 'An unexpected error occurred. Please try again later.'
 
     if (err.response) {
       if (err.response.status === 401 || err.response.status === 403) {
-        onNavigate("/auth/login");
+        onNavigate('/auth/login')
         ToastManager.toast({
-          title: "Unauthorized",
-          description: "Please log in again",
-          variant: "error",
+          title: 'Unauthorized',
+          description: 'Please log in again',
+          variant: 'error',
           action: {
-            altText: "Login Required",
+            altText: 'Login Required',
             onClick: () => {},
-            label: "Login Again",
+            label: 'Login Again',
           },
-        });
+        })
       } else if (err.response.status === 409) {
-        onNavigate("/auth/login");
-        console.log(err.response);
+        onNavigate('/auth/login')
+        console.log(err.response)
         ToastManager.toast({
-          title: err.response?.data?.message || "Your account is needs to be verified",
-          variant: "error"
-        });
+          title: err.response?.data?.message || 'Your account is needs to be verified',
+          variant: 'error',
+        })
       }
     } else {
       ToastManager.toast({
-        title: "Error",
+        title: 'Error',
         description: errorMessage,
-        variant: "error",
+        variant: 'error',
         action: {
-          altText: "Retry",
+          altText: 'Retry',
           onClick: () => {},
-          label: "Retry",
+          label: 'Retry',
         },
-      });
+      })
     }
   } finally {
-    setLoading(false);
+    setLoading(false)
   }
-};
+}

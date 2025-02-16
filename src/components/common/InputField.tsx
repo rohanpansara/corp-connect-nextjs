@@ -33,9 +33,7 @@ const InputField = ({
         name={name}
         type={type}
         className={`mt-1 block w-full p-2 border ${
-          errors[name] && touched[name]
-            ? 'border-[#ff0800] placeholder:text-[#caadad]'
-            : 'border-gray-300'
+          errors[name] && touched[name] ? 'border-[#ff0800] placeholder:text-[#caadad]' : 'border-gray-300'
         } rounded-md shadow-sm text-[#444E60] sm:text-sm placeholder:text-[#babdc2]`}
         placeholder={placeholder}
         onFocus={() => {

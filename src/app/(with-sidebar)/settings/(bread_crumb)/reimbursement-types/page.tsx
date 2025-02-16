@@ -1,11 +1,9 @@
-import { settingsReimbursementTypesMetadata } from "@/app/metadata/settingsMetadata";
+import { settingsReimbursementTypesMetadata } from '@/app/metadata/settingsMetadata'
 
-export const metadata = settingsReimbursementTypesMetadata;
+export const metadata = settingsReimbursementTypesMetadata
 
 const SettingsConfigurations = () => {
-  return (
-    <>Reimbursement Types</>
-  );
-};
+  return <>Reimbursement Types</>
+}
 
-export default SettingsConfigurations;
+export default SettingsConfigurations

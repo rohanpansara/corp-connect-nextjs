@@ -1,44 +1,34 @@
 // Tremor DonutChart [v0.0.1]
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-"use client"
+'use client'
 
-import React from "react"
-import {
-  Pie,
-  PieChart as ReChartsDonutChart,
-  ResponsiveContainer,
-  Sector,
-  Tooltip,
-} from "recharts"
+import React from 'react'
+import { Pie, PieChart as ReChartsDonutChart, ResponsiveContainer, Sector, Tooltip } from 'recharts'
 
 import {
   AvailableChartColors,
   AvailableChartColorsKeys,
   constructCategoryColors,
   getColorClassName,
-} from "@/lib/charUtils"
-import { cn } from "@/lib/utils"
+} from '@/lib/charUtils'
+import { cn } from '@/lib/utils'
 
-const sumNumericArray = (arr: number[]): number =>
-  arr.reduce((sum, num) => sum + num, 0)
+const sumNumericArray = (arr: number[]): number => arr.reduce((sum, num) => sum + num, 0)
 
 const parseData = (
   data: Record<string, any>[],
   categoryColors: Map<string, AvailableChartColorsKeys>,
   category: string,
 ) =>
-  data.map((dataPoint) => ({
+  data.map(dataPoint => ({
     ...dataPoint,
     color: categoryColors.get(dataPoint[category]) || AvailableChartColors[0],
-    className: getColorClassName(
-      categoryColors.get(dataPoint[category]) || AvailableChartColors[0],
-      "fill",
-    ),
+    className: getColorClassName(categoryColors.get(dataPoint[category]) || AvailableChartColors[0], 'fill'),
   }))
 
 const calculateDefaultLabel = (data: any[], valueKey: string): number =>
-  sumNumericArray(data.map((dataPoint) => dataPoint[valueKey]))
+  sumNumericArray(data.map(dataPoint => dataPoint[valueKey]))
 
 const parseLabelInput = (
   labelInput: string | undefined,
@@ -49,7 +39,7 @@ const parseLabelInput = (
 
 //#region Tooltip
 
-type TooltipProps = Pick<ChartTooltipProps, "active" | "payload">
+type TooltipProps = Pick<ChartTooltipProps, 'active' | 'payload'>
 
 type PayloadItem = {
   category: string
@@ -63,43 +53,33 @@ interface ChartTooltipProps {
   valueFormatter: (value: number) => string
 }
 
-const ChartTooltip = ({
-  active,
-  payload,
-  valueFormatter,
-}: ChartTooltipProps) => {
+const ChartTooltip = ({ active, payload, valueFormatter }: ChartTooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div
         className={cn(
           // base
-          "rounded-md border text-sm shadow-md",
+          'rounded-md border text-sm shadow-md',
           // border color
-          "border-gray-200 dark:border-gray-800",
+          'border-gray-200 dark:border-gray-800',
           // background color
-          "bg-white dark:bg-gray-950",
+          'bg-white dark:bg-gray-950',
         )}
       >
-        <div className={cn("space-y-1 px-4 py-2")}>
+        <div className={cn('space-y-1 px-4 py-2')}>
           {payload.map(({ value, category, color }, index) => (
-            <div
-              key={`id-${index}`}
-              className="flex items-center justify-between space-x-8"
-            >
-              <div className="flex items-center space-x-2">
+            <div key={`id-${index}`} className='flex items-center justify-between space-x-8'>
+              <div className='flex items-center space-x-2'>
                 <span
-                  aria-hidden="true"
-                  className={cn(
-                    "size-2 shrink-0 rounded-full",
-                    getColorClassName(color, "bg"),
-                  )}
+                  aria-hidden='true'
+                  className={cn('size-2 shrink-0 rounded-full', getColorClassName(color, 'bg'))}
                 />
                 <p
                   className={cn(
                     // base
-                    "whitespace-nowrap text-right",
+                    'whitespace-nowrap text-right',
                     // text color
-                    "text-gray-700 dark:text-gray-300",
+                    'text-gray-700 dark:text-gray-300',
                   )}
                 >
                   {category}
@@ -108,9 +88,9 @@ const ChartTooltip = ({
               <p
                 className={cn(
                   // base
-                  "whitespace-nowrap text-right font-medium tabular-nums",
+                  'whitespace-nowrap text-right font-medium tabular-nums',
                   // text color
-                  "text-gray-900 dark:text-gray-50",
+                  'text-gray-900 dark:text-gray-50',
                 )}
               >
                 {valueFormatter(value)}
@@ -125,8 +105,7 @@ const ChartTooltip = ({
 }
 
 const renderInactiveShape = (props: any) => {
-  const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, className } =
-    props
+  const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, className } = props
 
   return (
     <Sector
@@ -137,17 +116,17 @@ const renderInactiveShape = (props: any) => {
       startAngle={startAngle}
       endAngle={endAngle}
       className={className}
-      fill=""
+      fill=''
       opacity={0.3}
-      style={{ outline: "none" }}
+      style={{ outline: 'none' }}
     />
   )
 }
 
-type DonutChartVariant = "donut" | "pie"
+type DonutChartVariant = 'donut' | 'pie'
 
 type BaseEventProps = {
-  eventType: "sector"
+  eventType: 'sector'
   categoryClicked: string
   [key: string]: number | string
 }
@@ -176,7 +155,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
       value,
       category,
       colors = AvailableChartColors,
-      variant = "donut",
+      variant = 'donut',
       valueFormatter = (value: number) => value.toString(),
       label,
       showLabel = false,
@@ -190,23 +169,17 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
     forwardedRef,
   ) => {
     const CustomTooltip = customTooltip
-    const [activeIndex, setActiveIndex] = React.useState<number | undefined>(
-      undefined,
-    )
-    const isDonut = variant === "donut"
+    const [activeIndex, setActiveIndex] = React.useState<number | undefined>(undefined)
+    const isDonut = variant === 'donut'
     const parsedLabelInput = parseLabelInput(label, valueFormatter, data, value)
 
-    const categories = Array.from(new Set(data.map((item) => item[category])))
+    const categories = Array.from(new Set(data.map(item => item[category])))
     const categoryColors = constructCategoryColors(categories, colors)
 
     const prevActiveRef = React.useRef<boolean | undefined>(undefined)
     const prevCategoryRef = React.useRef<string | undefined>(undefined)
 
-    const handleShapeClick = (
-      data: any,
-      index: number,
-      event: React.MouseEvent,
-    ) => {
+    const handleShapeClick = (data: any, index: number, event: React.MouseEvent) => {
       event.stopPropagation()
       if (!onValueChange) return
 
@@ -216,7 +189,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
       } else {
         setActiveIndex(index)
         onValueChange({
-          eventType: "sector",
+          eventType: 'sector',
           categoryClicked: data.payload[category],
           ...data.payload,
         })
@@ -224,13 +197,8 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
     }
 
     return (
-      <div
-        ref={forwardedRef}
-        className={cn("h-40 w-40", className)}
-        tremor-id="tremor-raw"
-        {...other}
-      >
-        <ResponsiveContainer className="size-full">
+      <div ref={forwardedRef} className={cn('h-40 w-40', className)} tremor-id='tremor-raw' {...other}>
+        <ResponsiveContainer className='size-full'>
           <ReChartsDonutChart
             onClick={
               onValueChange && activeIndex !== undefined
@@ -244,49 +212,47 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
           >
             {showLabel && isDonut && (
               <text
-                className="fill-gray-700 dark:fill-gray-300"
-                x="50%"
-                y="50%"
-                textAnchor="middle"
-                dominantBaseline="middle"
+                className='fill-gray-700 dark:fill-gray-300'
+                x='50%'
+                y='50%'
+                textAnchor='middle'
+                dominantBaseline='middle'
               >
                 {parsedLabelInput}
               </text>
             )}
             <Pie
               className={cn(
-                "stroke-white dark:stroke-gray-950 [&_.recharts-pie-sector]:outline-none",
-                onValueChange ? "cursor-pointer" : "cursor-default",
+                'stroke-white dark:stroke-gray-950 [&_.recharts-pie-sector]:outline-none',
+                onValueChange ? 'cursor-pointer' : 'cursor-default',
               )}
               data={parseData(data, categoryColors, category)}
-              cx="50%"
-              cy="50%"
+              cx='50%'
+              cy='50%'
               startAngle={90}
               endAngle={-270}
-              innerRadius={isDonut ? "75%" : "0%"}
-              outerRadius="100%"
-              stroke=""
-              strokeLinejoin="round"
+              innerRadius={isDonut ? '75%' : '0%'}
+              outerRadius='100%'
+              stroke=''
+              strokeLinejoin='round'
               dataKey={value}
               nameKey={category}
               isAnimationActive={false}
               onClick={handleShapeClick}
               activeIndex={activeIndex}
               inactiveShape={renderInactiveShape}
-              style={{ outline: "none" }}
+              style={{ outline: 'none' }}
             />
             {showTooltip && (
               <Tooltip
-                wrapperStyle={{ outline: "none" }}
+                wrapperStyle={{ outline: 'none' }}
                 isAnimationActive={false}
                 content={({ active, payload }) => {
                   const cleanPayload = payload
                     ? payload.map((item: any) => ({
                         category: item.payload[category],
                         value: item.value,
-                        color: categoryColors.get(
-                          item.payload[category],
-                        ) as AvailableChartColorsKeys,
+                        color: categoryColors.get(item.payload[category]) as AvailableChartColorsKeys,
                       }))
                     : []
 
@@ -294,8 +260,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
 
                   if (
                     tooltipCallback &&
-                    (active !== prevActiveRef.current ||
-                      payloadCategory !== prevCategoryRef.current)
+                    (active !== prevActiveRef.current || payloadCategory !== prevCategoryRef.current)
                   ) {
                     tooltipCallback({
                       active,
@@ -309,11 +274,7 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
                     CustomTooltip ? (
                       <CustomTooltip active={active} payload={cleanPayload} />
                     ) : (
-                      <ChartTooltip
-                        active={active}
-                        payload={cleanPayload}
-                        valueFormatter={valueFormatter}
-                      />
+                      <ChartTooltip active={active} payload={cleanPayload} valueFormatter={valueFormatter} />
                     )
                   ) : null
                 }}
@@ -326,6 +287,6 @@ const DonutChart = React.forwardRef<HTMLDivElement, DonutChartProps>(
   },
 )
 
-DonutChart.displayName = "DonutChart"
+DonutChart.displayName = 'DonutChart'
 
 export { DonutChart, type DonutChartEventProps, type TooltipProps }

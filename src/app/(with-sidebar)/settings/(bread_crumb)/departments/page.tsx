@@ -1,11 +1,9 @@
-import { settingsDepartmentsMetadata } from "@/app/metadata/settingsMetadata";
+import { settingsDepartmentsMetadata } from '@/app/metadata/settingsMetadata'
 
-export const metadata = settingsDepartmentsMetadata;
+export const metadata = settingsDepartmentsMetadata
 
 const SettingsConfigurations = () => {
-  return (
-    <>Departments</>
-  );
-};
+  return <>Departments</>
+}
 
-export default SettingsConfigurations;
+export default SettingsConfigurations

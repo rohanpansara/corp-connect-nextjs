@@ -1,11 +1,9 @@
-import { settingsLeaveTypesMetadata } from "@/app/metadata/settingsMetadata";
+import { settingsLeaveTypesMetadata } from '@/app/metadata/settingsMetadata'
 
-export const metadata = settingsLeaveTypesMetadata;
+export const metadata = settingsLeaveTypesMetadata
 
 const SettingsConfigurations = () => {
-  return (
-    <>Leave Types</>
-  );
-};
+  return <>Leave Types</>
+}
 
-export default SettingsConfigurations;
+export default SettingsConfigurations

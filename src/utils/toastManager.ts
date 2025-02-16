@@ -1,7 +1,7 @@
-import { toast as toastInstance } from "@/lib/useToast";
+import { toast as toastInstance } from '@/lib/useToast'
 
 class ToastManager {
-  static toast = toastInstance;
+  static toast = toastInstance
 }
 
-export default ToastManager;
+export default ToastManager
