@@ -30,7 +30,7 @@ import {
 } from 'react-icons/pi'
 import DeleteDialog from '../common/DeleteDialog'
 import Loader from '../common/Loader'
-import PaginatedDataTable from '../common/PaginatedDataTable'
+import { DataTable } from '../common/Table/DataTable'
 import AddUserDialog from './AddUserDialog'
 import UserProfileImage from './UserProfileImage'
 
@@ -167,7 +167,11 @@ const UserTable = () => {
       header: 'Enabled',
       cell: ({ row }) => (
         <div className='w-full pl-2'>
-          {row.original?.isAccountEnabled === 'true' ? <FcOk className='h-4 w-4' /> : <FcCancel className='h-4 w-4' />}
+          {row.original?.isAccountEnabled === 'true' ? (
+            <FcOk className='h-4 w-4' />
+          ) : (
+            <FcCancel className='h-4 w-4' />
+          )}
         </div>
       ),
     },
@@ -186,19 +190,31 @@ const UserTable = () => {
               <DropdownMenuSeparator />
               <DropdownMenuGroup className='text-xs'>
                 <DropdownMenuItem className='group'>
-                  <Button variant='plain' size='nothing' className='text-xs flex justify-start items-center w-full'>
+                  <Button
+                    variant='plain'
+                    size='nothing'
+                    className='text-xs flex justify-start items-center w-full'
+                  >
                     <PiIdentificationBadgeLight className='group-hover:text-green-500' />
                     <span>View Profile</span>
                   </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem className='group'>
-                  <Button variant='plain' size='nothing' className='text-xs flex justify-start items-center w-full'>
+                  <Button
+                    variant='plain'
+                    size='nothing'
+                    className='text-xs flex justify-start items-center w-full'
+                  >
                     <PiPencilSimpleLineLight className='group-hover:text-blue-500' />
                     <span>Edit</span>
                   </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem className='group'>
-                  <Button variant='plain' size='nothing' className='text-xs flex justify-start items-center w-full'>
+                  <Button
+                    variant='plain'
+                    size='nothing'
+                    className='text-xs flex justify-start items-center w-full'
+                  >
                     <PiTrashLight className='group-hover:text-red-500' />
                     <span>Remove</span>
                   </Button>
@@ -257,7 +273,7 @@ const UserTable = () => {
         </div>
       </div>
       <div className='py-4'>
-        <PaginatedDataTable columns={columns} apiEndpoint='/user/filter' />
+        <DataTable<UserDTO> apiEndpoint='/user/filter' columns={columns} data={usersData}/>
       </div>
     </div>
   )

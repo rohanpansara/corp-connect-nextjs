@@ -43,7 +43,7 @@ const PaginatedDataTable = <TData,>({ columns, apiEndpoint }: PaginatedDataTable
         const response = await apiClient.get(`${apiEndpoint}`, {
           params: { pageNumber: currentPage - 1, rowsPerPage: pageSize },
         })
-        console.log(response.data)
+        console.log("Table Data", response.data)
         setData(response.data.items)
         setTotalPages(response.data.totalPages)
       } catch (error) {

@@ -28,8 +28,8 @@ const TableComponent = <T,>({ table, columns, loading }: TableComponentProps<T>)
                 Loading...
               </td>
             </tr>
-          ) : table?.getRowModel().rows?.length ? (
-            table?.getRowModel().rows?.map(row => (
+          ) : (table?.getRowModel()?.rows || []).length ? (
+            table.getRowModel()?.rows?.map(row => (
               <tr key={row.id} className='border-b border-gray-300'>
                 {row.getVisibleCells().map(cell => (
                   <td key={cell.id} className='border border-gray-300 p-2 text-sm'>
