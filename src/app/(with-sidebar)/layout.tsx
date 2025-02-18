@@ -20,8 +20,8 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
   return (
     <AuthProvider>
       <SidebarProvider>
-        <AppSidebar userId={userId} />
         <main className={`w-full ${poppins.className}`}>
+          <AppSidebar />
           <AppNavbar />
           {children}
         </main>

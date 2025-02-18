@@ -161,7 +161,7 @@ export function AppSidebar() {
                         />
                         <span>{loading ? 'Logging out...' : item.title}</span>
                       </button>
-                    ) : (
+                    ) : ( 
                       <a
                         href={item.url}
                         className={clsx(

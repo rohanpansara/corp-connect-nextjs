@@ -8,7 +8,7 @@ export const handleAddUserSubmit = async (
   { resetForm, setSubmitting }: FormikHelpers<AddUserFormValues>,
 ) => {
   try {
-    const response = await apiClient.post('/hr/access-control/new-user', values)
+    const response = await apiClient.post('/public/new-user', values)
     // Show success message from the response (if available)
     ToastManager.toast({
       title: 'Success',

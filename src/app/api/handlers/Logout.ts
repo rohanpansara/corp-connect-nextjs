@@ -10,7 +10,7 @@ export const handleLogout = async ({ setLoading }: any, {}) => {
 
   setLoading(true)
   try {
-    const response = await apiClient.post('/user/logout')
+    const response = await apiClient.post('/public/logout')
     if (response?.status === 200) {
       router.push('/auth/login')
       ToastManager.toast({
