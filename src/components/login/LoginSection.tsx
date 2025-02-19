@@ -22,7 +22,7 @@ const LoginSection = () => {
     }
 
     validateSession()
-  }, [router])
+  }, [])
 
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid format').required('*Email is required'),

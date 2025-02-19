@@ -4,7 +4,7 @@ import ToastManager from '@/utils/toastManager'
 export const handleLoginSubmit = async (
   values: { email: string; password: string },
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  onNavigate: (path: string) => void, // Callback function for navigation
+  onNavigate: (path: string) => void, 
 ) => {
   setLoading(true)
 
@@ -17,6 +17,8 @@ export const handleLoginSubmit = async (
         description: response.data.message,
         variant: 'success',
       })
+
+      setLoading(false)
 
       // Navigate to the dashboard
       onNavigate('/dashboard')
@@ -57,6 +59,9 @@ export const handleLoginSubmit = async (
         },
       })
     }
+
+    setLoading(false)
+
   } finally {
     setLoading(false)
   }

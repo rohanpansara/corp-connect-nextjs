@@ -1,6 +1,6 @@
 // page.tsx
 import LoginSection from '@/components/login/LoginSection'
-import { loginMetadata } from '@/app/metadata/loginMetadata'
+import { loginMetadata } from '@/app/metadata/authMetadata'
 
 export const metadata = loginMetadata
 

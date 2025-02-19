@@ -2,6 +2,7 @@ import { Poppins } from 'next/font/google'
 import { profileMetadata } from '@/app/metadata/profileMetadata'
 import ProfileHeader from '@/components/profile/ProfileHeader'
 import UserInfo from '@/components/profile/UserInfo'
+import { getCookieAsString } from '@/utils/cookieUtils'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -12,15 +13,15 @@ const poppins = Poppins({
 
 export const metadata = profileMetadata
 
-const ProfilePage = ({ params }: { params: { id: string } }) => {
-  const { id } = params || { id: 'undefined' }
+const ProfilePage = () => {
+  const userId = getCookieAsString('User_Id')
 
   return (
     <div
       className={`min-h-screen w-full bg-mainBackground flex items-center flex-col space-y-4 p-4 ${poppins.className}`}
     >
-      <ProfileHeader id={id} />
-      <UserInfo id={id} />
+      <ProfileHeader id={userId} />
+      <UserInfo id={userId} />
     </div>
   )
 }
