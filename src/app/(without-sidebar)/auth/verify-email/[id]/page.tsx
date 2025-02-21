@@ -9,7 +9,6 @@ import { Poppins } from 'next/font/google'
 import { useParams, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export const metadata = otpVerificationMetadata
 
 const poppins = Poppins({
   subsets: ['latin'],
