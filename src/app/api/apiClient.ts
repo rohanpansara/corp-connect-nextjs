@@ -23,7 +23,7 @@ apiClient.interceptors.response.use(
       originalRequest._retry = true
 
       try {
-        const refreshResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/public/refresh-token`, null, {
+        const refreshResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/refresh-token`, null, {
           withCredentials: true,
         })
 

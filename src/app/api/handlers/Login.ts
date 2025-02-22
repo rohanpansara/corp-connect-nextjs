@@ -9,7 +9,7 @@ export const handleLoginSubmit = async (
   setLoading(true)
 
   try {
-    const response = await apiClient.post('/public/login', values)
+    const response = await apiClient.post('/auth/login', values)
 
     if (response.status === 200) {
       ToastManager.toast({

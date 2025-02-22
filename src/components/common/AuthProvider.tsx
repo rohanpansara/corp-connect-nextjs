@@ -32,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await apiClient.get('/public/validate/token')
+        await apiClient.get('/auth/validate/token')
         setIsAuthenticated(true)
 
         // Extract user role
