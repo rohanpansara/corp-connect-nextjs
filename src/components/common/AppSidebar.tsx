@@ -81,7 +81,7 @@ export function AppSidebar() {
   const handleLogout = async () => {
     setLoading(true)
     try {
-      const response = await apiClient.post('/user/logout')
+      const response = await apiClient.post('/auth/logout')
       if (response?.status === 200) {
         router.push('/auth/login')
         ToastManager.toast({
