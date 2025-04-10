@@ -131,7 +131,7 @@ const UserTable = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <UserProfileImage user={row?.original} />
+              <UserProfileImage user={row.original} />
             </TooltipTrigger>
             <TooltipContent>{row.original?.name}</TooltipContent>
           </Tooltip>

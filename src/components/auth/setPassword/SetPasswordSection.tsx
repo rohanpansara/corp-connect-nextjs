@@ -8,7 +8,7 @@ const SetPasswordSection = () => {
         <LoginIllustration />
       </section>
 
-      {/* Second Section: Login Form */}
+      {/* Second Section: Set Password */}
       <section className='flex w-[60%] xl:w-1/2 mx-auto h-full justify-center items-center'>
         <span className='font-bold text-xl'>Jai Ho</span>
       </section>
