@@ -2,6 +2,7 @@
 import { Toaster } from '@/components/common/Toaster'
 import './globals.css'
 import { Poppins } from 'next/font/google'
+import BlurBackground from '@/components/common/BlurBackground'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <BlurBackground />
         {children}
         <Toaster />
       </body>
