@@ -7,13 +7,13 @@ const ResetPassword: React.FC = () => {
         <div className='flex flex-col gap-3'>
           <div className='flex flex-col gap-[2px]'>
             <label htmlFor='password' className='text-sm text-gray-200'>
-              New Password
+              Set New Password
             </label>
             <input
               type='password'
               id='password'
               className='rounded-sm p-1 bg-slate-200 text-[12px] text-slate-800 placeholder:text-gray-400 pl-2'
-              placeholder='Enter your new password'
+              placeholder='Set your new password'
               required
             />
           </div>
