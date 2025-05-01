@@ -8,7 +8,7 @@ const OTPVerification: React.FC = () => {
   const [otp, setOtp] = useState('')
 
   const resendOTP = () => {
-    alert('Resend OTP')
+    alert('OTP resent!')
   }
 
   return (

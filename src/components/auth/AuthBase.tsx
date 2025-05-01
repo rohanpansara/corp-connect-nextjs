@@ -11,7 +11,7 @@ const AuthBase = ({ children }: { children: React.ReactNode }) => {
     >
       <div className='flex flex-col sm:flex-row h-[90%] w-full rounded-md backdrop-blur-md shadow-lg p-2 gap-2 sm:max-w-[90%]'>
         {/* This section will be hidden on small devices */}
-        <section className='hidden sm:relative sm:flex w-full sm:w-[60%] h-[200px] bg-[#3D90BE] sm:h-full rounded-sm border border-opacity-10 border-gray-800 overflow-hidden'>
+        <section className='hidden sm:relative sm:flex w-full sm:w-[60%] h-[200px] bg-[#85cef5] sm:h-full rounded-sm border border-opacity-10 border-[#1b9adf] overflow-hidden'>
           <Image
             src={illustration}
             alt='Illustration'

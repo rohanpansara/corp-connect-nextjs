@@ -6,7 +6,7 @@ export const metadata = loginMetadata
 
 const page = () => {
   return (
-    <LoginPage/>
+    <LoginPage />
   )
 }
 
