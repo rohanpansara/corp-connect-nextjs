@@ -106,16 +106,16 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
             <div className='flex-1 bg-mainBackground rounded-sm'>
               <div className='w-full h-full flex flex-col justify-between text-xs px-2 py-1'>
                 <div className='flex flex-[0.25] justify-between items-center gap-1 font-semibold'>
-                  <span className='flex items-center gap-1 font-semibold'>
-                    <IoVideocam className='text-blue-800' />
-                    11:00 AM
-                  </span>
+                  <span className='flex items-center gap-1 font-semibold'>11:00 AM</span>
                   <span className='font-semibold rounded-full hover:bg-gray-200 hover:cursor-pointer p-1'>
                     <GoArrowUpRight />
                   </span>
                 </div>
                 <div className='flex flex-1 justify-between items-center gap-1'>
-                  <span className='text-sm'>Daily Scrum Meeting</span>
+                  <div className='flex items-center gap-1'>
+                    <IoVideocam className='text-blue-800' />
+                    <span className='text-sm'>Daily Scrum Meeting</span>
+                  </div>
                   <div className='rounded-full bg-gray-600 text-gray-100 p-1'>RP</div>
                 </div>
               </div>
@@ -123,16 +123,16 @@ const RightSideCards = ({ data }: RightSideCardsProps) => {
             <div className='flex-1 bg-mainBackground rounded-sm'>
               <div className='w-full h-full flex flex-col justify-between text-xs px-2 py-1'>
                 <div className='flex flex-[0.25] justify-between items-center gap-1 font-semibold'>
-                  <span className='flex items-center gap-1 font-semibold'>
-                    <BiSolidParty className='text-orange-800' />
-                    4:30 PM
-                  </span>
+                  <span className='flex items-center gap-1 font-semibold'>4:30 PM</span>
                   <span className='font-semibold rounded-full hover:bg-gray-200 hover:cursor-pointer p-1'>
                     <GoArrowUpRight />
                   </span>
                 </div>
                 <div className='flex flex-1 justify-between items-center gap-1'>
-                  <span className='text-sm'>Fun Friday!</span>
+                  <div className='flex items-center gap-1'>
+                    <BiSolidParty className='text-orange-800' />
+                    <span className='text-sm'>Fun Friday!</span>
+                  </div>
                   <div className='rounded-full bg-gray-600 text-gray-100 p-1'>RP</div>
                 </div>
               </div>
